@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head><meta charset="UTF-8"><title>DB 추가 조회</title></head>
+<body>
+<pre id="out">로딩중...</pre>
+<script>
+async function fetchAll() {
+    // awe_notices 전체, awe_participants 전체, awe_contacts 전체, awe_content 전체 분리 출력
+    const tables = ['awe_notices','awe_participants','awe_contacts','awe_content'];
+    for (const t of tables) {
+        try {
+            const res = await fetch(`../tables/${t}?limit=500`);
+            const json = await res.json();
+            const rows = json.data || [];
+            // 필요 필드만 출력
+            const slim = rows.map(r => {
+                const { _rid,_self,_etag,_attachments,_ts,gs_project_id,gs_table_name,...rest } = r;
+                return rest;
+            });
+            console.log('===TABLE:' + t + '===COUNT:' + slim.length);
+            slim.forEach((row,i) => console.log('ROW' + i + ':' + JSON.stringify(row)));
+        } catch(e) {
+            console.log('ERROR_' + t + ':' + e.message);
+        }
+    }
+    document.getElementById('out').textContent = '완료';
+}
+fetchAll();
+</script>
+</body>
+</html>

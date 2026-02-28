@@ -1,0 +1,2875 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>상해 AWE 2026 참관</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <style>
+/* ===== GUIDE APP CSS ===== */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Noto Sans KR', sans-serif; background: #f0f2f5; color: #1a1a2e; }
+#guide-app { min-height: 100vh; display: flex; flex-direction: column; }
+.guide-header { background: linear-gradient(135deg, #0a0e27 0%, #1a1f4e 60%, #0d2137 100%); padding: 0 28px; position: sticky; top: 0; z-index: 200; box-shadow: 0 2px 20px rgba(0,0,0,0.3); }
+.guide-header-inner { max-width: 1280px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; height: 60px; }
+.guide-header-title { display: flex; align-items: center; gap: 12px; pointer-events: none; user-select: none; }
+.guide-header-title .event-name { font-size: 16px; font-weight: 700; color: white; letter-spacing: 0.5px; }
+.guide-header-title .grade-badge { font-size: 11px; padding: 3px 10px; border-radius: 20px; font-weight: 600; letter-spacing: 0.5px; }
+.grade-badge.executive { background: linear-gradient(135deg, #FFD700, #FFA000); color: #1a1a00; }
+.grade-badge.staff { background: linear-gradient(135deg, #4FC3F7, #0288D1); color: #fff; }
+.header-actions { display: flex; align-items: center; gap: 6px; }
+.mode-btn { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; width: 46px; height: 46px; border-radius: 10px; border: none; background: transparent; cursor: pointer; transition: all 0.2s ease; color: rgba(255,255,255,0.45); }
+.mode-btn:hover { background: rgba(255,255,255,0.1); color: rgba(255,255,255,0.85); }
+.mode-btn.active { background: rgba(255,255,255,0.15); color: white; }
+.mode-btn i { font-size: 17px; }
+.mode-btn span { font-size: 9px; font-weight: 600; letter-spacing: 0.3px; }
+.admin-mode-badge { display: none; align-items: center; gap: 6px; background: rgba(255,100,100,0.2); border: 1px solid rgba(255,100,100,0.4); border-radius: 20px; padding: 4px 12px; color: #ff8a80; font-size: 11px; font-weight: 600; margin-right: 8px; }
+.admin-mode-badge.visible { display: flex; }
+.admin-mode-badge i { font-size: 10px; }
+.home-btn { display: flex; align-items: center; gap: 6px; padding: 6px 12px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.15); background: transparent; color: rgba(255,255,255,0.6); font-size: 12px; cursor: pointer; transition: all 0.2s; font-family: 'Noto Sans KR', sans-serif; }
+.home-btn:hover { background: rgba(255,255,255,0.1); color: white; border-color: rgba(255,255,255,0.3); }
+.guide-nav { background: #f0f2f5; border-bottom: 1px solid #d8dbe8; box-shadow: 0 1px 8px rgba(0,0,0,0.06); position: sticky; top: 60px; z-index: 190; padding: 10px 0; }
+.guide-nav-inner { max-width: 1280px; margin: 0 auto; display: flex; gap: 8px; overflow-x: auto; scrollbar-width: none; -ms-overflow-style: none; padding: 0 16px; }
+.guide-nav-inner::-webkit-scrollbar { display: none; }
+.nav-tab { flex-shrink: 0; display: flex; align-items: center; gap: 7px; padding: 0 18px; height: 44px; border: 2px solid #c8ccd8; background: white; color: #555; font-size: 13px; font-weight: 600; cursor: pointer; border-radius: 10px; transition: all 0.18s; font-family: 'Noto Sans KR', sans-serif; white-space: nowrap; box-shadow: 0 1px 4px rgba(0,0,0,0.06); }
+.nav-tab i { font-size: 14px; color: #888; transition: color 0.18s; }
+.nav-tab:hover { color: #1a1f4e; border-color: #9fa8da; background: #f0f1ff; box-shadow: 0 2px 8px rgba(57,73,171,0.12); }
+.nav-tab:hover i { color: #3949ab; }
+.nav-tab.active { color: white; background: #1a1f4e; border-color: #1a1f4e; font-weight: 700; box-shadow: 0 3px 10px rgba(26,31,78,0.25); }
+.nav-tab.active i { color: rgba(255,255,255,0.85); }
+.guide-content { flex: 1; max-width: 1280px; width: 100%; margin: 0 auto; padding: 28px 24px 60px; }
+.section-card { background: white; border-radius: 16px; padding: 24px 28px; margin-bottom: 20px; box-shadow: 0 2px 12px rgba(0,0,0,0.06); border: 1px solid #eef0f6; transition: box-shadow 0.2s; }
+.section-card:hover { box-shadow: 0 4px 20px rgba(0,0,0,0.09); }
+.section-card.important { background: linear-gradient(135deg, #fff8e1, #fff3e0); border: 1.5px solid #FFB300; position: relative; overflow: hidden; }
+.section-card.important::before { content: ''; position: absolute; top: 0; left: 0; width: 5px; height: 100%; background: linear-gradient(180deg, #FFD700, #FF8F00); }
+.section-card-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 18px; }
+.section-card-title { display: flex; align-items: center; gap: 10px; font-size: 17px; font-weight: 700; color: #1a1a2e; }
+.section-card-title i { font-size: 18px; color: #1a1f4e; }
+.section-card.important .section-card-title i { color: #FF8F00; }
+.section-badge { font-size: 10px; padding: 3px 9px; border-radius: 12px; font-weight: 700; letter-spacing: 0.5px; text-transform: uppercase; }
+.section-badge.important-badge { background: #FF8F00; color: white; }
+.section-badge.basic-badge { background: #e8eaf6; color: #3949ab; }
+.edit-btn { display: none; align-items: center; gap: 5px; padding: 5px 12px; border-radius: 8px; border: 1px solid #d0d4e8; background: white; color: #555; font-size: 12px; cursor: pointer; transition: all 0.2s; font-family: 'Noto Sans KR', sans-serif; }
+.edit-btn:hover { background: #1a1f4e; color: white; border-color: #1a1f4e; }
+body.admin-mode .edit-btn { display: flex; }
+.content-display { min-height: 60px; color: #444; font-size: 14px; line-height: 1.8; white-space: pre-wrap; word-break: break-word; }
+.content-empty { color: #bbb; font-size: 13px; font-style: italic; padding: 20px 0; text-align: center; }
+.weather-section { margin-top: 8px; }
+.weather-cities { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.weather-city-card { background: linear-gradient(135deg, #1a1f4e, #0d2137); border-radius: 14px; padding: 20px; color: white; position: relative; overflow: hidden; }
+.weather-city-card::after { content: ''; position: absolute; top: -30px; right: -30px; width: 100px; height: 100px; border-radius: 50%; background: rgba(255,255,255,0.05); }
+.weather-city-name { font-size: 13px; color: rgba(255,255,255,0.6); margin-bottom: 4px; letter-spacing: 1px; }
+.weather-today { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
+.weather-icon { font-size: 36px; }
+.weather-temp-main { font-size: 32px; font-weight: 700; line-height: 1; }
+.weather-desc { font-size: 12px; color: rgba(255,255,255,0.65); margin-top: 3px; }
+.weather-range { font-size: 12px; color: rgba(255,255,255,0.55); margin-top: 2px; }
+.weather-weekly { display: flex; gap: 6px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 12px; margin-top: 4px; overflow-x: auto; scrollbar-width: none; }
+.weather-weekly::-webkit-scrollbar { display: none; }
+.weather-day-item { display: flex; flex-direction: column; align-items: center; gap: 4px; flex: 1; min-width: 44px; }
+.weather-day-label { font-size: 11px; color: rgba(255,255,255,0.65); white-space: nowrap; text-align: center; }
+.weather-day-icon { font-size: 16px; }
+.weather-day-temp { font-size: 11px; color: rgba(255,255,255,0.75); }
+.weather-loading { text-align: center; padding: 16px; color: rgba(255,255,255,0.5); font-size: 12px; }
+.basic-info-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; }
+.basic-info-item { background: #f8f9ff; border-radius: 12px; padding: 18px 20px; border: 1px solid #e8eaf6; }
+.basic-info-item-title { display: flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 700; color: #1a1f4e; margin-bottom: 12px; }
+.basic-info-item-title i { font-size: 15px; color: #3949ab; }
+.contact-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+.contact-table th { background: #1a1f4e; color: white; padding: 10px 14px; text-align: left; font-weight: 600; font-size: 12px; }
+.contact-table th:first-child { border-radius: 8px 0 0 0; }
+.contact-table th:last-child { border-radius: 0 8px 0 0; }
+.contact-table td { padding: 10px 14px; border-bottom: 1px solid #eef0f6; color: #444; }
+.contact-table tr:last-child td { border-bottom: none; }
+.contact-table tr:hover td { background: #f8f9ff; }
+.prep-list { display: flex; flex-direction: column; gap: 8px; }
+.prep-item { display: flex; align-items: center; gap: 10px; font-size: 13px; color: #444; padding: 8px 12px; background: white; border-radius: 8px; border: 1px solid #eef0f6; }
+.prep-item i { color: #3949ab; font-size: 13px; width: 16px; text-align: center; }
+.prep-list-compact { display: flex; flex-wrap: wrap; gap: 6px; padding: 4px 0; }
+.prep-tag { display: inline-flex; align-items: center; gap: 5px; background: #eef0fa; border: 1px solid #c5cae9; border-radius: 20px; padding: 4px 12px; font-size: 12px; font-weight: 600; color: #3949ab; white-space: nowrap; }
+.prep-tag i { font-size: 10px; color: #5c6bc0; }
+.prep-numbered-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 0; border: 1px solid #dde0f5; border-radius: 10px; overflow: hidden; }
+.prep-numbered-item { display: flex; align-items: center; gap: 10px; padding: 7px 12px; background: #fff; border-bottom: 1px solid #eef0fa; font-size: 13px; color: #2d2d2d; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; line-height: 1.4; }
+.prep-numbered-item:last-child { border-bottom: none; }
+.prep-numbered-item:nth-child(odd) { background: #f9faff; }
+.prep-num { display: inline-flex; align-items: center; justify-content: center; width: 20px; height: 20px; min-width: 20px; background: #3949ab; color: #fff; font-size: 10px; font-weight: 700; border-radius: 50%; }
+.prep-text { font-weight: 500; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.prep-tag .prep-num { display: inline-flex; align-items: center; justify-content: center; width: 22px; height: 22px; border-radius: 50%; background: #1a1f4e; color: white; font-size: 11px; font-weight: 700; flex-shrink: 0; }
+.prep-tag i.fa-check { display: none; }
+.compact-prep { padding: 14px 16px !important; }
+.notice-board-card { min-height: auto; }
+.notice-board { max-height: 480px; overflow-y: auto; scrollbar-width: thin; scrollbar-color: #c5cae9 transparent; border-radius: 10px; border: 1px solid #f0e8c8; background: #fffdf5; }
+.notice-board::-webkit-scrollbar { width: 5px; }
+.notice-board::-webkit-scrollbar-track { background: transparent; }
+.notice-board::-webkit-scrollbar-thumb { background: #c5cae9; border-radius: 3px; }
+.notice-item { padding: 18px 20px; transition: background 0.15s; }
+.notice-item:hover { background: #fffae8; }
+.notice-item-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; gap: 8px; }
+.notice-item-meta { display: flex; align-items: center; gap: 6px; }
+.notice-num { display: inline-flex; align-items: center; justify-content: center; width: 24px; height: 24px; border-radius: 50%; background: #FF8F00; color: white; font-size: 11px; font-weight: 700; flex-shrink: 0; }
+.notice-new-badge { background: #e53935; color: white; font-size: 10px; font-weight: 700; padding: 2px 7px; border-radius: 10px; letter-spacing: 0.5px; }
+.notice-latest-badge { background: #1a1f4e; color: white; font-size: 10px; font-weight: 700; padding: 2px 7px; border-radius: 10px; }
+.notice-date { font-size: 11px; color: #aaa; white-space: nowrap; }
+.notice-delete-btn { width: 26px; height: 26px; border-radius: 6px; border: 1px solid #ffcdd2; background: white; color: #e53935; cursor: pointer; display: none; align-items: center; justify-content: center; font-size: 11px; transition: all 0.2s; flex-shrink: 0; }
+.notice-delete-btn:hover { background: #e53935; color: white; }
+body.admin-mode .notice-delete-btn { display: flex; }
+.notice-edit-btn { width: 26px; height: 26px; border-radius: 6px; border: 1px solid #c5cae9; background: white; color: #3949ab; cursor: pointer; display: none; align-items: center; justify-content: center; font-size: 11px; transition: all 0.2s; flex-shrink: 0; }
+.notice-edit-btn:hover { background: #3949ab; color: white; }
+body.admin-mode .notice-edit-btn { display: flex; }
+.notice-item-content { font-size: 14px; color: #2d2d2d; line-height: 1.8; word-break: break-word; white-space: pre-wrap; padding-left: 32px; }
+.notice-divider { height: 1px; background: linear-gradient(90deg, transparent, #f0d080, transparent); margin: 0 16px; }
+.upload-area { display: none; border: 2px dashed #c5cae9; border-radius: 12px; padding: 32px; text-align: center; cursor: pointer; transition: all 0.2s; margin-bottom: 16px; background: #f8f9ff; }
+.upload-area:hover { border-color: #3949ab; background: #eff0fa; }
+body.admin-mode .upload-area { display: block; }
+.upload-area i { font-size: 32px; color: #9fa8da; margin-bottom: 10px; }
+.upload-area p { font-size: 13px; color: #888; line-height: 1.6; }
+.upload-area .upload-types { font-size: 11px; color: #aaa; margin-top: 6px; }
+.file-list { display: flex; flex-direction: column; gap: 10px; }
+.file-item { display: flex; align-items: center; gap: 12px; padding: 12px 16px; background: #f8f9ff; border-radius: 10px; border: 1px solid #e8eaf6; transition: all 0.2s; }
+.file-item:hover { background: #eef0fa; box-shadow: 0 2px 8px rgba(57,73,171,0.1); }
+.file-icon { width: 40px; height: 40px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; }
+.file-icon.pdf { background: #ffebee; color: #e53935; }
+.file-icon.image { background: #e8f5e9; color: #43a047; }
+.file-icon.excel { background: #e8f5e9; color: #2e7d32; }
+.file-icon.word { background: #e3f2fd; color: #1565c0; }
+.file-icon.youtube { background: #ffebee; color: #e53935; }
+.file-icon.default { background: #f3e5f5; color: #7b1fa2; }
+.file-info { flex: 1; min-width: 0; }
+.file-name { font-size: 13px; font-weight: 600; color: #1a1a2e; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.file-meta { font-size: 11px; color: #999; margin-top: 2px; }
+.file-actions { display: flex; gap: 6px; flex-shrink: 0; }
+.file-action-btn { width: 32px; height: 32px; border-radius: 8px; border: 1px solid #e0e3f0; background: white; color: #555; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 13px; transition: all 0.2s; }
+.file-action-btn:hover { background: #1a1f4e; color: white; border-color: #1a1f4e; }
+.file-action-btn.delete-btn { color: #e53935; border-color: #ffcdd2; }
+.file-action-btn.delete-btn:hover { background: #e53935; color: white; border-color: #e53935; }
+.participant-count-badge { display: inline-flex; align-items: center; justify-content: center; background: #1a1f4e; color: #fff; font-size: 11px; font-weight: 700; padding: 2px 9px; border-radius: 20px; margin-left: 8px; }
+.participant-group { margin-bottom: 20px; }
+.participant-group:last-child { margin-bottom: 0; }
+.participant-group-header { display: flex; align-items: center; gap: 8px; padding: 8px 14px; background: #f0f2fa; border-left: 4px solid #1a1f4e; border-radius: 0 8px 8px 0; margin-bottom: 10px; font-size: 14px; font-weight: 700; color: #1a1f4e; }
+.participant-group-header i { font-size: 13px; color: #3949ab; }
+.participant-group-count { margin-left: auto; font-size: 12px; font-weight: 600; color: #888; background: #fff; border: 1px solid #dde0f5; border-radius: 12px; padding: 1px 10px; }
+.participant-cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 10px; padding: 0 4px; }
+.participant-card { display: flex; align-items: center; gap: 12px; background: #fff; border: 1px solid #e8eaf6; border-radius: 12px; padding: 12px 14px; transition: box-shadow 0.2s, border-color 0.2s; position: relative; }
+.participant-card:hover { border-color: #c5cae9; box-shadow: 0 3px 10px rgba(57,73,171,0.08); }
+.participant-avatar { width: 40px; height: 40px; min-width: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 17px; font-weight: 800; }
+.participant-info { flex: 1; min-width: 0; }
+.participant-name { font-size: 14px; font-weight: 700; color: #1a1a2e; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-bottom: 5px; }
+.participant-tags { display: flex; flex-wrap: wrap; gap: 4px; }
+.p-tag { display: inline-block; font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 10px; white-space: nowrap; }
+.position-tag { background: #e8eaf6; color: #3949ab; }
+.role-tag { background: #e8f5e9; color: #2e7d32; }
+.participant-card-actions { display: flex !important; flex-direction: column; gap: 4px; flex-shrink: 0; }
+body:not(.admin-mode) .participant-card-actions { display: none !important; }
+.p-action-btn { width: 24px; height: 24px; border-radius: 6px; border: 1px solid #e0e3f0; background: #fff; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 10px; transition: all 0.18s; }
+.p-action-btn.edit { color: #3949ab; border-color: #c5cae9; }
+.p-action-btn.edit:hover { background: #3949ab; color: #fff; border-color: #3949ab; }
+.p-action-btn.delete { color: #e53935; border-color: #ffcdd2; }
+.p-action-btn.delete:hover { background: #e53935; color: #fff; border-color: #e53935; }
+.participant-form-label { display: block; font-size: 12px; font-weight: 600; color: #555; margin-bottom: 5px; }
+.confirm-icon .fa-user-check { color: #1a1f4e; }
+.schedule-type-badge { display: inline-flex; align-items: center; font-size: 11px; font-weight: 600; padding: 3px 10px; border-radius: 20px; margin-left: 10px; }
+.schedule-type-badge.exec { background: #e8eaf6; color: #1a1f4e; }
+.schedule-type-badge.staff { background: #e3f2fd; color: #1565c0; }
+.pdf-export-btn { display: inline-flex; align-items: center; gap: 5px; padding: 5px 13px; border-radius: 8px; background: #e53935; color: #fff !important; font-size: 12px; font-weight: 600; text-decoration: none; transition: background 0.15s; margin-left: auto; flex-shrink: 0; }
+.pdf-export-btn:hover { background: #c62828; }
+.pdf-export-btn i { font-size: 13px; }
+.schedule-timeline { display: flex; flex-direction: column; padding: 4px 0 0; }
+.sched-day-row { display: flex; align-items: stretch; gap: 16px; padding-bottom: 24px; }
+.sched-day-row.last { padding-bottom: 4px; }
+.sched-day-col { display: flex; flex-direction: column; align-items: center; flex-shrink: 0; width: 68px; }
+.sched-day-badge { border-radius: 10px; padding: 6px 0; width: 68px; text-align: center; margin-top: 0; flex-shrink: 0; display: flex; flex-direction: column; align-items: center; gap: 2px; }
+.sched-day-num { font-size: 11px; font-weight: 800; color: #fff; line-height: 1.3; }
+.sched-day-date { font-size: 11px; font-weight: 600; color: rgba(255,255,255,0.85); margin-top: 1px; }
+.sched-line { width: 2px; flex: 1; background: #dde0f5; margin: 6px 0; min-height: 20px; }
+.sched-line-stub { width: 2px; height: 14px; background: #dde0f5; margin-top: 6px; }
+.sched-dot { width: 13px; height: 13px; border-radius: 50%; flex-shrink: 0; z-index: 1; margin-bottom: 2px; }
+.sched-content-card { flex: 1; background: #fff; border: 1px solid #e8eaf6; border-radius: 14px; padding: 14px 16px 12px; box-shadow: 0 2px 8px rgba(57,73,171,0.05); min-width: 0; }
+.sched-card-header { display: flex; align-items: center; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; padding-bottom: 10px; border-bottom: 1px solid #f0f2fa; }
+.sched-region { display: flex; align-items: center; gap: 6px; font-size: 14px; font-weight: 700; color: #1a1f4e; }
+.sched-region i { font-size: 12px; }
+.sched-transport { display: flex; align-items: center; gap: 5px; font-size: 11px; font-weight: 600; padding: 3px 10px; border-radius: 12px; border: 1px solid transparent; }
+.sched-transport i { font-size: 10px; }
+.sched-slots { display: flex; flex-direction: column; gap: 0; margin-bottom: 10px; }
+.sched-slot { display: flex; align-items: flex-start; gap: 0; padding: 5px 0; border-bottom: 1px dashed #f0f2fa; }
+.sched-slot:last-child { border-bottom: none; }
+.sched-slot-time { width: 58px; flex-shrink: 0; padding-top: 2px; }
+.slot-time-badge { display: inline-block; font-size: 11px; font-weight: 700; padding: 2px 7px; border-radius: 6px; border: 1px solid transparent; white-space: nowrap; font-family: 'Courier New', monospace; }
+.slot-time-empty { display: inline-block; width: 48px; }
+.sched-slot-body { flex: 1; display: flex; align-items: flex-start; gap: 6px; min-width: 0; }
+.slot-arrow { font-size: 10px; font-weight: 700; margin-top: 3px; flex-shrink: 0; }
+.slot-dot { font-size: 14px; color: #aaa; margin-top: 0; flex-shrink: 0; line-height: 1.5; }
+.slot-line { font-size: 12px; color: #ccc; margin-top: 2px; flex-shrink: 0; }
+.slot-detail-wrap { flex: 1; min-width: 0; }
+.slot-detail { font-size: 13px; color: #333; line-height: 1.65; word-break: keep-all; }
+.slot-detail-point { font-weight: 600; color: #1a1f4e; }
+.slot-memo { display: block; font-size: 11px; color: #888; margin-top: 2px; font-style: italic; }
+.sched-team-group { border: 1px solid; border-radius: 10px; overflow: hidden; margin-bottom: 6px; }
+.sched-team-header { display: flex; align-items: center; gap: 6px; padding: 5px 12px; font-size: 12px; font-weight: 700; border-bottom: 1px solid; letter-spacing: 0.3px; }
+.team-header-icon { font-size: 13px; }
+.team-header-label { flex: 1; }
+.sched-team-rows { padding: 6px 10px; display: flex; flex-direction: column; gap: 4px; }
+.team-slot-row { display: flex; align-items: baseline; gap: 8px; font-size: 13px; line-height: 1.6; }
+.team-slot-time { font-size: 11px; font-weight: 700; font-family: 'Courier New', monospace; flex-shrink: 0; min-width: 38px; }
+.team-slot-detail { color: #2d2d2d; word-break: keep-all; }
+.slot-flight { font-weight: 700; color: inherit; }
+.sched-slot.slot-point { background: #f8f9ff; border-radius: 8px; padding: 6px 8px; border-bottom: none; margin-bottom: 2px; }
+.sched-slot.slot-normal {}
+.sched-summary { display: flex; align-items: flex-start; gap: 6px; background: #fffde7; border: 1px solid #ffe082; border-radius: 8px; padding: 7px 10px; margin: 8px 0 6px; font-size: 12px; color: #6d4c00; line-height: 1.5; }
+.sched-summary i { color: #f9a825; margin-top: 2px; flex-shrink: 0; }
+.sched-footer { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-top: 10px; padding-top: 10px; border-top: 1px solid #f0f2fa; }
+.sched-meals { display: flex; align-items: center; gap: 5px; flex-wrap: wrap; }
+.sched-meals i { color: #f57c00; font-size: 11px; }
+.meal-chip { font-size: 11px; padding: 2px 8px; border-radius: 8px; border: 1px solid; }
+.meal-chip b { font-weight: 700; }
+.meal-chip.meal-morning { background: #fff9e6; border-color: #ffe082; color: #795548; }
+.meal-chip.meal-lunch { background: #e8f5e9; border-color: #a5d6a7; color: #2e7d32; }
+.meal-chip.meal-dinner { background: #fce4ec; border-color: #f48fb1; color: #880e4f; }
+.sched-hotel { display: flex; align-items: center; gap: 6px; font-size: 12px; color: #555; background: #f5f5f5; padding: 3px 10px; border-radius: 8px; border: 1px solid #e0e0e0; }
+.sched-hotel i { color: #5c6bc0; font-size: 11px; }
+.admin-only-btn { display: none; }
+body.admin-mode .admin-only-btn { display: flex; }
+/* ===== 일정 편집 모달 ===== */
+#sched-edit-modal .modal-box { max-width: 680px; max-height: 90vh; overflow-y: auto; }
+.sched-edit-section { margin-bottom: 18px; }
+.sched-edit-label { font-size: 12px; font-weight: 700; color: #555; margin-bottom: 5px; display: block; }
+.sched-edit-input { width: 100%; padding: 9px 12px; border: 1.5px solid #e0e3f0; border-radius: 8px; font-size: 13px; font-family: 'Noto Sans KR', sans-serif; outline: none; transition: border-color 0.2s; color: #333; }
+.sched-edit-input:focus { border-color: #1a1f4e; }
+.sched-edit-row-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 18px; }
+.sched-edit-meals-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; margin-bottom: 18px; }
+.sched-slot-edit-list { display: flex; flex-direction: column; gap: 6px; margin-bottom: 10px; max-height: 260px; overflow-y: auto; padding-right: 4px; }
+.sched-slot-edit-item { display: flex; align-items: center; gap: 6px; background: #f8f9ff; border: 1px solid #e8eaf6; border-radius: 8px; padding: 6px 8px; }
+.sched-slot-edit-time { width: 64px; flex-shrink: 0; padding: 5px 7px; border: 1px solid #d0d4e8; border-radius: 6px; font-size: 12px; font-family: 'Courier New', monospace; text-align: center; outline: none; }
+.sched-slot-edit-detail { flex: 1; padding: 5px 8px; border: 1px solid #d0d4e8; border-radius: 6px; font-size: 12px; font-family: 'Noto Sans KR', sans-serif; outline: none; }
+.sched-slot-edit-del { width: 26px; height: 26px; border-radius: 6px; border: 1px solid #ffcdd2; background: white; color: #e53935; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 11px; flex-shrink: 0; transition: all 0.15s; }
+.sched-slot-edit-del:hover { background: #e53935; color: white; }
+.sched-add-slot-btn { width: 100%; padding: 7px; border: 1.5px dashed #c5cae9; background: transparent; border-radius: 8px; color: #666; cursor: pointer; font-family: 'Noto Sans KR', sans-serif; font-size: 12px; transition: all 0.15s; }
+.sched-add-slot-btn:hover { border-color: #3949ab; color: #3949ab; background: #f0f1ff; }
+.sched-edit-day-btn { display: none; align-items: center; justify-content: center; width: 30px; height: 30px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.3); background: rgba(255,255,255,0.15); color: white; cursor: pointer; font-size: 12px; transition: all 0.2s; margin-left: 6px; flex-shrink: 0; }
+.sched-edit-day-btn:hover { background: rgba(255,255,255,0.3); }
+body.admin-mode .sched-edit-day-btn { display: flex; }
+.sched-add-day-btn { display: inline-flex; align-items: center; gap: 5px; padding: 8px 14px; background: #1a1f4e; color: white; border: none; border-radius: 8px; font-size: 12px; cursor: pointer; font-family: 'Noto Sans KR', sans-serif; transition: background 0.2s; white-space: nowrap; }
+.sched-add-day-btn:hover { background: #3949ab; }
+.sched-divider { height: 1px; background: #eef0f6; margin: 16px 0; }
+.youtube-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 16px; margin-top: 16px; }
+.youtube-card { border-radius: 12px; overflow: hidden; background: #111; cursor: pointer; transition: all 0.2s; position: relative; box-shadow: 0 2px 10px rgba(0,0,0,0.12); }
+.youtube-card:hover { transform: translateY(-3px); box-shadow: 0 6px 20px rgba(0,0,0,0.2); }
+.youtube-thumb { width: 100%; aspect-ratio: 16/9; object-fit: cover; display: block; }
+.youtube-play-overlay { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; background: rgba(0,0,0,0.3); transition: background 0.2s; }
+.youtube-card:hover .youtube-play-overlay { background: rgba(0,0,0,0.5); }
+.youtube-play-btn { width: 48px; height: 48px; border-radius: 50%; background: #FF0000; display: flex; align-items: center; justify-content: center; color: white; font-size: 18px; box-shadow: 0 2px 12px rgba(0,0,0,0.4); }
+.youtube-title { padding: 10px 12px; font-size: 12px; color: #eee; line-height: 1.4; background: #1a1a1a; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.youtube-add-form { display: none; gap: 8px; margin-bottom: 12px; flex-wrap: wrap; }
+body.admin-mode .youtube-add-form { display: flex; }
+.youtube-add-form input { flex: 1; min-width: 200px; padding: 10px 14px; border: 1px solid #d0d4e8; border-radius: 8px; font-size: 13px; font-family: 'Noto Sans KR', sans-serif; outline: none; transition: border-color 0.2s; }
+.youtube-add-form input:focus { border-color: #3949ab; }
+.youtube-add-form button { padding: 10px 20px; background: #1a1f4e; color: white; border: none; border-radius: 8px; font-size: 13px; cursor: pointer; font-family: 'Noto Sans KR', sans-serif; transition: background 0.2s; white-space: nowrap; }
+.youtube-add-form button:hover { background: #3949ab; }
+.data-table-wrap { overflow-x: auto; border-radius: 10px; border: 1px solid #e8eaf6; }
+.data-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+.data-table th { background: #1a1f4e; color: white; padding: 11px 16px; text-align: left; font-weight: 600; white-space: nowrap; }
+.data-table td { padding: 10px 16px; border-bottom: 1px solid #eef0f6; color: #444; vertical-align: middle; }
+.data-table tr:last-child td { border-bottom: none; }
+.data-table tr:hover td { background: #f8f9ff; }
+.empty-state { text-align: center; padding: 48px 20px; color: #bbb; }
+.empty-state i { font-size: 48px; margin-bottom: 14px; display: block; opacity: 0.4; }
+.empty-state p { font-size: 14px; line-height: 1.6; }
+.modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 1000; display: flex; align-items: center; justify-content: center; padding: 20px; backdrop-filter: blur(4px); }
+.modal-overlay.hidden { display: none; }
+.modal-box { background: white; border-radius: 20px; padding: 32px; width: 100%; max-width: 480px; box-shadow: 0 20px 60px rgba(0,0,0,0.2); animation: modalIn 0.3s ease; }
+@keyframes modalIn { from { opacity: 0; transform: scale(0.9) translateY(20px); } to { opacity: 1; transform: scale(1) translateY(0); } }
+.modal-title { font-size: 18px; font-weight: 700; color: #1a1a2e; margin-bottom: 8px; }
+.modal-desc { font-size: 13px; color: #888; margin-bottom: 24px; line-height: 1.6; }
+.modal-input { width: 100%; padding: 12px 16px; border: 1.5px solid #e0e3f0; border-radius: 10px; font-size: 15px; font-family: 'Noto Sans KR', sans-serif; outline: none; transition: border-color 0.2s; margin-bottom: 20px; letter-spacing: 4px; text-align: center; }
+.modal-input:focus { border-color: #1a1f4e; }
+.modal-textarea { width: 100%; padding: 14px 16px; border: 1.5px solid #e0e3f0; border-radius: 10px; font-size: 13px; font-family: 'Noto Sans KR', sans-serif; outline: none; resize: vertical; min-height: 160px; line-height: 1.8; transition: border-color 0.2s; color: #333; margin-bottom: 20px; }
+.modal-textarea:focus { border-color: #1a1f4e; }
+.modal-buttons { display: flex; gap: 10px; justify-content: flex-end; }
+.btn-cancel { padding: 10px 22px; border: 1.5px solid #e0e3f0; border-radius: 10px; background: white; color: #666; font-size: 14px; cursor: pointer; font-family: 'Noto Sans KR', sans-serif; transition: all 0.2s; }
+.btn-cancel:hover { background: #f5f5f5; }
+.btn-confirm { padding: 10px 22px; border: none; border-radius: 10px; background: #1a1f4e; color: white; font-size: 14px; font-weight: 600; cursor: pointer; font-family: 'Noto Sans KR', sans-serif; transition: all 0.2s; }
+.btn-confirm:hover { background: #3949ab; }
+.btn-confirm.danger { background: #e53935; }
+.btn-confirm.danger:hover { background: #c62828; }
+.confirm-icon { width: 56px; height: 56px; border-radius: 50%; background: #fff3e0; display: flex; align-items: center; justify-content: center; font-size: 24px; color: #FF8F00; margin: 0 auto 16px; }
+.contact-edit-row { display: grid; grid-template-columns: 1fr 1fr 1fr auto; gap: 8px; margin-bottom: 8px; align-items: center; }
+.contact-edit-row input { padding: 8px 12px; border: 1px solid #e0e3f0; border-radius: 8px; font-size: 12px; font-family: 'Noto Sans KR', sans-serif; outline: none; }
+.contact-edit-row input:focus { border-color: #3949ab; }
+.toast-container { position: fixed; bottom: 24px; right: 24px; z-index: 9999; display: flex; flex-direction: column; gap: 8px; }
+.toast { background: #1a1a2e; color: white; padding: 12px 20px; border-radius: 12px; font-size: 13px; box-shadow: 0 4px 20px rgba(0,0,0,0.2); display: flex; align-items: center; gap: 10px; animation: toastIn 0.3s ease; min-width: 200px; }
+.toast.success { border-left: 3px solid #43a047; }
+.toast.error { border-left: 3px solid #e53935; }
+.toast.info { border-left: 3px solid #1976D2; }
+@keyframes toastIn { from { opacity: 0; transform: translateX(20px); } to { opacity: 1; transform: translateX(0); } }
+@keyframes toastOut { from { opacity: 1; transform: translateX(0); } to { opacity: 0; transform: translateX(20px); } }
+.loading-spinner { display: inline-block; width: 20px; height: 20px; border: 2px solid #e0e3f0; border-top-color: #1a1f4e; border-radius: 50%; animation: spin 0.8s linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
+@media (max-width: 768px) { .guide-header-inner { height: 52px; } .guide-nav { top: 52px; } .guide-header .event-name { font-size: 13px; } .guide-content { padding: 16px 12px 48px; } .section-card { padding: 18px 16px; } .weather-cities { grid-template-columns: 1fr; } .contact-edit-row { grid-template-columns: 1fr 1fr; } .contact-edit-row input:last-of-type { grid-column: span 2; } .nav-tab { padding: 0 14px; font-size: 12px; } .basic-info-grid { grid-template-columns: 1fr; } }
+@media (max-width: 520px) { .sched-day-col { width: 56px; } .sched-day-badge { width: 56px; } .sched-day-row { gap: 10px; } .sched-content-card { padding: 10px 12px; } .sched-slot-time { width: 48px; } .slot-time-badge { font-size: 10px; padding: 1px 5px; } .slot-detail { font-size: 12px; } }
+    </style>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            min-height: 100vh;
+            background: #0a0e27;
+            overflow: hidden;
+        }
+
+        /* ===== LANDING PAGE ===== */
+        #landing-page {
+            position: fixed;
+            inset: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #0a0e27 0%, #1a1f4e 40%, #0d2137 100%);
+            z-index: 100;
+            transition: opacity 0.6s ease, visibility 0.6s ease;
+        }
+
+        #landing-page.fade-out {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+
+        /* 배경 파티클/별 효과 */
+        .stars {
+            position: absolute;
+            inset: 0;
+            overflow: hidden;
+            pointer-events: none;
+        }
+
+        .star {
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+            animation: twinkle var(--duration) ease-in-out infinite;
+            opacity: 0;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0; transform: scale(0.5); }
+            50% { opacity: var(--opacity); transform: scale(1); }
+        }
+
+        /* 상단 배지 */
+        .landing-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 30px;
+            padding: 8px 20px;
+            color: rgba(255, 255, 255, 0.85);
+            font-size: 13px;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            margin-bottom: 28px;
+            backdrop-filter: blur(10px);
+        }
+
+        .landing-badge i {
+            color: #FFD700;
+            font-size: 14px;
+        }
+
+        /* 메인 타이틀 */
+        .landing-title-wrap {
+            text-align: center;
+            margin-bottom: 16px;
+        }
+
+        .landing-title-main {
+            font-size: clamp(32px, 6.5vw, 72px);
+            font-weight: 900;
+            color: white;
+            letter-spacing: 2px;
+            line-height: 1.1;
+            white-space: nowrap;
+            text-shadow: 0 0 60px rgba(100, 160, 255, 0.35);
+        }
+
+        .landing-title-main .awe {
+            color: #4FC3F7;
+        }
+
+        .landing-title-main .year {
+            color: #FFD700;
+        }
+
+        .landing-title-ko {
+            font-size: clamp(18px, 3vw, 30px);
+            font-weight: 600;
+            color: rgba(255, 255, 255, 0.85);
+            letter-spacing: 4px;
+            margin-top: 14px;
+        }
+
+        /* 구분선 */
+        .landing-divider {
+            width: 80px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #4FC3F7, transparent);
+            margin: 24px auto;
+        }
+
+        /* 선택 버튼 */
+        .landing-select-label {
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 13px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .landing-buttons {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .landing-btn {
+            position: relative;
+            padding: 0;
+            border: none;
+            background: none;
+            cursor: pointer;
+            outline: none;
+            transition: transform 0.3s ease;
+        }
+
+        .landing-btn:hover {
+            transform: translateY(-4px);
+        }
+
+        .landing-btn-inner {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 220px;
+            height: 140px;
+            border-radius: 20px;
+            border: 1.5px solid rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(20px);
+            transition: all 0.3s ease;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* 책임자급 버튼 - 단색 골드 */
+        .landing-btn.executive .landing-btn-inner {
+            background: #FFCC00;
+            border-color: #FFCC00;
+            box-shadow: 0 4px 20px rgba(255, 204, 0, 0.4);
+        }
+
+        /* 실무자급 버튼 - 단색 스카이블루 */
+        .landing-btn.staff .landing-btn-inner {
+            background: #29B6F6;
+            border-color: #29B6F6;
+            box-shadow: 0 4px 20px rgba(41, 182, 246, 0.4);
+        }
+
+        .landing-btn.executive:hover .landing-btn-inner {
+            background: #FFD700;
+            border-color: #FFD700;
+            box-shadow: 0 10px 36px rgba(255, 215, 0, 0.55);
+        }
+
+        .landing-btn.staff:hover .landing-btn-inner {
+            background: #0EA5D8;
+            border-color: #0EA5D8;
+            box-shadow: 0 10px 36px rgba(41, 182, 246, 0.55);
+        }
+
+        .landing-btn-icon {
+            font-size: 34px;
+            margin-bottom: 12px;
+            filter: drop-shadow(0 2px 6px rgba(0,0,0,0.25));
+        }
+
+        .landing-btn.executive .landing-btn-icon {
+            color: #1a1200;
+            filter: none;
+        }
+
+        .landing-btn.staff .landing-btn-icon {
+            color: #001a2e;
+            filter: none;
+        }
+
+        .landing-btn-title {
+            font-size: 19px;
+            font-weight: 800;
+            color: white;
+            margin-bottom: 4px;
+            text-shadow: none;
+        }
+
+        /* 책임자급은 어두운 글자 */
+        .landing-btn.executive .landing-btn-title {
+            color: #1a1200;
+            text-shadow: none;
+        }
+
+        /* 실무자급도 어두운 글자 */
+        .landing-btn.staff .landing-btn-title {
+            color: #001a2e;
+            text-shadow: none;
+        }
+
+        .landing-btn-sub {
+            font-size: 14px;
+            font-weight: 600;
+            color: rgba(255, 255, 255, 0.85);
+        }
+
+        .landing-btn.executive .landing-btn-sub {
+            color: rgba(30, 20, 0, 0.7);
+        }
+
+        .landing-btn.staff .landing-btn-sub {
+            color: rgba(0, 26, 46, 0.7);
+        }
+
+        .landing-btn.executive .landing-btn-arrow {
+            color: rgba(30, 20, 0, 0.45);
+        }
+
+        .landing-btn.executive:hover .landing-btn-arrow {
+            color: rgba(30, 20, 0, 0.85);
+        }
+
+        .landing-btn.staff .landing-btn-arrow {
+            color: rgba(0, 26, 46, 0.45);
+        }
+
+        .landing-btn.staff:hover .landing-btn-arrow {
+            color: rgba(0, 26, 46, 0.85);
+        }
+
+        .landing-btn-arrow {
+            position: absolute;
+            bottom: 14px;
+            right: 16px;
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.55);
+            transition: all 0.3s ease;
+        }
+
+        .landing-btn:hover .landing-btn-arrow {
+            color: white;
+            transform: translateX(4px);
+        }
+
+        /* 하단 푸터 - 페이지 중앙 하단 고정 */
+        .landing-footer {
+            position: absolute;
+            bottom: 24px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: rgba(255, 255, 255, 0.3);
+            font-size: 12px;
+            letter-spacing: 1px;
+            white-space: nowrap;
+        }
+
+        /* 빛 번짐 효과 */
+        .glow-orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.15;
+            pointer-events: none;
+        }
+
+        .glow-orb.blue {
+            width: 400px;
+            height: 400px;
+            background: #2979ff;
+            top: -100px;
+            right: -100px;
+        }
+
+        .glow-orb.gold {
+            width: 300px;
+            height: 300px;
+            background: #FFD700;
+            bottom: -80px;
+            left: -80px;
+        }
+
+        .glow-orb.cyan {
+            width: 250px;
+            height: 250px;
+            background: #00BCD4;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            opacity: 0.08;
+        }
+
+        /* 중국 국기 포인트 - 미사용 */
+        .china-flag-dot { display: none; }
+
+        @media (max-width: 520px) {
+            .landing-title-main {
+                font-size: clamp(32px, 11vw, 56px);
+                white-space: nowrap;
+            }
+            .landing-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            .landing-btn-inner {
+                width: 280px;
+                height: 110px;
+                flex-direction: row;
+                gap: 16px;
+                padding: 0 24px;
+            }
+            .landing-btn-icon {
+                margin-bottom: 0;
+            }
+            .landing-btn-title { font-size: 17px; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ===== LANDING PAGE ===== -->
+<div id="landing-page">
+    <div class="stars" id="stars-container"></div>
+    <div class="glow-orb blue"></div>
+    <div class="glow-orb gold"></div>
+    <div class="glow-orb cyan"></div>
+
+    <div class="landing-title-wrap">
+        <div class="landing-title-main">
+            상해 <span class="awe">AWE</span> <span class="year">2026</span>
+        </div>
+        <div class="landing-title-ko">참관단 안내</div>
+    </div>
+
+    <div class="landing-divider"></div>
+
+    <div class="landing-select-label">참가자 유형을 선택하세요</div>
+
+    <div class="landing-buttons">
+        <button class="landing-btn executive" onclick="enterPage('executive')">
+            <div class="landing-btn-inner">
+                <div class="landing-btn-icon"><i class="fas fa-crown"></i></div>
+                <div>
+                    <div class="landing-btn-title">책임자급</div>
+                    <div class="landing-btn-sub">(임원)</div>
+                </div>
+                <i class="fas fa-chevron-right landing-btn-arrow"></i>
+            </div>
+        </button>
+
+        <button class="landing-btn staff" onclick="enterPage('staff')">
+            <div class="landing-btn-inner">
+                <div class="landing-btn-icon"><i class="fas fa-user-tie"></i></div>
+                <div>
+                    <div class="landing-btn-title">실무자급</div>
+                    <div class="landing-btn-sub">(직원)</div>
+                </div>
+                <i class="fas fa-chevron-right landing-btn-arrow"></i>
+            </div>
+        </button>
+    </div>
+
+    <div class="landing-footer">© 2026 AWE Shanghai 참관단 · 해외출장 안내 시스템</div>
+</div>
+
+<!-- ===== MAIN APP (2p) ===== -->
+<div id="main-app" style="display:none;">
+    <!-- guide.html로 분리, JS에서 로딩 -->
+</div>
+
+<script>
+    // 별 배경 생성
+    const starsContainer = document.getElementById('stars-container');
+    for (let i = 0; i < 80; i++) {
+        const star = document.createElement('div');
+        star.classList.add('star');
+        const size = Math.random() * 3 + 1;
+        star.style.cssText = `
+            width: ${size}px;
+            height: ${size}px;
+            left: ${Math.random() * 100}%;
+            top: ${Math.random() * 100}%;
+            --duration: ${Math.random() * 4 + 2}s;
+            --opacity: ${Math.random() * 0.8 + 0.2};
+            animation-delay: ${Math.random() * 4}s;
+        `;
+        starsContainer.appendChild(star);
+    }
+
+    function enterPage(type) {
+        const landing = document.getElementById('landing-page');
+        landing.classList.add('fade-out');
+
+        setTimeout(() => {
+            landing.style.display = 'none';
+            document.body.style.overflow = 'auto';
+            document.body.style.background = '#f0f2f5';
+            // guide.js로 앱 실행
+            if (typeof initGuideApp === 'function') {
+                initGuideApp(type);
+            }
+        }, 600);
+    }
+</script>
+<script>
+// ===== AWE 2026 정적 데이터 (완전 인라인 – 서버 DB 독립) =====
+
+const STATIC_NOTICES = [
+  { id: '2b16f1b8', user_type: 'executive', content: '[AWE 참관 등록 - 여행사 대행(인증번호 요청) 안내]\n- 이메일 인증이 필요하여, 여행사에서 인증번호를 요청드릴 예정입니다.\n여행사에서 연락을 드리면, 그룹웨어로 발송되는 인증번호를 말씀부탁드립니다.', created_at_custom: 1772094209428, created_at: 1772094211054 },
+  { id: '3167673d', user_type: 'executive', content: '[사전 특강 필참 안내]\n- 일시 : 3월 9일(월) 오후 2시 ~ 5시\n- 장소 : 수산빌딩 지하 1층 대강당 (서울 강남구 밤고개로5길 13 수산빌딩)\n   ※ 사전특강 관련 자료는 "학습자료"메뉴에서 확인하실 수 있습니다.', created_at_custom: 1772093074934, created_at: 1772093075669 },
+  { id: '3a48f697', user_type: 'staff',     content: '[AWE 참관 등록 - 여행사 대행(인증번호 요청) 안내]\n- 이메일 인증이 필요하여, 여행사에서 인증번호를 요청드릴 예정입니다.\n여행사에서 연락을 드리면, 그룹웨어로 발송되는 인증번호를 말씀부탁드립니다.', created_at_custom: 1772176036199, created_at: 1772176037047 },
+  { id: '66ea094a', user_type: 'staff',     content: '[사전 특강 필참 안내]\n- 일시 : 3월 9일(월) 오후 2시 ~ 5시\n- 장소 : 수산빌딩 지하 1층 대강당 (서울 강남구 밤고개로5길 13 수산빌딩)\n   ※ 사전특강 관련 자료는 "학습자료"메뉴에서 확인하실 수 있습니다.', created_at_custom: 1772176031565, created_at: 1772176032300 },
+];
+
+const STATIC_PARTICIPANTS = [
+  { id: 'p01', user_type: 'executive', company: '수산그룹',       name: '정석현', position: '회장',      role: '회장',                    sort_order: 1 },
+  { id: 'p02', user_type: 'executive', company: '수산인더스트리', name: '한봉섭', position: '부회장',    role: '부회장',                  sort_order: 2 },
+  { id: 'p03', user_type: 'executive', company: '수산인더스트리', name: '정보윤', position: '부사장',    role: '부사장',                  sort_order: 3 },
+  { id: 'p04', user_type: 'executive', company: '수산인더스트리', name: '고우식', position: '상무',      role: '기술개발본부장',          sort_order: 4 },
+  { id: 'p05', user_type: 'executive', company: '수산인더스트리', name: '손영환', position: '상무',      role: '사업관리실장',            sort_order: 5 },
+  { id: 'p06', user_type: 'executive', company: '수산이앤에스',   name: '황성재', position: '상무',      role: '기술개발본부장',          sort_order: 6 },
+  { id: 'p07', user_type: 'executive', company: '수산이앤에스',   name: '정필석', position: '상무',      role: '엔지니어링본부장',        sort_order: 7 },
+  { id: 'p08', user_type: 'executive', company: '수산이앤에스',   name: '조숙희', position: '상무',      role: '방산기술팀원',            sort_order: 8 },
+  { id: 'p09', user_type: 'executive', company: '수산이앤에스',   name: '심길섭', position: '노조위원장',role: '노조위원장',              sort_order: 9 },
+  { id: 'p10', user_type: 'executive', company: '수산세보틱스',   name: '김병현', position: '사장',      role: '사장 (전략기획실장 겸직)',sort_order: 10 },
+  { id: 'p11', user_type: 'executive', company: '수산세보틱스',   name: '이호철', position: '전무',      role: '사외이사',                sort_order: 11 },
+  { id: 'p12', user_type: 'executive', company: '수산세보틱스',   name: '심선보', position: '노조지부장',role: '노조지부장',              sort_order: 12 },
+  { id: 'p13', user_type: 'executive', company: '수산세보틱스',   name: '문상보', position: '부사장',    role: '부사장',                  sort_order: 13 },
+  { id: 'p14', user_type: 'executive', company: '수산비나모터',   name: '강문종', position: '부사장',    role: '부사장',                  sort_order: 14 },
+];
+
+const STATIC_CONTACTS = [
+  { id: 'c01', user_type: 'executive', name: '김선채 과장', role: '전략기획실 인사기획팀', phone: '010-4634-2987', sort_order: 0 },
+  { id: 'c02', user_type: 'executive', name: '임현준 대리', role: '전략기획실 인사기획팀', phone: '010-8992-7654', sort_order: 1 },
+  { id: 'c03', user_type: 'staff',     name: '이동민 부장', role: '전략기획실 인사기획팀', phone: '010-7793-0081', sort_order: 0 },
+  { id: 'c04', user_type: 'staff',     name: '최지수 대리', role: '전략기획실 인사기획팀', phone: '010-8790-8201', sort_order: 1 },
+];
+
+const STATIC_CONTENT = [
+  { id: 'ct01', user_type: 'executive', menu: 'important_notice', section: 'prep', title: '준비물', sort_order: 0,
+    content: '1. ★여권\n2. ★핸드폰 로밍\n3. 세면용품 (칫솔 / 치약 / 면도기 등)\n4. 개인의약품\n5. 보조배터리/충전기\n6. 여벌 옷, 우산 등 개인 짐       ※하단 날씨 정보 참고\n7. 선글라스, 선크림, 모자 (선택사항)' },
+  { id: 'ct02', user_type: 'staff',     menu: 'important_notice', section: 'prep', title: '준비물', sort_order: 0,
+    content: '1. ★여권\n2. ★핸드폰 로밍\n3. 세면용품 (칫솔 / 치약 / 면도기 등)\n4. 개인의약품\n5. 보조배터리/충전기\n6. 여벌 옷, 우산 등 개인 짐      ※ 하단 날씨 정보 참고\n7. 선글라스, 선크림, 모자 (선택사항)' },
+];
+
+const STATIC_FILES = [];
+
+// ── STATIC_SCHEDULE: D1 awe_schedule 테이블이 비어있을 때 폴백(fallback)용으로만 사용 ──
+// 정상적인 경우 앱은 항상 D1에서 데이터를 로드합니다.
+// 관리자가 수정/추가/삭제한 내용은 D1에 영구 저장되므로
+// 이 배열을 직접 수정해도 D1에 이미 데이터가 있으면 반영되지 않습니다.
+const STATIC_SCHEDULE = [
+  // ── 책임자급 ──
+  { id:'ed1', user_type:'executive', day_num:1, sort_order:1, day_label:'제1일', date_label:'3/10(월)', region:'인천/김포 → 북경', transport:'OZ 331 / OZ 3355', notes:'인천/김포 출발 → 북경 수도공항 도착 → 기업 방문 → 호텔',
+    time_slots: JSON.stringify([
+      {time:'05:30', detail:'[인천공항 출발팀] OZ 331 · 인천국제공항 2터미널 아시아나항공 카운터 개별 수속'},
+      {time:'08:20', detail:'[인천공항 출발팀] 인천 출발'},
+      {time:'05:30', detail:'[김포공항 출발팀] OZ 3355 · 김포공항 국제선터미널 아시아나항공 카운터 개별 수속'},
+      {time:'08:40', detail:'[김포공항 출발팀] 김포 출발'},
+      {time:'09:45', detail:'▶ 북경 수도 국제공항 도착 및 가이드 미팅 (합류)'},
+      {time:'11:00', detail:'▶ 중국 국가박물관 방문'},
+      {time:'15:00', detail:'▶ Xiaomi EV Hyperfactory 방문'},
+      {time:'18:00', detail:'▶ KOTRA 세미나 및 석식 (북경오리)'},
+    ]), meal_morning:'', meal_lunch:'도시락', meal_dinner:'북경오리', hotel:'Beijing Kun Tai Hotel(3/10-11)' },
+
+  { id:'ed2', user_type:'executive', day_num:2, sort_order:2, day_label:'제2일', date_label:'3/11(수)', region:'북경', transport:'', notes:'호텔 조식 후 기업방문 및 세미나',
+    time_slots: JSON.stringify([
+      {time:'09:00', detail:'▶ 중국 기술·산업 동향 브리핑 (권혁민, 호텔 세미나실)'},
+      {time:'14:30', detail:'▶ 센스타임 포동 린강 데이터센터 방문'},
+      {time:'18:00', detail:'▶ 석식 (박선경 KITA 상해지부장 참석) 후 호텔 휴식'},
+    ]), meal_morning:'호텔', meal_lunch:'현지식', meal_dinner:'현지식', hotel:'Beijing Kun Tai Hotel(3/10-11)' },
+
+  { id:'ed3', user_type:'executive', day_num:3, sort_order:3, day_label:'제3일', date_label:'3/12(목)', region:'북경 → 상해', transport:'고속열차', notes:'호텔 조식 후 고속열차 탑승하여 상해 이동',
+    time_slots: JSON.stringify([
+      {time:'09:00', detail:'▶ 북경남역 출발 (고속열차)'},
+      {time:'13:40', detail:'▶ 상해 홍교역 도착'},
+      {time:'14:30', detail:'▶ 센스타임 포동 린강 데이터센터 방문'},
+      {time:'18:00', detail:'▶ 석식 (박선경 KITA 상해지부장 참석) 후 호텔 휴식'},
+    ]), meal_morning:'호텔', meal_lunch:'도시락', meal_dinner:'현지식', hotel:'Grand Metropark Hotel(3/12-14)' },
+
+  { id:'ed4', user_type:'executive', day_num:4, sort_order:4, day_label:'제4일', date_label:'3/13(금)', region:'상해', transport:'', notes:'호텔 조식 후 기업방문',
+    time_slots: JSON.stringify([
+      {time:'09:00', detail:'▶ 애지봇 방문 및 미팅'},
+      {time:'11:00', detail:'▶ 장강그룹 방문 및 미팅'},
+      {time:'16:00', detail:'▶ 화웨이 방문 및 식사'},
+    ]), meal_morning:'호텔', meal_lunch:'현지식', meal_dinner:'화웨이', hotel:'Grand Metropark Hotel(3/12-14)' },
+
+  { id:'ed5', user_type:'executive', day_num:5, sort_order:5, day_label:'제5일', date_label:'3/14(토)', region:'상해 (AWE 박람회)', transport:'', notes:'호텔 조식 후 전시장 이동, 상해 문화탐방',
+    time_slots: JSON.stringify([
+      {time:'09:00', detail:'▶ 상해 가전 AWE 박람회 참관/상담  (Eastern Hub 2전시장 ⇒ SNIEC 1전시장)'},
+      {time:'17:00', detail:'▶ 토론 및 간담회'},
+      {time:'19:00', detail:'▶ 석식 후 난징동루 탐방 (아시아 브랜드, 팝컬쳐-화웨이, 삼성, 타마샤인 네이션스, 미니쏠랜드 등)'},
+    ]), meal_morning:'호텔', meal_lunch:'현지식', meal_dinner:'호텔', hotel:'Grand Metropark Hotel(3/12-14)' },
+
+  { id:'ed6', user_type:'executive', day_num:6, sort_order:6, day_label:'제6일', date_label:'3/15(일)', region:'상해 → 귀국', transport:'OZ 366', notes:'호텔 조식 후 AWE 박람회 참관 → 귀국',
+    time_slots: JSON.stringify([
+      {time:'09:00', detail:'▶ 상해 가전 AWE 박람회 참관/상담'},
+      {time:'12:00', detail:'▶ 중식 후 공항 이동'},
+      {time:'16:25', detail:'[인천공항 도착팀] OZ 366 · 상해 포동 국제공항 출발 → 19:20 인천 도착 후 해산'},
+      {time:'16:25', detail:'[김포공항 도착팀] OZ 366 · 상해 포동 국제공항 출발 → 19:20 인천 도착 후 해산'},
+    ]), meal_morning:'호텔', meal_lunch:'현지식', meal_dinner:'', hotel:'' },
+
+  // ── 실무자급 ──
+  { id:'sd1', user_type:'staff', day_num:1, sort_order:1, day_label:'제1일', date_label:'3/11(화)', region:'상해 도착', transport:'OZ 365', notes:'인천 출발 → 상해 포동공항 도착 → 호텔',
+    time_slots: JSON.stringify([
+      {time:'07:00', detail:'[인천공항 출발팀] OZ 365 · 인천국제공항 2터미널 아시아나항공 카운터 개별 수속'},
+      {time:'09:30', detail:'[인천공항 출발팀] 인천 출발'},
+      {time:'11:30', detail:'▶ 상해 포동 국제공항 도착 및 가이드 미팅'},
+      {time:'16:00', detail:'▶ 이동 및 석식'},
+      {time:'19:00', detail:'• 호텔 휴식'},
+    ]), meal_morning:'', meal_lunch:'현지식', meal_dinner:'현지식', hotel:'Grand Metropark Hotel(3/11-14)' },
+
+  { id:'sd2', user_type:'staff', day_num:2, sort_order:2, day_label:'제2일', date_label:'3/12(수)', region:'상해', transport:'', notes:'호텔 조식 후 기업방문 및 세미나',
+    time_slots: JSON.stringify([
+      {time:'09:00', detail:'▶ 중국 기술·산업 동향 브리핑 (권혁민, 호텔 세미나실)'},
+      {time:'14:30', detail:'▶ 센스타임 포동 린강 데이터센터 방문'},
+      {time:'18:00', detail:'▶ 석식 (박선경 KITA 상해지부장 참석) 후 호텔 휴식'},
+    ]), meal_morning:'호텔', meal_lunch:'현지식', meal_dinner:'현지식', hotel:'Grand Metropark Hotel(3/11-14)' },
+
+  { id:'sd3', user_type:'staff', day_num:3, sort_order:3, day_label:'제3일', date_label:'3/13(목)', region:'상해', transport:'', notes:'호텔 조식 후 기업 방문',
+    time_slots: JSON.stringify([
+      {time:'09:00', detail:'▶ 애지봇 방문 및 미팅'},
+      {time:'11:00', detail:'▶ 장강그룹 방문 및 미팅'},
+      {time:'16:00', detail:'▶ 화웨이 방문 및 식사'},
+    ]), meal_morning:'호텔', meal_lunch:'현지식', meal_dinner:'화웨이', hotel:'Grand Metropark Hotel(3/11-14)' },
+
+  { id:'sd4', user_type:'staff', day_num:4, sort_order:4, day_label:'제4일', date_label:'3/14(금)', region:'상해 (AWE 박람회)', transport:'', notes:'호텔 조식 후 AWE 전시 참관 및 상해 문화 탐방',
+    time_slots: JSON.stringify([
+      {time:'09:00', detail:'▶ 상해 가전 AWE 박람회 참관/상담  (Eastern Hub 2전시장 ⇒ SNIEC 1전시장)'},
+      {time:'17:00', detail:'▶ 토론 및 간담회'},
+      {time:'19:00', detail:'▶ 석식 후 난징동루 탐방 (아시아 브랜드, 팝컬쳐-화웨이, 삼성, 타마샤인 네이션스, 미니쏠랜드 등)'},
+    ]), meal_morning:'호텔', meal_lunch:'현지식', meal_dinner:'호텔', hotel:'Grand Metropark Hotel(3/11-14)' },
+
+  { id:'sd5', user_type:'staff', day_num:5, sort_order:5, day_label:'제5일', date_label:'3/15(토)', region:'상해 → 귀국', transport:'OZ 366', notes:'호텔 조식 후 AWE 전시 참관 → 귀국',
+    time_slots: JSON.stringify([
+      {time:'09:00', detail:'▶ 상해 가전 AWE 박람회 참관/상담'},
+      {time:'12:00', detail:'▶ 중식 후 공항 이동'},
+      {time:'16:25', detail:'▶ OZ 366 상해 포동 국제공항 출발'},
+      {time:'19:20', detail:'▶ 인천 도착 후 해산'},
+    ]), meal_morning:'호텔', meal_lunch:'현지식', meal_dinner:'', hotel:'' },
+];
+</script>
+<script>
+/**
+ * AWE 2026 참관 안내 앱 - 최적화 버전
+ * 핵심: 앱 시작 시 전체 데이터 1회 로드 → 메모리 캐시 → 메뉴 전환 즉시 렌더링
+ */
+
+// ===== 전역 상태 =====
+const AppState = {
+    userType: 'staff',
+    isAdmin: false,
+    currentMenu: 'important_notice',
+    editCallback: null,
+    _pendingEditText: null,
+};
+
+// ===== 메모리 캐시 =====
+const Cache = {
+    content: null,
+    files: null,
+    contacts: null,
+    notices: null,
+    participants: null,
+    schedule: null,
+    weather: null,
+    weatherTime: 0,
+    loaded: false,
+};
+const WEATHER_TTL = 30 * 60 * 1000;
+
+// ===== localStorage 키 =====
+const LS_CONTENT      = 'awe_cache_content';
+const LS_FILES        = 'awe_cache_files';
+const LS_CONTACTS     = 'awe_cache_contacts';
+const LS_NOTICES      = 'awe_cache_notices';
+const LS_PARTICIPANTS = 'awe_cache_participants';
+const LS_SCHEDULE     = 'awe_cache_schedule';
+
+function lsSave(key, data) {
+    try {
+        if (key === LS_FILES) {
+            const slim = (data || []).map(f => { const { file_data, ...rest } = f; return rest; });
+            localStorage.setItem(key, JSON.stringify(slim));
+        } else {
+            localStorage.setItem(key, JSON.stringify(data || []));
+        }
+    } catch (e) {}
+}
+function lsLoad(key) {
+    try { const raw = localStorage.getItem(key); return raw ? JSON.parse(raw) : null; } catch { return null; }
+}
+function lsSaveFileData(fileId, fileData) { try { localStorage.setItem('awe_file_' + fileId, fileData); } catch {} }
+function lsLoadFileData(fileId) { try { return localStorage.getItem('awe_file_' + fileId) || null; } catch { return null; } }
+function lsRemoveFileData(fileId) { try { localStorage.removeItem('awe_file_' + fileId); } catch {} }
+
+const ADMIN_PW = '0000';
+const TABLE_CONTENT      = 'awe_content';
+const TABLE_FILES        = 'awe_files';
+const TABLE_CONTACTS     = 'awe_contacts';
+const TABLE_NOTICES      = 'awe_notices';
+const TABLE_PARTICIPANTS = 'awe_participants';
+const TABLE_SCHEDULE     = 'awe_schedule';
+
+const MENUS = [
+    { key: 'important_notice', label: '중요 안내사항', icon: 'fa-exclamation-circle' },
+    { key: 'company_info',     label: '방문기업 정보', icon: 'fa-building' },
+    { key: 'learning',         label: '학습자료',      icon: 'fa-book-open' },
+    { key: 'participants',     label: '참가자명단',    icon: 'fa-users' },
+    { key: 'schedule',         label: '일정표',        icon: 'fa-calendar-alt' },
+    { key: 'room_assignment',  label: '방 배정표',     icon: 'fa-door-open' },
+];
+
+// ===== 앱 진입점 =====
+async function initGuideApp(type) {
+    AppState.userType = type;
+    AppState.isAdmin  = false;
+    AppState.currentMenu = 'important_notice';
+
+    const app = document.getElementById('main-app');
+    app.style.display = 'block';
+    app.innerHTML = buildAppHTML();
+    bindEvents();
+
+    // 정적 데이터(공지/참가자/연락처/준비물)를 캐시에 즉시 로드
+    Cache.notices      = (typeof STATIC_NOTICES      !== 'undefined') ? STATIC_NOTICES      : [];
+    Cache.participants = (typeof STATIC_PARTICIPANTS !== 'undefined') ? STATIC_PARTICIPANTS : [];
+    Cache.contacts     = (typeof STATIC_CONTACTS     !== 'undefined') ? STATIC_CONTACTS     : [];
+    Cache.content      = (typeof STATIC_CONTENT      !== 'undefined') ? STATIC_CONTENT      : [];
+    Cache.files        = (typeof STATIC_FILES        !== 'undefined') ? STATIC_FILES        : [];
+
+    // ★ 일정은 D1에서만 로드 (영구 저장 구조)
+    // 첫 메뉴(important_notice)를 먼저 보여주고, 백그라운드에서 일정 fetch
+    Cache.schedule = [];
+    Cache.loaded   = true;
+    renderMenu(AppState.currentMenu);
+
+    // D1에서 일정 로드 (백그라운드, 일정 탭 열면 자동 갱신)
+    loadScheduleFromDB();
+}
+
+/**
+ * D1 awe_schedule 테이블에서 일정 데이터를 로드합니다.
+ * - 항상 D1에서 최신 데이터를 fetch
+ * - 실패 시 STATIC_SCHEDULE 폴백 (오프라인/DB 오류 대비)
+ */
+async function loadScheduleFromDB() {
+    try {
+        const res  = await fetch(`tables/${TABLE_SCHEDULE}?limit=200&sort=sort_order`);
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        const data = await res.json();
+        const rows = data.data || [];
+        if (rows.length > 0) {
+            Cache.schedule = rows;
+        } else {
+            // D1에 데이터 없을 경우 정적 폴백만 사용 (씨딩하지 않음 - 이미 DB에 있어야 함)
+            console.warn('awe_schedule 테이블이 비어있습니다.');
+            Cache.schedule = (typeof STATIC_SCHEDULE !== 'undefined') ? STATIC_SCHEDULE : [];
+        }
+        // 일정 탭이 열려있으면 즉시 갱신
+        if (AppState.currentMenu === 'schedule') {
+            const content = document.getElementById('menu-content');
+            if (content) renderSchedule(content);
+        }
+    } catch(e) {
+        console.warn('일정 DB 로드 실패, 정적 데이터 폴백 사용:', e);
+        Cache.schedule = (typeof STATIC_SCHEDULE !== 'undefined') ? STATIC_SCHEDULE : [];
+        if (AppState.currentMenu === 'schedule') {
+            const content = document.getElementById('menu-content');
+            if (content) renderSchedule(content);
+        }
+    }
+}
+
+async function prefetchAll() {}
+
+async function invalidateContent() {
+    try {
+        const res  = await fetch(`tables/${TABLE_CONTENT}?limit=500`);
+        const data = await res.json();
+        const srv = data.data || [];
+        if (srv.length > 0) { Cache.content = srv; }
+    } catch {}
+}
+async function invalidateFiles() {
+    try {
+        const res  = await fetch(`tables/${TABLE_FILES}?limit=500`);
+        const data = await res.json();
+        const srv = data.data || [];
+        if (srv.length > 0) {
+            Cache.files = srv;
+            Cache.files.forEach(f => { if (f.file_data) lsSaveFileData(f.id, f.file_data); });
+        }
+    } catch {}
+}
+async function invalidateContacts() {
+    try {
+        const res  = await fetch(`tables/${TABLE_CONTACTS}?limit=200`);
+        const data = await res.json();
+        const srv = data.data || [];
+        if (srv.length > 0) { Cache.contacts = srv; }
+    } catch {}
+}
+async function invalidateNotices() {
+    try {
+        const res  = await fetch(`tables/${TABLE_NOTICES}?limit=500`);
+        const data = await res.json();
+        const srv = data.data || [];
+        if (srv.length > 0) { Cache.notices = srv; }
+    } catch {}
+}
+async function invalidateParticipants() {
+    try {
+        const res  = await fetch(`tables/${TABLE_PARTICIPANTS}?limit=500`);
+        const data = await res.json();
+        const srv = data.data || [];
+        if (srv.length > 0) { Cache.participants = srv; }
+    } catch {}
+}
+async function invalidateSchedule() {
+    try {
+        const res  = await fetch(`tables/${TABLE_SCHEDULE}?limit=200&sort=sort_order`);
+        const data = await res.json();
+        const rows = data.data || [];
+        if (rows.length > 0) Cache.schedule = rows;
+    } catch(e) { console.warn('invalidateSchedule 실패:', e); }
+}
+
+function getCachedContent(menu, section) {
+    return (Cache.content || []).find(r =>
+        r.user_type === AppState.userType && r.menu === menu && r.section === section
+    ) || null;
+}
+function getCachedFiles(menu) {
+    return (Cache.files || [])
+        .filter(r => r.user_type === AppState.userType && r.menu === menu)
+        .sort((a, b) => (a.sort_order || 0) - (b.sort_order || 0));
+}
+function getCachedContacts() {
+    return (Cache.contacts || [])
+        .filter(r => r.user_type === AppState.userType)
+        .sort((a, b) => (a.sort_order || 0) - (b.sort_order || 0));
+}
+
+// ===== HTML 빌드 =====
+function buildAppHTML() {
+    const gradeLabel = AppState.userType === 'executive' ? '책임자급' : '실무자급';
+    const gradeCls   = AppState.userType === 'executive' ? 'executive' : 'staff';
+
+    const navTabs = MENUS.map(m => `
+        <button class="nav-tab ${m.key === 'important_notice' ? 'active' : ''}"
+                data-menu="${m.key}" onclick="switchMenu('${m.key}')">
+            <i class="fas ${m.icon}"></i>${m.label}
+        </button>`).join('');
+
+    return `
+    <div id="guide-app">
+        <header class="guide-header">
+            <div class="guide-header-inner">
+                <div class="guide-header-title">
+                    <span class="event-name">상해 AWE 2026 참관</span>
+                    <span class="grade-badge ${gradeCls}">${gradeLabel}</span>
+                </div>
+                <div class="header-actions">
+                    <span class="admin-mode-badge" id="admin-badge">
+                        <i class="fas fa-edit"></i> 관리자 모드
+                    </span>
+                    <button class="mode-btn active" id="user-mode-btn" title="사용자 모드" onclick="switchToUser()">
+                        <i class="fas fa-user"></i><span>사용자</span>
+                    </button>
+                    <button class="mode-btn" id="admin-mode-btn" title="관리자 모드" onclick="requestAdminMode()">
+                        <i class="fas fa-cog"></i><span>관리자</span>
+                    </button>
+                    <button class="home-btn" onclick="goHome()">
+                        <i class="fas fa-home"></i> 처음으로
+                    </button>
+                </div>
+            </div>
+        </header>
+        <nav class="guide-nav">
+            <div class="guide-nav-inner" id="nav-tabs">${navTabs}</div>
+        </nav>
+        <main class="guide-content" id="menu-content"></main>
+    </div>
+
+    <!-- 비밀번호 모달 -->
+    <div class="modal-overlay hidden" id="pw-modal">
+        <div class="modal-box">
+            <div class="modal-title"><i class="fas fa-lock" style="margin-right:8px;color:#1a1f4e;"></i>관리자 인증</div>
+            <div class="modal-desc">관리자 모드로 전환하려면 비밀번호를 입력하세요.</div>
+            <input type="password" class="modal-input" id="pw-input" placeholder="• • • •" maxlength="8"
+                   onkeydown="if(event.key==='Enter')confirmAdminPw()">
+            <div id="pw-error" style="color:#e53935;font-size:12px;margin-top:-14px;margin-bottom:16px;display:none;">
+                <i class="fas fa-exclamation-circle"></i> 비밀번호가 올바르지 않습니다.
+            </div>
+            <div class="modal-buttons">
+                <button class="btn-cancel" onclick="closePwModal()">취소</button>
+                <button class="btn-confirm" onclick="confirmAdminPw()">확인</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 텍스트 편집 모달 -->
+    <div class="modal-overlay hidden" id="edit-modal">
+        <div class="modal-box" style="max-width:600px;">
+            <div class="modal-title" id="edit-modal-title">내용 편집</div>
+            <div class="modal-desc"  id="edit-modal-desc">내용을 입력하고 저장을 클릭하세요.</div>
+            <textarea class="modal-textarea" id="edit-textarea" placeholder="내용을 입력하세요..."></textarea>
+            <div class="modal-buttons">
+                <button class="btn-cancel" onclick="closeEditModal()">취소</button>
+                <button class="btn-confirm" onclick="requestSaveEdit()">저장</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 저장 확인 모달 -->
+    <div class="modal-overlay hidden" id="confirm-modal">
+        <div class="modal-box">
+            <div class="confirm-icon"><i class="fas fa-pencil-alt"></i></div>
+            <div class="modal-title" style="text-align:center;">수정하시겠습니까?</div>
+            <div class="modal-desc"  style="text-align:center;">입력한 내용으로 저장됩니다. 계속 진행하시겠습니까?</div>
+            <div class="modal-buttons" style="justify-content:center;">
+                <button class="btn-cancel" onclick="closeConfirmModal()">취소</button>
+                <button class="btn-confirm" onclick="executeConfirmedSave()">수정 완료</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 삭제 확인 모달 -->
+    <div class="modal-overlay hidden" id="delete-modal">
+        <div class="modal-box">
+            <div class="confirm-icon" style="background:#ffebee;"><i class="fas fa-trash" style="color:#e53935;"></i></div>
+            <div class="modal-title" style="text-align:center;">삭제하시겠습니까?</div>
+            <div class="modal-desc"  style="text-align:center;" id="delete-modal-desc">이 항목을 삭제하면 복구할 수 없습니다.</div>
+            <div class="modal-buttons" style="justify-content:center;">
+                <button class="btn-cancel" onclick="closeDeleteModal()">취소</button>
+                <button class="btn-confirm danger" id="delete-confirm-btn">삭제</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 연락처 편집 모달 -->
+    <div class="modal-overlay hidden" id="contact-modal">
+        <div class="modal-box" style="max-width:600px;">
+            <div class="modal-title">스태프 연락처 편집</div>
+            <div class="modal-desc">연락처 목록을 편집하세요.</div>
+            <div id="contact-edit-list" style="margin-bottom:16px;max-height:300px;overflow-y:auto;"></div>
+            <button onclick="addContactRow()" style="width:100%;padding:8px;border:1.5px dashed #c5cae9;background:transparent;border-radius:8px;color:#666;cursor:pointer;font-family:'Noto Sans KR',sans-serif;font-size:13px;margin-bottom:16px;">
+                <i class="fas fa-plus"></i> 연락처 추가
+            </button>
+            <div class="modal-buttons">
+                <button class="btn-cancel" onclick="closeContactModal()">취소</button>
+                <button class="btn-confirm" onclick="requestSaveContacts()">저장</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 유튜브 플레이어 모달 -->
+    <div class="modal-overlay hidden" id="yt-modal">
+        <div class="modal-box" style="max-width:700px;padding:0;border-radius:16px;overflow:hidden;">
+            <div style="position:relative;padding-top:56.25%;background:#000;">
+                <iframe id="yt-iframe" style="position:absolute;inset:0;width:100%;height:100%;border:none;"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen></iframe>
+            </div>
+            <div style="padding:16px 20px;display:flex;justify-content:flex-end;">
+                <button class="btn-cancel" onclick="closeYtModal()">닫기</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 이미지 미리보기 모달 -->
+    <div class="modal-overlay hidden" id="img-modal" onclick="closeImgModal()">
+        <img id="img-modal-img" style="max-width:95vw;max-height:90vh;border-radius:12px;object-fit:contain;" src="" alt="">
+    </div>
+
+    <!-- 토스트 -->
+    <div class="toast-container" id="toast-container"></div>`;
+}
+
+// ===== 이벤트 바인딩 =====
+function bindEvents() {
+    if (!document.getElementById('file-input')) {
+        const fi = document.createElement('input');
+        fi.type = 'file'; fi.id = 'file-input'; fi.style.display = 'none';
+        fi.accept = '.pdf,.jpg,.jpeg,.png,.gif,.xls,.xlsx,.doc,.docx';
+        fi.onchange = handleFileUpload;
+        document.body.appendChild(fi);
+    }
+}
+
+// ===== 메뉴 전환 =====
+function switchMenu(menuKey) {
+    AppState.currentMenu = menuKey;
+    document.querySelectorAll('.nav-tab').forEach(t =>
+        t.classList.toggle('active', t.dataset.menu === menuKey));
+    renderMenu(menuKey);
+}
+
+function renderMenu(menuKey) {
+    const content = document.getElementById('menu-content');
+    if (!content) return;
+    if (!Cache.loaded) {
+        content.innerHTML = '<div style="text-align:center;padding:60px;"><div class="loading-spinner"></div></div>';
+        const timer = setInterval(() => { if (Cache.loaded) { clearInterval(timer); renderMenu(menuKey); } }, 100);
+        return;
+    }
+    switch (menuKey) {
+        case 'important_notice': renderImportantNotice(content); break;
+        case 'company_info':     renderCompanyInfo(content);     break;
+        case 'learning':         renderLearning(content);        break;
+        case 'participants':     renderParticipants(content);    break;
+        case 'schedule':         renderSchedule(content);        break;
+        case 'room_assignment':  renderFileSection(content, 'room_assignment','방 배정표', 'fa-door-open'); break;
+    }
+}
+
+// ===== 모드 전환 =====
+function switchToUser() {
+    AppState.isAdmin = false;
+    document.body.classList.remove('admin-mode');
+    document.getElementById('user-mode-btn').classList.add('active');
+    document.getElementById('admin-mode-btn').classList.remove('active');
+    document.getElementById('admin-badge').classList.remove('visible');
+    showToast('사용자 모드로 전환되었습니다.', 'info');
+    renderMenu(AppState.currentMenu);
+}
+function requestAdminMode() {
+    document.getElementById('pw-modal').classList.remove('hidden');
+    document.getElementById('pw-input').value = '';
+    document.getElementById('pw-error').style.display = 'none';
+    setTimeout(() => document.getElementById('pw-input').focus(), 100);
+}
+function confirmAdminPw() {
+    if (document.getElementById('pw-input').value === ADMIN_PW) {
+        AppState.isAdmin = true;
+        document.body.classList.add('admin-mode');
+        document.getElementById('admin-mode-btn').classList.add('active');
+        document.getElementById('user-mode-btn').classList.remove('active');
+        document.getElementById('admin-badge').classList.add('visible');
+        closePwModal();
+        showToast('관리자 모드로 전환되었습니다.', 'success');
+        renderMenu(AppState.currentMenu);
+    } else {
+        document.getElementById('pw-error').style.display = 'block';
+        document.getElementById('pw-input').value = '';
+        document.getElementById('pw-input').focus();
+    }
+}
+function closePwModal() { document.getElementById('pw-modal').classList.add('hidden'); }
+function goHome() {
+    AppState.isAdmin = false;
+    document.body.classList.remove('admin-mode');
+    document.getElementById('main-app').style.display = 'none';
+    document.body.style.overflow = 'hidden';
+    document.body.style.background = '#0a0e27';
+    const landing = document.getElementById('landing-page');
+    landing.style.display = 'flex';
+    landing.classList.remove('fade-out');
+}
+
+// ===== 편집 모달 =====
+function openEditModal(title, desc, currentText, callback) {
+    AppState.editCallback = callback;
+    document.getElementById('edit-modal-title').textContent = title;
+    document.getElementById('edit-modal-desc').textContent  = desc;
+    document.getElementById('edit-textarea').value = currentText || '';
+    document.getElementById('edit-modal').classList.remove('hidden');
+    setTimeout(() => document.getElementById('edit-textarea').focus(), 100);
+}
+function closeEditModal() {
+    document.getElementById('edit-modal').classList.add('hidden');
+    AppState.editCallback = null;
+}
+function requestSaveEdit() {
+    AppState._pendingEditText = document.getElementById('edit-textarea').value.trim();
+    document.getElementById('edit-modal').classList.add('hidden');
+    document.getElementById('confirm-modal').classList.remove('hidden');
+}
+function closeConfirmModal() {
+    document.getElementById('confirm-modal').classList.add('hidden');
+    if (AppState.editCallback && AppState.editCallback !== saveContactsCallback) {
+        document.getElementById('edit-modal').classList.remove('hidden');
+    }
+    AppState.editCallback = null;
+    AppState._pendingEditText = null;
+}
+async function executeConfirmedSave() {
+    document.getElementById('confirm-modal').classList.add('hidden');
+    const cb   = AppState.editCallback;
+    const text = AppState._pendingEditText;
+    AppState.editCallback    = null;
+    AppState._pendingEditText = null;
+    if (cb) await cb(text);
+}
+function closeDeleteModal() { document.getElementById('delete-modal').classList.add('hidden'); }
+
+// ===== 저장 헬퍼 =====
+async function saveContent(menu, section, title, text) {
+    try {
+        const existing = getCachedContent(menu, section);
+        if (existing) {
+            await fetch(`tables/${TABLE_CONTENT}/${existing.id}`, {
+                method: 'PUT', headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ ...existing, content: text, title })
+            });
+        } else {
+            await fetch(`tables/${TABLE_CONTENT}`, {
+                method: 'POST', headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ user_type: AppState.userType, menu, section, title, content: text, sort_order: 0 })
+            });
+        }
+        await invalidateContent();
+        showToast('저장되었습니다!', 'success');
+    } catch (e) { showToast('저장 실패: ' + e.message, 'error'); }
+}
+
+// ===== 1. 중요 안내사항 =====
+function renderImportantNotice(container) {
+    const prepRec  = getCachedContent('important_notice', 'prep');
+    const contacts = getCachedContacts();
+    const prepText = prepRec ? prepRec.content : '';
+    const notices = (Cache.notices || [])
+        .filter(n => n.user_type === AppState.userType)
+        .sort((a, b) => (b.created_at_custom || b.created_at || 0) - (a.created_at_custom || a.created_at || 0));
+
+    container.innerHTML = `
+    <div class="section-card important notice-board-card">
+        <div class="section-card-header">
+            <div class="section-card-title">
+                <i class="fas fa-exclamation-triangle"></i>중요 안내
+                <span class="section-badge important-badge">IMPORTANT</span>
+            </div>
+            <button class="edit-btn" onclick="openNoticeWriteModal()">
+                <i class="fas fa-plus"></i> 작성
+            </button>
+        </div>
+        <div class="notice-board" id="notice-board">
+            ${renderNoticeList(notices)}
+        </div>
+    </div>
+
+    <div class="section-card">
+        <div class="section-card-header">
+            <div class="section-card-title">
+                <i class="fas fa-info-circle"></i>기본 안내
+                <span class="section-badge basic-badge">BASIC</span>
+            </div>
+        </div>
+        <div class="basic-info-grid">
+            <div class="basic-info-item">
+                <div class="basic-info-item-title">
+                    <i class="fas fa-phone-alt"></i> 스태프 연락처
+                    <button class="edit-btn" style="margin-left:auto;" onclick="openContactEditModal()"><i class="fas fa-pen"></i> 편집</button>
+                </div>
+                <div id="contact-display">${renderContactTable(contacts)}</div>
+            </div>
+            <div class="basic-info-item compact-prep">
+                <div class="basic-info-item-title">
+                    <i class="fas fa-suitcase"></i> 준비물
+                    <button class="edit-btn" style="margin-left:auto;" onclick="editPrepItems()"><i class="fas fa-pen"></i> 편집</button>
+                </div>
+                <div id="prep-display">${renderPrepListCompact(prepText)}</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="section-card">
+        <div class="section-card-header">
+            <div class="section-card-title">
+                <i class="fas fa-cloud-sun"></i>현재 날씨
+                <span class="section-badge basic-badge">LIVE</span>
+            </div>
+            <button onclick="refreshWeather()" style="padding:5px 12px;border:1px solid #d0d4e8;border-radius:8px;background:white;color:#555;font-size:12px;cursor:pointer;font-family:'Noto Sans KR',sans-serif;">
+                <i class="fas fa-sync-alt"></i> 새로고침
+            </button>
+        </div>
+        <div class="weather-cities" id="weather-container">
+            ${renderWeatherPlaceholders()}
+        </div>
+    </div>
+
+    <div class="modal-overlay hidden" id="notice-write-modal">
+        <div class="modal-box" style="max-width:600px;">
+            <div class="modal-title" id="notice-modal-title"><i class="fas fa-pen" style="margin-right:8px;color:#FF8F00;"></i>중요 안내 작성</div>
+            <div class="modal-desc" id="notice-modal-desc">작성한 내용은 최신순으로 상단에 표시됩니다.</div>
+            <textarea class="modal-textarea" id="notice-textarea" placeholder="안내 내용을 입력하세요..."></textarea>
+            <div class="modal-buttons">
+                <button class="btn-cancel" onclick="closeNoticeWriteModal()">취소</button>
+                <button class="btn-confirm" onclick="requestSaveNotice()">저장</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-overlay hidden" id="notice-confirm-modal">
+        <div class="modal-box">
+            <div class="confirm-icon"><i class="fas fa-pencil-alt"></i></div>
+            <div class="modal-title" style="text-align:center;" id="notice-confirm-label">등록하시겠습니까?</div>
+            <div class="modal-desc" style="text-align:center;" id="notice-confirm-desc">작성한 중요 안내를 등록합니다.</div>
+            <div class="modal-buttons" style="justify-content:center;">
+                <button class="btn-cancel" onclick="closeNoticeConfirmModal()">취소</button>
+                <button class="btn-confirm" onclick="executeSaveNotice()" id="notice-confirm-action-btn">등록</button>
+            </div>
+        </div>
+    </div>`;
+
+    loadWeather();
+}
+
+function renderNoticeList(notices) {
+    if (!notices || notices.length === 0) {
+        return '<div class="content-empty" style="padding:32px 0;">등록된 중요 안내사항이 없습니다.<br><small style="font-size:11px;">관리자 모드에서 작성 버튼을 눌러 등록하세요.</small></div>';
+    }
+    return notices.map((n, idx) => {
+        const ts = n.created_at_custom || n.created_at || 0;
+        const date = ts ? new Date(ts) : null;
+        const dateStr = date
+            ? `${date.getFullYear()}.${String(date.getMonth()+1).padStart(2,'0')}.${String(date.getDate()).padStart(2,'0')} ${String(date.getHours()).padStart(2,'0')}:${String(date.getMinutes()).padStart(2,'0')}`
+            : '';
+        const isNew = ts && (Date.now() - ts) < 24 * 60 * 60 * 1000;
+        const escapedContent = escapeHtml(n.content || '').replace(/\n/g,'<br>');
+        const contentForEdit = encodeURIComponent(n.content || '');
+        return `
+        <div class="notice-item" id="notice-item-${n.id}">
+            <div class="notice-item-header">
+                <div class="notice-item-meta">
+                    <span class="notice-num">${notices.length - idx}</span>
+                    ${isNew ? '<span class="notice-new-badge">NEW</span>' : ''}
+                    ${idx === 0 ? '<span class="notice-latest-badge">최신</span>' : ''}
+                </div>
+                <div style="display:flex;align-items:center;gap:6px;">
+                    <span class="notice-date">${dateStr}</span>
+                    <button class="notice-edit-btn admin-only-btn" onclick="openNoticeEditModal('${n.id}', decodeURIComponent('${contentForEdit}'))" title="수정">
+                        <i class="fas fa-pen"></i>
+                    </button>
+                    <button class="notice-delete-btn admin-only-btn" onclick="confirmDeleteNotice('${n.id}')" title="삭제">
+                        <i class="fas fa-trash"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="notice-item-content">${escapedContent}</div>
+        </div>`;
+    }).join('<div class="notice-divider"></div>');
+}
+
+function openNoticeWriteModal() {
+    AppState._editingNoticeId = null;
+    document.getElementById('notice-modal-title').textContent = '중요 안내 작성';
+    document.getElementById('notice-modal-desc').textContent = '작성한 내용은 최신순으로 상단에 표시됩니다.';
+    document.getElementById('notice-confirm-label').textContent = '등록하시겠습니까?';
+    document.getElementById('notice-confirm-desc').textContent = '작성한 중요 안내를 등록합니다.';
+    document.getElementById('notice-confirm-action-btn').textContent = '등록';
+    document.getElementById('notice-textarea').value = '';
+    document.getElementById('notice-write-modal').classList.remove('hidden');
+    setTimeout(() => document.getElementById('notice-textarea').focus(), 100);
+}
+function closeNoticeWriteModal() {
+    document.getElementById('notice-write-modal').classList.add('hidden');
+    AppState._editingNoticeId = null;
+}
+function openNoticeEditModal(noticeId, currentContent) {
+    AppState._editingNoticeId = noticeId;
+    document.getElementById('notice-modal-title').textContent = '중요 안내 수정';
+    document.getElementById('notice-modal-desc').textContent = '내용을 수정하고 저장을 클릭하세요.';
+    document.getElementById('notice-confirm-label').textContent = '수정하시겠습니까?';
+    document.getElementById('notice-confirm-desc').textContent = '변경된 내용으로 저장됩니다.';
+    document.getElementById('notice-confirm-action-btn').textContent = '수정 완료';
+    document.getElementById('notice-textarea').value = currentContent;
+    document.getElementById('notice-write-modal').classList.remove('hidden');
+    setTimeout(() => document.getElementById('notice-textarea').focus(), 100);
+}
+function requestSaveNotice() {
+    const text = document.getElementById('notice-textarea').value.trim();
+    if (!text) { showToast('내용을 입력하세요.', 'error'); return; }
+    AppState._pendingNoticeText = text;
+    document.getElementById('notice-write-modal').classList.add('hidden');
+    document.getElementById('notice-confirm-modal').classList.remove('hidden');
+}
+function closeNoticeConfirmModal() {
+    document.getElementById('notice-confirm-modal').classList.add('hidden');
+    document.getElementById('notice-write-modal').classList.remove('hidden');
+}
+async function executeSaveNotice() {
+    document.getElementById('notice-confirm-modal').classList.add('hidden');
+    const text = AppState._pendingNoticeText;
+    const editId = AppState._editingNoticeId;
+    AppState._pendingNoticeText = null;
+    AppState._editingNoticeId = null;
+    if (!text) return;
+    try {
+        if (editId) {
+            const existing = (Cache.notices || []).find(n => n.id === editId);
+            await fetch(`tables/${TABLE_NOTICES}/${editId}`, {
+                method: 'PUT', headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ ...existing, content: text })
+            });
+            showToast('수정되었습니다!', 'success');
+        } else {
+            const now = Date.now();
+            await fetch(`tables/${TABLE_NOTICES}`, {
+                method: 'POST', headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ user_type: AppState.userType, content: text, created_at_custom: now })
+            });
+            showToast('중요 안내가 등록되었습니다!', 'success');
+        }
+        await invalidateNotices();
+        const board = document.getElementById('notice-board');
+        if (board) {
+            const notices = (Cache.notices || [])
+                .filter(n => n.user_type === AppState.userType)
+                .sort((a, b) => (b.created_at_custom || b.created_at || 0) - (a.created_at_custom || a.created_at || 0));
+            board.innerHTML = renderNoticeList(notices);
+        }
+    } catch (e) { showToast('저장 실패: ' + e.message, 'error'); }
+}
+
+let pendingNoticeDeleteId = '';
+function confirmDeleteNotice(noticeId) {
+    pendingNoticeDeleteId = noticeId;
+    document.getElementById('delete-modal-desc').textContent = '이 안내 게시물을 삭제하시겠습니까?';
+    document.getElementById('delete-confirm-btn').onclick = executeDeleteNotice;
+    document.getElementById('delete-modal').classList.remove('hidden');
+}
+async function executeDeleteNotice() {
+    document.getElementById('delete-modal').classList.add('hidden');
+    try {
+        await fetch(`tables/${TABLE_NOTICES}/${pendingNoticeDeleteId}`, { method: 'DELETE' });
+        await invalidateNotices();
+        showToast('삭제되었습니다.', 'success');
+        const board = document.getElementById('notice-board');
+        if (board) {
+            const notices = (Cache.notices || [])
+                .filter(n => n.user_type === AppState.userType)
+                .sort((a, b) => (b.created_at_custom || b.created_at || 0) - (a.created_at_custom || a.created_at || 0));
+            board.innerHTML = renderNoticeList(notices);
+        }
+    } catch (e) { showToast('삭제 실패: ' + e.message, 'error'); }
+}
+
+function renderContactTable(contacts) {
+    if (!contacts || contacts.length === 0)
+        return '<div class="content-empty">연락처가 없습니다.</div>';
+    return `<table class="contact-table">
+        <thead><tr><th>이름</th><th>역할</th><th>연락처</th></tr></thead>
+        <tbody>${contacts.map(c => `
+            <tr>
+                <td>${escapeHtml(c.name||'')}</td>
+                <td>${escapeHtml(c.role||'')}</td>
+                <td><a href="tel:${c.phone}" style="color:#1976D2;text-decoration:none;">${escapeHtml(c.phone||'')}</a></td>
+            </tr>`).join('')}
+        </tbody></table>`;
+}
+
+function renderPrepListCompact(text) {
+    if (!text) return '<div class="content-empty" style="font-size:12px;">준비물 목록이 없습니다.</div>';
+    const items = text.split('\n').filter(t => t.trim());
+    return `<ol class="prep-numbered-list">${items.map((item, i) =>
+        `<li class="prep-numbered-item"><span class="prep-num">${i + 1}</span><span class="prep-text">${escapeHtml(item.trim())}</span></li>`
+    ).join('')}</ol>`;
+}
+
+function renderPrepList(text) {
+    if (!text) return '<div class="content-empty">준비물 목록이 없습니다.</div>';
+    const items = text.split('\n').filter(t => t.trim());
+    return `<div class="prep-list">${items.map(item =>
+        `<div class="prep-item"><i class="fas fa-check-circle"></i> ${escapeHtml(item.trim())}</div>`
+    ).join('')}</div>`;
+}
+
+function editPrepItems() {
+    const rec = getCachedContent('important_notice', 'prep');
+    openEditModal('준비물 편집', '준비물을 한 줄에 하나씩 입력하세요.',
+        rec ? rec.content : '',
+        async (text) => {
+            await saveContent('important_notice', 'prep', '준비물', text);
+            const el = document.getElementById('prep-display');
+            if (el) el.innerHTML = renderPrepListCompact(text);
+        });
+}
+
+// ===== 연락처 =====
+let tempContacts = [];
+function openContactEditModal() {
+    tempContacts = getCachedContacts().map(c => ({ ...c }));
+    renderContactEditList();
+    document.getElementById('contact-modal').classList.remove('hidden');
+}
+function closeContactModal() { document.getElementById('contact-modal').classList.add('hidden'); }
+function renderContactEditList() {
+    document.getElementById('contact-edit-list').innerHTML = tempContacts.map((c, i) => `
+        <div class="contact-edit-row">
+            <input type="text" value="${escapeHtml(c.name||'')}"  placeholder="이름"    oninput="tempContacts[${i}].name=this.value">
+            <input type="text" value="${escapeHtml(c.role||'')}"  placeholder="역할"    oninput="tempContacts[${i}].role=this.value">
+            <input type="tel"  value="${escapeHtml(c.phone||'')}" placeholder="연락처"  oninput="tempContacts[${i}].phone=this.value">
+            <button class="file-action-btn delete-btn" onclick="removeContactRow(${i})" style="display:flex;"><i class="fas fa-times"></i></button>
+        </div>`).join('');
+}
+function addContactRow() {
+    tempContacts.push({ name:'', role:'', phone:'', user_type: AppState.userType, sort_order: tempContacts.length });
+    renderContactEditList();
+}
+function removeContactRow(idx) { tempContacts.splice(idx, 1); renderContactEditList(); }
+async function requestSaveContacts() {
+    closeContactModal();
+    AppState.editCallback    = saveContactsCallback;
+    AppState._pendingEditText = '';
+    document.getElementById('confirm-modal').classList.remove('hidden');
+}
+async function saveContactsCallback() {
+    try {
+        const existing = (Cache.contacts || []).filter(r => r.user_type === AppState.userType);
+        await Promise.all(existing.map(c => fetch(`tables/${TABLE_CONTACTS}/${c.id}`, { method: 'DELETE' })));
+        await Promise.all(tempContacts.filter(c => c.name || c.phone).map((c, i) =>
+            fetch(`tables/${TABLE_CONTACTS}`, {
+                method: 'POST', headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ ...c, user_type: AppState.userType, sort_order: i })
+            })
+        ));
+        await invalidateContacts();
+        showToast('연락처가 저장되었습니다!', 'success');
+        const el = document.getElementById('contact-display');
+        if (el) el.innerHTML = renderContactTable(getCachedContacts());
+    } catch (e) { showToast('저장 실패: ' + e.message, 'error'); }
+}
+
+// ===== 날씨 =====
+function renderWeatherPlaceholders() {
+    return ['🏯 베이징 (北京)', '🏙️ 상하이 (上海)'].map(name => `
+        <div class="weather-city-card">
+            <div class="weather-loading">
+                <div class="loading-spinner" style="border-color:rgba(255,255,255,0.2);border-top-color:white;margin:0 auto 10px;width:18px;height:18px;"></div>
+                날씨 불러오는 중...
+            </div>
+        </div>`).join('');
+}
+async function loadWeather() {
+    const now = Date.now();
+    if (Cache.weather && (now - Cache.weatherTime) < WEATHER_TTL) {
+        document.getElementById('weather-container').innerHTML = Cache.weather;
+        return;
+    }
+    await fetchWeather();
+}
+async function refreshWeather() {
+    Cache.weather = null;
+    const container = document.getElementById('weather-container');
+    if (container) container.innerHTML = renderWeatherPlaceholders();
+    await fetchWeather();
+}
+async function fetchWeather() {
+    const cities = [
+        { name: '베이징 (北京)', lat: 39.9042, lon: 116.4074, emoji: '🏯' },
+        { name: '상하이 (上海)', lat: 31.2304, lon: 121.4737, emoji: '🏙️' },
+    ];
+    const container = document.getElementById('weather-container');
+    if (!container) return;
+    const htmlArr = await Promise.all(cities.map(fetchCityWeather));
+    const html = htmlArr.join('');
+    Cache.weather    = html;
+    Cache.weatherTime = Date.now();
+    container.innerHTML = html;
+}
+async function fetchCityWeather(city) {
+    try {
+        const url = `https://api.open-meteo.com/v1/forecast?latitude=${city.lat}&longitude=${city.lon}&current=temperature_2m,relative_humidity_2m,weather_code,wind_speed_10m&daily=weather_code,temperature_2m_max,temperature_2m_min&timezone=Asia%2FShanghai&forecast_days=7`;
+        const res  = await fetch(url);
+        const data = await res.json();
+        const cur   = data.current;
+        const daily = data.daily;
+        const weeklyHtml = daily.time.map((d, i) => {
+            const dateObj = new Date(d);
+            const m = dateObj.getMonth() + 1;
+            const day = dateObj.getDate();
+            const label = i === 0 ? `오늘(${m}/${day})` : i === 1 ? `내일(${m}/${day})` : `${m}/${day}`;
+            return `<div class="weather-day-item">
+                <div class="weather-day-label">${label}</div>
+                <div class="weather-day-icon">${weatherCodeToIcon(daily.weather_code[i])}</div>
+                <div class="weather-day-temp">${Math.round(daily.temperature_2m_min[i])}° / ${Math.round(daily.temperature_2m_max[i])}°</div>
+            </div>`;
+        }).join('');
+        return `<div class="weather-city-card">
+            <div class="weather-city-name">${city.emoji} ${city.name}</div>
+            <div class="weather-today">
+                <div class="weather-icon">${weatherCodeToIcon(cur.weather_code)}</div>
+                <div>
+                    <div class="weather-temp-main">${Math.round(cur.temperature_2m)}°C</div>
+                    <div class="weather-desc">${weatherCodeToDesc(cur.weather_code)}</div>
+                    <div class="weather-range">습도 ${cur.relative_humidity_2m}% · 바람 ${Math.round(cur.wind_speed_10m)}km/h</div>
+                </div>
+            </div>
+            <div class="weather-weekly">${weeklyHtml}</div>
+        </div>`;
+    } catch {
+        return `<div class="weather-city-card">
+            <div class="weather-city-name">${city.emoji} ${city.name}</div>
+            <div class="weather-loading">날씨 정보를 불러올 수 없습니다.</div>
+        </div>`;
+    }
+}
+function weatherCodeToIcon(c) {
+    if (c===0) return '☀️'; if (c<=2) return '🌤️'; if (c===3) return '☁️';
+    if (c<=49) return '🌫️'; if (c<=59) return '🌦️'; if (c<=65) return '🌧️';
+    if (c<=69) return '🌨️'; if (c<=77) return '🌨️'; if (c<=82) return '🌧️';
+    if (c<=94) return '🌩️'; return '⛈️';
+}
+function weatherCodeToDesc(c) {
+    if (c===0) return '맑음'; if (c<=2) return '구름 조금'; if (c===3) return '흐림';
+    if (c<=49) return '안개'; if (c<=59) return '이슬비'; if (c<=65) return '비';
+    if (c<=69) return '눈비'; if (c<=77) return '눈'; if (c<=82) return '소나기';
+    if (c<=94) return '뇌우'; return '심한 뇌우';
+}
+
+// ===== 2. 방문기업 정보 =====
+function renderCompanyInfo(container) {
+    const rec  = getCachedContent('company_info', 'main');
+    const text = rec ? rec.content : '';
+    container.innerHTML = `
+    <div class="section-card">
+        <div class="section-card-header">
+            <div class="section-card-title"><i class="fas fa-building"></i>방문기업 정보</div>
+            <button class="edit-btn" onclick="editCompanyInfo()"><i class="fas fa-pen"></i> 편집</button>
+        </div>
+        <div class="content-display" id="company-info-text">
+            ${text ? escapeHtml(text).replace(/\n/g,'<br>') : '<span class="content-empty">방문기업 정보를 입력하세요. (관리자 모드에서 편집 가능)</span>'}
+        </div>
+    </div>`;
+}
+function editCompanyInfo() {
+    const rec = getCachedContent('company_info', 'main');
+    openEditModal('방문기업 정보 편집', '방문기업에 대한 정보를 입력하세요.',
+        rec ? rec.content : '',
+        async (text) => {
+            await saveContent('company_info', 'main', '방문기업 정보', text);
+            const el = document.getElementById('company-info-text');
+            if (el) el.innerHTML = text ? escapeHtml(text).replace(/\n/g,'<br>') : '<span class="content-empty">방문기업 정보를 입력하세요.</span>';
+        });
+}
+
+// ===== 3. 학습자료 =====
+function renderLearning(container) {
+    const files    = getCachedFiles('learning');
+    const ytFiles  = files.filter(f => f.file_type === 'youtube');
+    const docFiles = files.filter(f => f.file_type !== 'youtube');
+
+    container.innerHTML = `
+    <div class="section-card">
+        <div class="section-card-header">
+            <div class="section-card-title"><i class="fas fa-file-alt"></i>문서 자료</div>
+        </div>
+        <div class="upload-area" onclick="triggerFileUpload('learning')">
+            <i class="fas fa-cloud-upload-alt"></i>
+            <p>클릭하여 파일 업로드<br>또는 파일을 여기에 드래그하세요</p>
+            <p class="upload-types">PDF · 이미지(JPG, PNG) · 엑셀(XLS, XLSX) · 워드(DOC, DOCX)</p>
+        </div>
+        <div class="file-list" id="doc-file-list">
+            ${docFiles.length === 0
+                ? '<div class="empty-state"><i class="fas fa-folder-open"></i><p>업로드된 문서가 없습니다.</p></div>'
+                : docFiles.map(renderFileItem).join('')}
+        </div>
+    </div>
+
+    <div class="section-card">
+        <div class="section-card-header">
+            <div class="section-card-title"><i class="fab fa-youtube" style="color:#FF0000;"></i>영상 자료 (YouTube)</div>
+        </div>
+        <div class="youtube-add-form">
+            <input type="text" id="yt-url-input" placeholder="YouTube URL을 입력하세요 (예: https://youtu.be/xxxxx)">
+            <button onclick="addYoutubeLink()"><i class="fas fa-plus"></i> 추가</button>
+        </div>
+        <div id="yt-list">
+            ${ytFiles.length === 0
+                ? '<div class="empty-state"><i class="fab fa-youtube"></i><p>등록된 영상이 없습니다.</p></div>'
+                : `<div class="youtube-grid">${ytFiles.map(renderYoutubeCard).join('')}</div>`}
+        </div>
+    </div>`;
+    setupDragDrop('learning');
+}
+
+// ===== 4. 참가자명단 =====
+function renderParticipants(container) {
+    const list = (Cache.participants || [])
+        .filter(p => p.user_type === AppState.userType)
+        .sort((a, b) => (a.sort_order || 0) - (b.sort_order || 0));
+    const groups = {};
+    list.forEach(p => { const key = p.company || '기타'; if (!groups[key]) groups[key] = []; groups[key].push(p); });
+    const totalCount = list.length;
+
+    container.innerHTML = `
+    <div class="section-card">
+        <div class="section-card-header">
+            <div class="section-card-title">
+                <i class="fas fa-users"></i>참가자명단
+                ${totalCount > 0 ? `<span class="participant-count-badge">${totalCount}명</span>` : ''}
+            </div>
+            <button class="edit-btn admin-only-btn" onclick="openParticipantAddModal()">
+                <i class="fas fa-user-plus"></i> 참가자 추가
+            </button>
+        </div>
+
+        ${totalCount === 0
+            ? `<div class="empty-state"><i class="fas fa-users"></i><p>등록된 참가자가 없습니다.<br><small>관리자 모드에서 참가자를 추가하세요.</small></p></div>`
+            : Object.entries(groups).map(([company, members]) => `
+                <div class="participant-group">
+                    <div class="participant-group-header">
+                        <i class="fas fa-building"></i>
+                        <span>${escapeHtml(company)}</span>
+                        <span class="participant-group-count">${members.length}명</span>
+                    </div>
+                    <div class="participant-cards">
+                        ${members.map(p => renderParticipantCard(p)).join('')}
+                    </div>
+                </div>`).join('')
+        }
+    </div>
+
+    <div class="modal-overlay hidden" id="participant-modal">
+        <div class="modal-box" style="max-width:480px;">
+            <div class="modal-title" id="participant-modal-title">
+                <i class="fas fa-user-plus" style="margin-right:8px;color:#1a1f4e;"></i>참가자 추가
+            </div>
+            <div style="display:flex;flex-direction:column;gap:12px;margin-bottom:20px;">
+                <div>
+                    <label class="participant-form-label">소속 계열사 *</label>
+                    <input type="text" id="p-company" class="modal-input" placeholder="예) LG전자, LG디스플레이" style="margin:0;">
+                </div>
+                <div>
+                    <label class="participant-form-label">이름 *</label>
+                    <input type="text" id="p-name" class="modal-input" placeholder="홍길동" style="margin:0;">
+                </div>
+                <div>
+                    <label class="participant-form-label">직위</label>
+                    <input type="text" id="p-position" class="modal-input" placeholder="예) 부장, 차장, 과장, 대리" style="margin:0;">
+                </div>
+                <div>
+                    <label class="participant-form-label">직책</label>
+                    <input type="text" id="p-role" class="modal-input" placeholder="예) 팀장, 파트장, 담당" style="margin:0;">
+                </div>
+            </div>
+            <div class="modal-buttons">
+                <button class="btn-cancel" onclick="closeParticipantModal()">취소</button>
+                <button class="btn-confirm" onclick="requestSaveParticipant()" id="participant-save-btn">저장</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-overlay hidden" id="participant-confirm-modal">
+        <div class="modal-box">
+            <div class="confirm-icon"><i class="fas fa-user-check"></i></div>
+            <div class="modal-title" style="text-align:center;" id="participant-confirm-title">저장하시겠습니까?</div>
+            <div class="modal-desc"  style="text-align:center;" id="participant-confirm-desc">참가자 정보를 저장합니다.</div>
+            <div class="modal-buttons" style="justify-content:center;">
+                <button class="btn-cancel" onclick="closeParticipantConfirmModal()">취소</button>
+                <button class="btn-confirm" onclick="executeSaveParticipant()">저장</button>
+            </div>
+        </div>
+    </div>`;
+}
+
+function renderParticipantCard(p) {
+    const initials = (p.name || '?').charAt(0);
+    const companyColors = getCompanyColor(p.company || '');
+    return `
+    <div class="participant-card" id="pcard-${p.id}">
+        <div class="participant-avatar" style="background:${companyColors.bg};color:${companyColors.text};">
+            ${initials}
+        </div>
+        <div class="participant-info">
+            <div class="participant-name">${escapeHtml(p.name || '')}</div>
+            <div class="participant-tags">
+                ${p.position ? `<span class="p-tag position-tag">${escapeHtml(p.position)}</span>` : ''}
+                ${p.role     ? `<span class="p-tag role-tag">${escapeHtml(p.role)}</span>`         : ''}
+            </div>
+        </div>
+        <div class="participant-card-actions admin-only-btn" style="display:none;">
+            <button class="p-action-btn edit" onclick="openParticipantEditModal('${p.id}')" title="수정">
+                <i class="fas fa-pen"></i>
+            </button>
+            <button class="p-action-btn delete" onclick="confirmDeleteParticipant('${p.id}','${escapeHtml(p.name||'')}')" title="삭제">
+                <i class="fas fa-trash"></i>
+            </button>
+        </div>
+    </div>`;
+}
+
+function getCompanyColor(company) {
+    const palettes = [
+        { bg:'#e8eaf6', text:'#3949ab' },
+        { bg:'#e3f2fd', text:'#1565c0' },
+        { bg:'#e8f5e9', text:'#2e7d32' },
+        { bg:'#fff3e0', text:'#e65100' },
+        { bg:'#fce4ec', text:'#c62828' },
+        { bg:'#f3e5f5', text:'#6a1b9a' },
+        { bg:'#e0f2f1', text:'#00695c' },
+        { bg:'#fff8e1', text:'#f57f17' },
+    ];
+    let hash = 0;
+    for (let i = 0; i < company.length; i++) hash = (hash * 31 + company.charCodeAt(i)) & 0xffff;
+    return palettes[hash % palettes.length];
+}
+
+let _editingParticipantId = null;
+let _pendingParticipantData = null;
+
+function openParticipantAddModal() {
+    _editingParticipantId = null;
+    document.getElementById('participant-modal-title').innerHTML =
+        '<i class="fas fa-user-plus" style="margin-right:8px;color:#1a1f4e;"></i>참가자 추가';
+    document.getElementById('p-company').value  = '';
+    document.getElementById('p-name').value     = '';
+    document.getElementById('p-position').value = '';
+    document.getElementById('p-role').value     = '';
+    document.getElementById('participant-modal').classList.remove('hidden');
+    setTimeout(() => document.getElementById('p-company').focus(), 100);
+}
+function openParticipantEditModal(id) {
+    const p = (Cache.participants || []).find(x => x.id === id);
+    if (!p) return;
+    _editingParticipantId = id;
+    document.getElementById('participant-modal-title').innerHTML =
+        '<i class="fas fa-user-edit" style="margin-right:8px;color:#1a1f4e;"></i>참가자 수정';
+    document.getElementById('p-company').value  = p.company  || '';
+    document.getElementById('p-name').value     = p.name     || '';
+    document.getElementById('p-position').value = p.position || '';
+    document.getElementById('p-role').value     = p.role     || '';
+    document.getElementById('participant-modal').classList.remove('hidden');
+    setTimeout(() => document.getElementById('p-name').focus(), 100);
+}
+function closeParticipantModal() {
+    document.getElementById('participant-modal').classList.add('hidden');
+    _editingParticipantId = null;
+}
+function requestSaveParticipant() {
+    const company  = document.getElementById('p-company').value.trim();
+    const name     = document.getElementById('p-name').value.trim();
+    const position = document.getElementById('p-position').value.trim();
+    const role     = document.getElementById('p-role').value.trim();
+    if (!company) { showToast('소속 계열사를 입력하세요.', 'error'); return; }
+    if (!name)    { showToast('이름을 입력하세요.', 'error'); return; }
+    _pendingParticipantData = { company, name, position, role };
+    document.getElementById('participant-modal').classList.add('hidden');
+    document.getElementById('participant-confirm-title').textContent =
+        _editingParticipantId ? '수정하시겠습니까?' : '등록하시겠습니까?';
+    document.getElementById('participant-confirm-desc').textContent =
+        _editingParticipantId ? '참가자 정보를 수정합니다.' : '참가자를 명단에 추가합니다.';
+    document.getElementById('participant-confirm-modal').classList.remove('hidden');
+}
+function closeParticipantConfirmModal() {
+    document.getElementById('participant-confirm-modal').classList.add('hidden');
+    document.getElementById('participant-modal').classList.remove('hidden');
+}
+async function executeSaveParticipant() {
+    document.getElementById('participant-confirm-modal').classList.add('hidden');
+    const data = _pendingParticipantData;
+    const editId = _editingParticipantId;
+    _pendingParticipantData = null;
+    _editingParticipantId  = null;
+    if (!data) return;
+    try {
+        if (editId) {
+            const existing = (Cache.participants || []).find(p => p.id === editId);
+            await fetch(`tables/${TABLE_PARTICIPANTS}/${editId}`, {
+                method: 'PUT', headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ ...existing, ...data })
+            });
+            showToast('수정되었습니다!', 'success');
+        } else {
+            await fetch(`tables/${TABLE_PARTICIPANTS}`, {
+                method: 'POST', headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ user_type: AppState.userType, ...data, sort_order: Date.now() })
+            });
+            showToast('참가자가 추가되었습니다!', 'success');
+        }
+        await invalidateParticipants();
+        const content = document.getElementById('menu-content');
+        if (content) renderParticipants(content);
+    } catch (e) { showToast('저장 실패: ' + e.message, 'error'); }
+}
+
+let _pendingDeleteParticipantId = '';
+function confirmDeleteParticipant(id, name) {
+    _pendingDeleteParticipantId = id;
+    document.getElementById('delete-modal-desc').textContent = `"${name}" 참가자를 삭제하시겠습니까?`;
+    document.getElementById('delete-confirm-btn').onclick = executeDeleteParticipant;
+    document.getElementById('delete-modal').classList.remove('hidden');
+}
+async function executeDeleteParticipant() {
+    document.getElementById('delete-modal').classList.add('hidden');
+    try {
+        await fetch(`tables/${TABLE_PARTICIPANTS}/${_pendingDeleteParticipantId}`, { method: 'DELETE' });
+        await invalidateParticipants();
+        showToast('삭제되었습니다.', 'success');
+        const content = document.getElementById('menu-content');
+        if (content) renderParticipants(content);
+    } catch (e) { showToast('삭제 실패: ' + e.message, 'error'); }
+}
+
+// ===== 5. 일정표 =====
+// 편집 중인 일정 ID
+let _editingScheduleId = null;
+let _editSlots = [];
+
+function renderSchedule(container) {
+    const allDays = (Cache.schedule || []).filter(d => d.user_type === AppState.userType);
+    const seen = new Set();
+    const days = allDays
+        .sort((a, b) => (a.sort_order || a.day_num || 0) - (b.sort_order || b.day_num || 0))
+        .filter(d => {
+            const key = d.id;
+            if (seen.has(key)) return false;
+            seen.add(key);
+            return true;
+        });
+
+    const totalDays  = days.length;
+    const typeLabel  = AppState.userType === 'executive' ? '책임자급 (5박6일 북경+상해)' : '실무자급 (4박5일 상해)';
+    const colorClass = AppState.userType === 'executive' ? 'exec' : 'staff';
+    const isAdmin    = AppState.isAdmin;
+
+    container.innerHTML = `
+    <div class="section-card">
+        <div class="section-card-header">
+            <div class="section-card-title">
+                <i class="fas fa-calendar-alt"></i>일정표
+                <span class="schedule-type-badge ${colorClass}">${typeLabel}</span>
+            </div>
+            <div style="display:flex;gap:8px;align-items:center;">
+                ${isAdmin ? `<button class="sched-add-day-btn" onclick="openSchedAddModal()" title="일정 추가"><i class="fas fa-plus"></i> 일정 추가</button>` : ''}
+                <a href="schedule-print.html" target="_blank" class="pdf-export-btn">
+                    <i class="fas fa-file-pdf"></i> PDF 저장
+                </a>
+            </div>
+        </div>
+        ${totalDays === 0
+            ? `<div class="empty-state"><i class="fas fa-calendar-alt"></i><p>등록된 일정이 없습니다.${isAdmin ? '<br><small>상단 "+ 일정 추가" 버튼을 눌러 추가하세요.</small>' : ''}</p></div>`
+            : `<div class="schedule-timeline">${days.map((d, idx) => renderScheduleDay(d, idx, totalDays)).join('')}</div>`
+        }
+    </div>
+
+    <!-- 일정 편집 모달 -->
+    <div class="modal-overlay hidden" id="sched-edit-modal">
+      <div class="modal-box" style="max-width:680px;max-height:90vh;overflow-y:auto;">
+        <div class="modal-title"><i class="fas fa-calendar-edit" style="margin-right:8px;color:#1a1f4e;"></i>일정 편집</div>
+        <div class="modal-desc">선택한 날의 일정을 수정하세요.</div>
+
+        <div class="sched-edit-row-grid">
+          <div>
+            <label class="sched-edit-label">날짜 라벨 (예: 제1일)</label>
+            <input class="sched-edit-input" id="se-day-label" placeholder="제1일">
+          </div>
+          <div>
+            <label class="sched-edit-label">날짜 (예: 3/10(월))</label>
+            <input class="sched-edit-input" id="se-date-label" placeholder="3/10(월)">
+          </div>
+        </div>
+
+        <div class="sched-edit-row-grid">
+          <div>
+            <label class="sched-edit-label">지역 (예: 인천/김포 → 북경)</label>
+            <input class="sched-edit-input" id="se-region" placeholder="지역">
+          </div>
+          <div>
+            <label class="sched-edit-label">교통편 (예: OZ 331 / OZ 3355)</label>
+            <input class="sched-edit-input" id="se-transport" placeholder="교통편">
+          </div>
+        </div>
+
+        <div class="sched-edit-section">
+          <label class="sched-edit-label">요약 메모</label>
+          <input class="sched-edit-input" id="se-notes" placeholder="호텔 조식 후 기업방문...">
+        </div>
+
+        <div class="sched-divider"></div>
+        <div class="sched-edit-section">
+          <label class="sched-edit-label">시간별 세부일정 <small style="font-weight:400;color:#aaa;">(시간 + 내용 입력, [팀명] 접두어 사용 가능)</small></label>
+          <div class="sched-slot-edit-list" id="se-slot-list"></div>
+          <button class="sched-add-slot-btn" onclick="seAddSlot()"><i class="fas fa-plus"></i> 슬롯 추가</button>
+        </div>
+
+        <div class="sched-divider"></div>
+        <label class="sched-edit-label">식사</label>
+        <div class="sched-edit-meals-grid">
+          <div>
+            <label class="sched-edit-label" style="color:#795548;">🌅 조식</label>
+            <input class="sched-edit-input" id="se-meal-morning" placeholder="호텔 / 현지식 / (없음)">
+          </div>
+          <div>
+            <label class="sched-edit-label" style="color:#2e7d32;">☀️ 중식</label>
+            <input class="sched-edit-input" id="se-meal-lunch" placeholder="현지식">
+          </div>
+          <div>
+            <label class="sched-edit-label" style="color:#880e4f;">🌙 석식</label>
+            <input class="sched-edit-input" id="se-meal-dinner" placeholder="북경오리">
+          </div>
+        </div>
+
+        <div class="sched-edit-section">
+          <label class="sched-edit-label">호텔</label>
+          <input class="sched-edit-input" id="se-hotel" placeholder="Beijing Kun Tai Hotel(3/10-11)">
+        </div>
+
+        <div class="modal-buttons" style="margin-top:20px;">
+          <button class="btn-delete" onclick="confirmDeleteSchedDay()" style="margin-right:auto;background:#e53935;color:#fff;border:none;padding:10px 18px;border-radius:8px;cursor:pointer;font-size:13px;"><i class="fas fa-trash" style="margin-right:5px;"></i>이 날 삭제</button>
+          <button class="btn-cancel" onclick="closeSchedEditModal()">취소</button>
+          <button class="btn-confirm" onclick="saveSchedEdit()"><i class="fas fa-save" style="margin-right:5px;"></i>저장</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 일정 새 항목 추가 모달 -->
+    <div class="modal-overlay hidden" id="sched-add-modal">
+      <div class="modal-box" style="max-width:680px;max-height:90vh;overflow-y:auto;">
+        <div class="modal-title"><i class="fas fa-plus-circle" style="margin-right:8px;color:#1a1f4e;"></i>일정 추가</div>
+        <div class="modal-desc">새 날짜의 일정을 추가합니다. 대상: <strong id="sa-usertype-label"></strong></div>
+
+        <div class="sched-edit-row-grid">
+          <div>
+            <label class="sched-edit-label">날짜 라벨 (예: 제7일)</label>
+            <input class="sched-edit-input" id="sa-day-label" placeholder="제7일">
+          </div>
+          <div>
+            <label class="sched-edit-label">날짜 (예: 3/16(일))</label>
+            <input class="sched-edit-input" id="sa-date-label" placeholder="3/16(일)">
+          </div>
+        </div>
+
+        <div class="sched-edit-row-grid">
+          <div>
+            <label class="sched-edit-label">지역</label>
+            <input class="sched-edit-input" id="sa-region" placeholder="상해">
+          </div>
+          <div>
+            <label class="sched-edit-label">교통편</label>
+            <input class="sched-edit-input" id="sa-transport" placeholder="OZ 366 (없으면 공백)">
+          </div>
+        </div>
+
+        <div class="sched-edit-section">
+          <label class="sched-edit-label">요약 메모</label>
+          <input class="sched-edit-input" id="sa-notes" placeholder="호텔 조식 후 ...">
+        </div>
+
+        <div class="sched-divider"></div>
+        <div class="sched-edit-section">
+          <label class="sched-edit-label">시간별 세부일정 <small style="font-weight:400;color:#aaa;">(시간 + 내용 입력)</small></label>
+          <div class="sched-slot-edit-list" id="sa-slot-list"></div>
+          <button class="sched-add-slot-btn" onclick="saAddSlot()"><i class="fas fa-plus"></i> 슬롯 추가</button>
+        </div>
+
+        <div class="sched-divider"></div>
+        <label class="sched-edit-label">식사</label>
+        <div class="sched-edit-meals-grid">
+          <div>
+            <label class="sched-edit-label" style="color:#795548;">🌅 조식</label>
+            <input class="sched-edit-input" id="sa-meal-morning" placeholder="호텔">
+          </div>
+          <div>
+            <label class="sched-edit-label" style="color:#2e7d32;">☀️ 중식</label>
+            <input class="sched-edit-input" id="sa-meal-lunch" placeholder="현지식">
+          </div>
+          <div>
+            <label class="sched-edit-label" style="color:#880e4f;">🌙 석식</label>
+            <input class="sched-edit-input" id="sa-meal-dinner" placeholder="현지식">
+          </div>
+        </div>
+
+        <div class="sched-edit-section">
+          <label class="sched-edit-label">호텔</label>
+          <input class="sched-edit-input" id="sa-hotel" placeholder="Grand Metropark Hotel(3/16-17)">
+        </div>
+
+        <div class="modal-buttons" style="margin-top:20px;">
+          <button class="btn-cancel" onclick="closeSchedAddModal()">취소</button>
+          <button class="btn-confirm" onclick="executeAddSchedDay()" id="sa-save-btn"><i class="fas fa-plus" style="margin-right:5px;"></i>추가</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 일정 삭제 확인 모달 -->
+    <div class="modal-overlay hidden" id="sched-delete-modal">
+      <div class="modal-box" style="max-width:400px;">
+        <div class="modal-title" style="color:#e53935;"><i class="fas fa-trash" style="margin-right:8px;"></i>일정 삭제</div>
+        <div class="modal-desc" id="sched-delete-desc">이 날의 일정을 삭제하시겠습니까? 삭제 후 복구할 수 없습니다.</div>
+        <div class="modal-buttons" style="margin-top:20px;">
+          <button class="btn-cancel" onclick="closeSchedDeleteModal()">취소</button>
+          <button class="btn-confirm" style="background:#e53935;" onclick="executeDeleteSchedDay()"><i class="fas fa-trash" style="margin-right:5px;"></i>삭제</button>
+        </div>
+      </div>
+    </div>`;
+}
+
+function renderSingleSlot(slot, color) {
+    const raw      = slot.detail || '';
+    const isPoint  = raw.startsWith('▶');
+    const hasBullet= raw.startsWith('•');
+    let text = raw.replace(/^▶\s*/, '').replace(/^•\s*/, '');
+    const parts    = text.split(/(※[^\n]*)/g);
+    const mainText = parts[0].trim();
+    const memoText = parts.slice(1).join('').trim();
+    return `
+    <div class="sched-slot ${isPoint ? 'slot-point' : 'slot-normal'}">
+        <div class="sched-slot-time">
+            ${slot.time ? `<span class="slot-time-badge" style="background:${color}15;color:${color};border-color:${color}40;">${escapeHtml(slot.time)}</span>` : '<span class="slot-time-empty"></span>'}
+        </div>
+        <div class="sched-slot-body">
+            ${isPoint ? `<span class="slot-arrow" style="color:${color};">▶</span>` : (hasBullet ? '<span class="slot-dot">•</span>' : '<span class="slot-line">–</span>')}
+            <div class="slot-detail-wrap">
+                <span class="slot-detail ${isPoint ? 'slot-detail-point' : ''}">${escapeHtml(mainText)}</span>
+                ${memoText ? `<span class="slot-memo">${escapeHtml(memoText)}</span>` : ''}
+            </div>
+        </div>
+    </div>`;
+}
+
+function renderScheduleDay(d, idx, total) {
+    const isLast = idx === total - 1;
+    const dayColors = ['#1a1f4e','#1565c0','#1976d2','#0288d1','#0097a7','#00796b'];
+    const color = dayColors[Math.min(idx, dayColors.length - 1)];
+
+    let slots = [];
+    try { slots = JSON.parse(d.time_slots || '[]'); } catch(e) { slots = []; }
+
+    const meals = [];
+    if (d.meal_morning) meals.push({ label:'조', val: d.meal_morning, cls:'morning' });
+    if (d.meal_lunch)   meals.push({ label:'중', val: d.meal_lunch,   cls:'lunch'   });
+    if (d.meal_dinner)  meals.push({ label:'석', val: d.meal_dinner,  cls:'dinner'  });
+
+    const teamColorMap = {
+        '인천공항 출발팀': { bg:'#e3f2fd', color:'#1565c0', border:'#90caf9', icon:'✈' },
+        '김포공항 출발팀': { bg:'#e8f5e9', color:'#2e7d32', border:'#a5d6a7', icon:'✈' },
+        '인천공항 도착팀': { bg:'#e3f2fd', color:'#1565c0', border:'#90caf9', icon:'🛬' },
+        '김포공항 도착팀': { bg:'#e8f5e9', color:'#2e7d32', border:'#a5d6a7', icon:'🛬' },
+    };
+
+    const teamSlotMap = {};
+    const teamOrderArr = [];
+    slots.forEach(slot => {
+        const m = (slot.detail || '').match(/^\[([^\]]+)\]/);
+        if (m) {
+            const tl = m[1];
+            if (!teamSlotMap[tl]) { teamSlotMap[tl] = []; teamOrderArr.push(tl); }
+            teamSlotMap[tl].push(slot);
+        }
+    });
+
+    const seenTeams = new Set();
+    const renderQueue = [];
+    slots.forEach(slot => {
+        const m = (slot.detail || '').match(/^\[([^\]]+)\]/);
+        if (!m) {
+            renderQueue.push({ type: 'single', slot });
+        } else {
+            const tl = m[1];
+            if (!seenTeams.has(tl)) { seenTeams.add(tl); renderQueue.push({ type: 'teamBox', teamLabel: tl }); }
+        }
+    });
+
+    const renderTeamBox = (teamLabel) => {
+        const tc       = teamColorMap[teamLabel] || { bg:'#f5f5f5', color:'#555', border:'#ddd', icon:'✈' };
+        const tSlots   = teamSlotMap[teamLabel] || [];
+        const rowsHtml = tSlots.map(s => {
+            let text = (s.detail || '').replace(/^\[[^\]]+\]\s*/, '');
+            text = text.replace(/^((?:OZ|KE|CA)\s*\d+)\s*[·•]\s*/, (_, f) =>
+                `<b class="slot-flight">${escapeHtml(f)}</b> · `
+            );
+            const ps   = text.split(/(※[^\n]*)/g);
+            const main = ps[0].trim();
+            const memo = ps.slice(1).join('').trim();
+            return `
+            <div class="team-slot-row">
+                <span class="team-slot-time" style="color:${tc.color};">${s.time ? escapeHtml(s.time) : ''}</span>
+                <span class="team-slot-detail">${main}${memo ? `<span class="slot-memo"> ${escapeHtml(memo)}</span>` : ''}</span>
+            </div>`;
+        }).join('');
+        return `
+        <div class="sched-team-group" style="border-color:${tc.border};">
+            <div class="sched-team-header" style="background:${tc.bg};color:${tc.color};border-bottom-color:${tc.border};">
+                <span class="team-header-icon">${tc.icon}</span>
+                <span class="team-header-label">${escapeHtml(teamLabel)}</span>
+            </div>
+            <div class="sched-team-rows">${rowsHtml}</div>
+        </div>`;
+    };
+
+    let slotRows = renderQueue.map(item =>
+        item.type === 'single' ? renderSingleSlot(item.slot, color) : renderTeamBox(item.teamLabel)
+    ).join('');
+
+    return `
+    <div class="sched-day-row ${isLast ? 'last' : ''}" id="sched-row-${d.id}">
+        <div class="sched-day-col">
+            <div class="sched-day-badge" style="background:${color};">
+                <div class="sched-day-num">${escapeHtml(d.day_label || '')}</div>
+                <div class="sched-day-date">${escapeHtml(d.date_label || '')}</div>
+                <button class="sched-edit-day-btn" onclick="openSchedEditModal('${d.id}')" title="이 날 일정 편집"><i class="fas fa-pen"></i></button>
+            </div>
+            ${!isLast ? `<div class="sched-line"></div>` : '<div class="sched-line-stub"></div>'}
+            <div class="sched-dot" style="background:${color};box-shadow:0 0 0 3px ${color}30;"></div>
+        </div>
+
+        <div class="sched-content-card" style="border-top:3px solid ${color};">
+            <div class="sched-card-header">
+                <div class="sched-region">
+                    <i class="fas fa-map-marker-alt" style="color:${color};"></i>
+                    <strong>${escapeHtml(d.region || '')}</strong>
+                </div>
+                ${d.transport ? (() => {
+                    const t = d.transport;
+                    const icon = t.includes('열차') || t.includes('KTX') || t.includes('고속') ? 'fa-train'
+                               : t.includes('버스') ? 'fa-bus' : 'fa-plane';
+                    return `<div class="sched-transport" style="background:${color}15;color:${color};border-color:${color}30;"><i class="fas ${icon}"></i>${escapeHtml(t)}</div>`;
+                })() : ''}
+            </div>
+            ${d.notes ? `
+            <div class="sched-summary">
+                <i class="fas fa-sticky-note"></i>${escapeHtml(d.notes)}
+            </div>` : ''}
+
+            <div class="sched-slots">${slotRows}</div>
+
+            <div class="sched-footer">
+                ${meals.length > 0 ? `
+                <div class="sched-meals">
+                    <i class="fas fa-utensils"></i>
+                    ${meals.map(m => `<span class="meal-chip meal-${m.cls}"><b>${m.label}</b> ${escapeHtml(m.val)}</span>`).join('')}
+                </div>` : ''}
+                ${d.hotel ? `
+                <div class="sched-hotel">
+                    <i class="fas fa-bed"></i>${escapeHtml(d.hotel)}
+                </div>` : ''}
+            </div>
+        </div>
+    </div>`;
+}
+
+// ===== 일정표 편집 함수들 =====
+function openSchedEditModal(dayId) {
+    const d = (Cache.schedule || []).find(x => x.id === dayId);
+    if (!d) return;
+    _editingScheduleId = dayId;
+
+    document.getElementById('se-day-label').value   = d.day_label   || '';
+    document.getElementById('se-date-label').value  = d.date_label  || '';
+    document.getElementById('se-region').value      = d.region      || '';
+    document.getElementById('se-transport').value   = d.transport   || '';
+    document.getElementById('se-notes').value       = d.notes       || '';
+    document.getElementById('se-meal-morning').value= d.meal_morning|| '';
+    document.getElementById('se-meal-lunch').value  = d.meal_lunch  || '';
+    document.getElementById('se-meal-dinner').value = d.meal_dinner || '';
+    document.getElementById('se-hotel').value       = d.hotel       || '';
+
+    try { _editSlots = JSON.parse(d.time_slots || '[]').map(s => ({...s})); }
+    catch(e) { _editSlots = []; }
+
+    renderSeSlotList();
+    document.getElementById('sched-edit-modal').classList.remove('hidden');
+}
+
+function closeSchedEditModal() {
+    document.getElementById('sched-edit-modal').classList.add('hidden');
+    _editingScheduleId = null;
+    _editSlots = [];
+}
+
+function renderSeSlotList() {
+    const list = document.getElementById('se-slot-list');
+    if (!list) return;
+    if (_editSlots.length === 0) {
+        list.innerHTML = '<div style="text-align:center;color:#bbb;padding:12px;font-size:12px;">슬롯이 없습니다. 아래 버튼으로 추가하세요.</div>';
+        return;
+    }
+    list.innerHTML = _editSlots.map((s, i) => `
+        <div class="sched-slot-edit-item" id="se-slot-${i}">
+            <input class="sched-slot-edit-time" value="${escapeHtml(s.time||'')}" placeholder="09:00"
+                   oninput="_editSlots[${i}].time=this.value">
+            <input class="sched-slot-edit-detail" value="${escapeHtml(s.detail||'')}" placeholder="▶ 일정 내용 입력 ([팀명] 접두 가능)"
+                   oninput="_editSlots[${i}].detail=this.value">
+            <button class="sched-slot-edit-del" onclick="seDelSlot(${i})" title="삭제"><i class="fas fa-times"></i></button>
+        </div>`).join('');
+}
+
+function seAddSlot() {
+    _editSlots.push({ time: '', detail: '' });
+    renderSeSlotList();
+    // 마지막 detail input에 포커스
+    const items = document.querySelectorAll('.sched-slot-edit-item');
+    if (items.length > 0) {
+        const last = items[items.length - 1];
+        const inp = last.querySelector('.sched-slot-edit-detail');
+        if (inp) setTimeout(() => inp.focus(), 50);
+    }
+}
+
+function seDelSlot(idx) {
+    _editSlots.splice(idx, 1);
+    renderSeSlotList();
+}
+
+async function saveSchedEdit() {
+    if (!_editingScheduleId) return;
+    const idx = Cache.schedule.findIndex(x => x.id === _editingScheduleId);
+    if (idx === -1) return;
+
+    const updated = {
+        ...Cache.schedule[idx],
+        day_label:    document.getElementById('se-day-label').value.trim(),
+        date_label:   document.getElementById('se-date-label').value.trim(),
+        region:       document.getElementById('se-region').value.trim(),
+        transport:    document.getElementById('se-transport').value.trim(),
+        notes:        document.getElementById('se-notes').value.trim(),
+        meal_morning: document.getElementById('se-meal-morning').value.trim(),
+        meal_lunch:   document.getElementById('se-meal-lunch').value.trim(),
+        meal_dinner:  document.getElementById('se-meal-dinner').value.trim(),
+        hotel:        document.getElementById('se-hotel').value.trim(),
+        time_slots:   JSON.stringify(_editSlots.filter(s => s.detail.trim() !== '')),
+    };
+
+    // 저장 버튼 비활성화 (중복 클릭 방지)
+    const saveBtn = document.querySelector('#sched-edit-modal .btn-confirm');
+    if (saveBtn) { saveBtn.disabled = true; saveBtn.innerHTML = '<i class="fas fa-spinner fa-spin" style="margin-right:5px;"></i>저장 중...'; }
+
+    try {
+        const res = await fetch(`tables/${TABLE_SCHEDULE}/${_editingScheduleId}`, {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(updated)
+        });
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        const saved = await res.json();
+
+        // 캐시도 서버 응답값으로 갱신
+        Cache.schedule[idx] = saved || updated;
+        closeSchedEditModal();
+        showToast('일정이 D1에 저장되었습니다! ✅', 'success');
+    } catch(e) {
+        // PUT 실패 시에도 캐시는 업데이트해서 화면에는 반영
+        Cache.schedule[idx] = updated;
+        if (saveBtn) { saveBtn.disabled = false; saveBtn.innerHTML = '<i class="fas fa-save" style="margin-right:5px;"></i>저장'; }
+        showToast('저장 실패(DB 연결 오류) — 화면에만 반영됨', 'error');
+        console.warn('일정 저장 실패:', e);
+    }
+
+    const content = document.getElementById('menu-content');
+    if (content) renderSchedule(content);
+}
+
+// ===== 일정 추가/삭제 함수 =====
+let _addSlots = [];
+
+function openSchedAddModal() {
+    if (!AppState.isAdmin) return;
+    _addSlots = [];
+    // 현재 user_type의 마지막 sort_order + 1 계산
+    const userDays = (Cache.schedule || []).filter(d => d.user_type === AppState.userType);
+    const maxSort  = userDays.reduce((m, d) => Math.max(m, d.sort_order || d.day_num || 0), 0);
+    const nextDay  = maxSort + 1;
+
+    document.getElementById('sa-usertype-label').textContent =
+        AppState.userType === 'executive' ? '책임자급' : '실무자급';
+    document.getElementById('sa-day-label').value    = `제${nextDay}일`;
+    document.getElementById('sa-date-label').value   = '';
+    document.getElementById('sa-region').value       = '';
+    document.getElementById('sa-transport').value    = '';
+    document.getElementById('sa-notes').value        = '';
+    document.getElementById('sa-meal-morning').value = '';
+    document.getElementById('sa-meal-lunch').value   = '';
+    document.getElementById('sa-meal-dinner').value  = '';
+    document.getElementById('sa-hotel').value        = '';
+    renderSaSlotList();
+    document.getElementById('sched-add-modal').classList.remove('hidden');
+}
+
+function closeSchedAddModal() {
+    document.getElementById('sched-add-modal').classList.add('hidden');
+    _addSlots = [];
+}
+
+function renderSaSlotList() {
+    const list = document.getElementById('sa-slot-list');
+    if (!list) return;
+    if (_addSlots.length === 0) {
+        list.innerHTML = '<div style="text-align:center;color:#bbb;padding:12px;font-size:12px;">슬롯이 없습니다. 아래 버튼으로 추가하세요.</div>';
+        return;
+    }
+    list.innerHTML = _addSlots.map((s, i) => `
+        <div class="sched-slot-edit-item" id="sa-slot-${i}">
+            <input class="sched-slot-edit-time" value="${escapeHtml(s.time||'')}" placeholder="09:00"
+                   oninput="_addSlots[${i}].time=this.value">
+            <input class="sched-slot-edit-detail" value="${escapeHtml(s.detail||'')}" placeholder="▶ 일정 내용 입력"
+                   oninput="_addSlots[${i}].detail=this.value">
+            <button class="sched-slot-edit-del" onclick="saDelSlot(${i})" title="삭제"><i class="fas fa-times"></i></button>
+        </div>`).join('');
+}
+
+function saAddSlot() {
+    _addSlots.push({ time: '', detail: '' });
+    renderSaSlotList();
+    const items = document.querySelectorAll('#sa-slot-list .sched-slot-edit-item');
+    if (items.length > 0) {
+        const inp = items[items.length - 1].querySelector('.sched-slot-edit-detail');
+        if (inp) setTimeout(() => inp.focus(), 50);
+    }
+}
+
+function saDelSlot(idx) {
+    _addSlots.splice(idx, 1);
+    renderSaSlotList();
+}
+
+async function executeAddSchedDay() {
+    const dayLabel  = document.getElementById('sa-day-label').value.trim();
+    const dateLabel = document.getElementById('sa-date-label').value.trim();
+    const region    = document.getElementById('sa-region').value.trim();
+
+    if (!dayLabel)  { showToast('날짜 라벨을 입력하세요.', 'error'); return; }
+    if (!dateLabel) { showToast('날짜를 입력하세요.', 'error'); return; }
+    if (!region)    { showToast('지역을 입력하세요.', 'error'); return; }
+
+    const userDays = (Cache.schedule || []).filter(d => d.user_type === AppState.userType);
+    const maxSort  = userDays.reduce((m, d) => Math.max(m, d.sort_order || d.day_num || 0), 0);
+    const dayNum   = maxSort + 1;
+
+    const newDay = {
+        user_type:    AppState.userType,
+        day_num:      dayNum,
+        sort_order:   dayNum,
+        day_label:    dayLabel,
+        date_label:   dateLabel,
+        region:       region,
+        transport:    document.getElementById('sa-transport').value.trim(),
+        notes:        document.getElementById('sa-notes').value.trim(),
+        meal_morning: document.getElementById('sa-meal-morning').value.trim(),
+        meal_lunch:   document.getElementById('sa-meal-lunch').value.trim(),
+        meal_dinner:  document.getElementById('sa-meal-dinner').value.trim(),
+        hotel:        document.getElementById('sa-hotel').value.trim(),
+        time_slots:   JSON.stringify(_addSlots.filter(s => s.detail.trim() !== '')),
+    };
+
+    const saveBtn = document.getElementById('sa-save-btn');
+    if (saveBtn) { saveBtn.disabled = true; saveBtn.textContent = '추가 중...'; }
+
+    try {
+        const res = await fetch(`tables/${TABLE_SCHEDULE}`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(newDay)
+        });
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        const saved = await res.json();
+
+        Cache.schedule.push(saved || newDay);
+        closeSchedAddModal();
+        showToast('일정이 추가되었습니다! ✅', 'success');
+
+        const content = document.getElementById('menu-content');
+        if (content) renderSchedule(content);
+    } catch(e) {
+        // DB 실패 시 로컬에만 반영
+        const localId = 'tmp_' + Date.now();
+        Cache.schedule.push({ ...newDay, id: localId });
+        closeSchedAddModal();
+        showToast('추가 실패(DB 오류) — 화면에만 반영됨', 'error');
+        console.warn('일정 추가 실패:', e);
+
+        const content = document.getElementById('menu-content');
+        if (content) renderSchedule(content);
+    } finally {
+        if (saveBtn) { saveBtn.disabled = false; saveBtn.innerHTML = '<i class="fas fa-plus" style="margin-right:5px;"></i>추가'; }
+    }
+}
+
+// 일정 삭제 관련
+function confirmDeleteSchedDay() {
+    const d = (Cache.schedule || []).find(x => x.id === _editingScheduleId);
+    if (!d) return;
+    const desc = document.getElementById('sched-delete-desc');
+    if (desc) desc.textContent = `"${d.day_label || ''} (${d.date_label || ''})" 일정을 삭제하시겠습니까? 삭제 후 복구할 수 없습니다.`;
+    document.getElementById('sched-edit-modal').classList.add('hidden');
+    document.getElementById('sched-delete-modal').classList.remove('hidden');
+}
+
+function closeSchedDeleteModal() {
+    document.getElementById('sched-delete-modal').classList.add('hidden');
+    document.getElementById('sched-edit-modal').classList.remove('hidden');
+}
+
+async function executeDeleteSchedDay() {
+    const delId = _editingScheduleId;
+    if (!delId) return;
+    document.getElementById('sched-delete-modal').classList.add('hidden');
+    _editingScheduleId = null;
+
+    try {
+        const res = await fetch(`tables/${TABLE_SCHEDULE}/${delId}`, { method: 'DELETE' });
+        if (!res.ok && res.status !== 204) throw new Error(`HTTP ${res.status}`);
+        Cache.schedule = Cache.schedule.filter(x => x.id !== delId);
+        showToast('일정이 삭제되었습니다.', 'success');
+    } catch(e) {
+        // DB 실패 시 캐시에서만 제거
+        Cache.schedule = Cache.schedule.filter(x => x.id !== delId);
+        showToast('삭제 실패(DB 오류) — 화면에만 반영됨', 'error');
+        console.warn('일정 삭제 실패:', e);
+    }
+
+    _editSlots = [];
+    const content = document.getElementById('menu-content');
+    if (content) renderSchedule(content);
+}
+function renderFileSection(container, menu, title, icon) {
+    const files = getCachedFiles(menu);
+    container.innerHTML = `
+    <div class="section-card">
+        <div class="section-card-header">
+            <div class="section-card-title"><i class="fas ${icon}"></i>${escapeHtml(title)}</div>
+        </div>
+        <div class="upload-area" onclick="triggerFileUpload('${menu}')">
+            <i class="fas fa-cloud-upload-alt"></i>
+            <p>클릭하여 파일 업로드<br>또는 파일을 여기에 드래그하세요</p>
+            <p class="upload-types">PDF · 이미지(JPG, PNG) · 엑셀(XLS, XLSX) · 워드(DOC, DOCX)</p>
+        </div>
+        <div class="file-list" id="file-list-${menu}">
+            ${files.length === 0
+                ? `<div class="empty-state"><i class="fas ${icon}"></i><p>업로드된 파일이 없습니다.<br><small>관리자 모드에서 파일을 업로드하세요.</small></p></div>`
+                : files.map(renderFileItem).join('')}
+        </div>
+    </div>`;
+    setupDragDrop(menu);
+}
+
+function renderFileItem(f) {
+    const iconCls = { pdf:'pdf', image:'image', excel:'excel', word:'word' }[f.file_type] || 'default';
+    const iconEl  = { pdf:'<i class="fas fa-file-pdf"></i>', image:'<i class="fas fa-file-image"></i>',
+                      excel:'<i class="fas fa-file-excel"></i>', word:'<i class="fas fa-file-word"></i>' }[f.file_type]
+                   || '<i class="fas fa-file"></i>';
+    return `<div class="file-item" id="file-${f.id}">
+        <div class="file-icon ${iconCls}">${iconEl}</div>
+        <div class="file-info">
+            <div class="file-name">${escapeHtml(f.file_name)}</div>
+            <div class="file-meta">${(f.file_type||'').toUpperCase()} · ${f.file_size||''}</div>
+        </div>
+        <div class="file-actions">
+            <button class="file-action-btn" onclick="downloadFile('${f.id}')" title="다운로드"><i class="fas fa-download"></i></button>
+            ${f.file_type==='image' ? `<button class="file-action-btn" onclick="previewImageById('${f.id}')" title="미리보기"><i class="fas fa-eye"></i></button>` : ''}
+            <button class="file-action-btn delete-btn admin-only-btn" onclick="confirmDeleteFile('${f.id}','${escapeHtml(f.file_name)}')" title="삭제"><i class="fas fa-trash"></i></button>
+        </div>
+    </div>`;
+}
+
+function renderYoutubeCard(f) {
+    const ytId = extractYtId(f.file_data);
+    const thumb = f.thumbnail_url || `https://img.youtube.com/vi/${ytId}/maxresdefault.jpg`;
+    return `<div class="youtube-card" style="position:relative;" id="yt-${f.id}">
+        <img class="youtube-thumb" src="${thumb}" alt="${escapeHtml(f.file_name)}"
+             onerror="this.src='https://img.youtube.com/vi/${ytId}/hqdefault.jpg'">
+        <div class="youtube-play-overlay" onclick="openYoutube('${f.file_data}')">
+            <div class="youtube-play-btn"><i class="fas fa-play" style="margin-left:3px;"></i></div>
+        </div>
+        <div class="youtube-title">${escapeHtml(f.file_name)}</div>
+        <button class="file-action-btn delete-btn admin-only-btn"
+                onclick="confirmDeleteFile('${f.id}','${escapeHtml(f.file_name)}')"
+                style="position:absolute;top:6px;right:6px;background:rgba(0,0,0,0.6);border-color:transparent;color:white;display:none;">
+            <i class="fas fa-times"></i>
+        </button>
+    </div>`;
+}
+
+let currentUploadMenu = '';
+function triggerFileUpload(menu) {
+    if (!AppState.isAdmin) return;
+    currentUploadMenu = menu;
+    const fi = document.getElementById('file-input');
+    fi.value  = '';
+    fi.accept = '.pdf,.jpg,.jpeg,.png,.gif,.xls,.xlsx,.doc,.docx';
+    fi.click();
+}
+function setupDragDrop(menu) {
+    document.querySelectorAll('.upload-area').forEach(area => {
+        area.ondragover  = (e) => { e.preventDefault(); area.style.borderColor = '#3949ab'; };
+        area.ondragleave = ()  => { area.style.borderColor = '#c5cae9'; };
+        area.ondrop      = (e) => {
+            e.preventDefault(); area.style.borderColor = '#c5cae9';
+            if (AppState.isAdmin && e.dataTransfer.files[0]) processFileUpload(e.dataTransfer.files[0], menu);
+        };
+    });
+}
+async function handleFileUpload(e) {
+    if (e.target.files[0]) await processFileUpload(e.target.files[0], currentUploadMenu);
+}
+async function processFileUpload(file, menu) {
+    if (file.size > 10 * 1024 * 1024) { showToast('파일 크기는 10MB 이하만 업로드 가능합니다.', 'error'); return; }
+    showToast('파일 업로드 중...', 'info');
+    try {
+        const base64 = await fileToBase64(file);
+        await fetch(`tables/${TABLE_FILES}`, {
+            method: 'POST', headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                user_type: AppState.userType, menu,
+                file_name: file.name, file_type: getFileType(file.name),
+                file_data: base64, file_size: formatFileSize(file.size),
+                thumbnail_url: '', sort_order: Date.now()
+            })
+        });
+        await invalidateFiles();
+        showToast(`"${file.name}" 업로드 완료!`, 'success');
+        renderMenu(menu);
+    } catch (e) { showToast('업로드 실패: ' + e.message, 'error'); }
+}
+
+// ===== 유튜브 =====
+async function addYoutubeLink() {
+    const input = document.getElementById('yt-url-input');
+    const url   = input?.value?.trim();
+    if (!url) { showToast('YouTube URL을 입력하세요.', 'error'); return; }
+    const ytId = extractYtId(url);
+    if (!ytId) { showToast('유효한 YouTube URL이 아닙니다.', 'error'); return; }
+    showToast('YouTube 링크 추가 중...', 'info');
+    try {
+        const title = await fetchYtTitle(ytId);
+        await fetch(`tables/${TABLE_FILES}`, {
+            method: 'POST', headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                user_type: AppState.userType, menu: 'learning',
+                file_name: title || url, file_type: 'youtube',
+                file_data: url, file_size: '',
+                thumbnail_url: `https://img.youtube.com/vi/${ytId}/maxresdefault.jpg`,
+                sort_order: Date.now()
+            })
+        });
+        if (input) input.value = '';
+        await invalidateFiles();
+        showToast('YouTube 영상이 추가되었습니다!', 'success');
+        renderMenu('learning');
+    } catch (e) { showToast('추가 실패: ' + e.message, 'error'); }
+}
+async function fetchYtTitle(ytId) {
+    try {
+        const res  = await fetch(`https://noembed.com/embed?url=https://www.youtube.com/watch?v=${ytId}`);
+        const data = await res.json();
+        return data.title || '';
+    } catch { return ''; }
+}
+function extractYtId(url) {
+    if (!url) return '';
+    const m = url.match(/(?:youtu\.be\/|youtube\.com\/(?:watch\?v=|embed\/|shorts\/))([a-zA-Z0-9_-]{11})/);
+    return m ? m[1] : '';
+}
+function openYoutube(url) {
+    const ytId = extractYtId(url);
+    if (!ytId) return;
+    document.getElementById('yt-iframe').src = `https://www.youtube.com/embed/${ytId}?autoplay=1`;
+    document.getElementById('yt-modal').classList.remove('hidden');
+}
+function closeYtModal() {
+    document.getElementById('yt-modal').classList.add('hidden');
+    document.getElementById('yt-iframe').src = '';
+}
+
+// ===== 파일 다운로드/미리보기 =====
+function getFileData(fileId) {
+    const f = (Cache.files || []).find(f => f.id === fileId);
+    if (f && f.file_data) return { meta: f, data: f.file_data };
+    const lsData = lsLoadFileData(fileId);
+    if (f && lsData) return { meta: f, data: lsData };
+    return null;
+}
+function downloadFile(fileId) {
+    const result = getFileData(fileId);
+    if (!result) { showToast('파일 데이터를 찾을 수 없습니다.', 'error'); return; }
+    const link = document.createElement('a');
+    link.href     = result.data;
+    link.download = result.meta.file_name;
+    link.click();
+}
+function previewImageById(fileId) {
+    const result = getFileData(fileId);
+    if (!result) return;
+    document.getElementById('img-modal-img').src = result.data;
+    document.getElementById('img-modal').classList.remove('hidden');
+}
+function closeImgModal() { document.getElementById('img-modal').classList.add('hidden'); }
+
+// ===== 파일 삭제 =====
+let pendingDeleteId = '';
+function confirmDeleteFile(fileId, fileName) {
+    pendingDeleteId = fileId;
+    document.getElementById('delete-modal-desc').textContent = `"${fileName}" 파일을 삭제하시겠습니까?`;
+    document.getElementById('delete-confirm-btn').onclick = executeDeleteFile;
+    document.getElementById('delete-modal').classList.remove('hidden');
+}
+async function executeDeleteFile() {
+    document.getElementById('delete-modal').classList.add('hidden');
+    try {
+        await fetch(`tables/${TABLE_FILES}/${pendingDeleteId}`, { method: 'DELETE' });
+        lsRemoveFileData(pendingDeleteId);
+        await invalidateFiles();
+        showToast('파일이 삭제되었습니다.', 'success');
+        renderMenu(AppState.currentMenu);
+    } catch (e) { showToast('삭제 실패: ' + e.message, 'error'); }
+}
+
+// ===== 유틸리티 =====
+function fileToBase64(file) {
+    return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload  = () => resolve(reader.result);
+        reader.onerror = reject;
+        reader.readAsDataURL(file);
+    });
+}
+function getFileType(name) {
+    const ext = name.split('.').pop().toLowerCase();
+    if (['pdf'].includes(ext)) return 'pdf';
+    if (['jpg','jpeg','png','gif','webp'].includes(ext)) return 'image';
+    if (['xls','xlsx'].includes(ext)) return 'excel';
+    if (['doc','docx'].includes(ext)) return 'word';
+    return 'default';
+}
+function formatFileSize(bytes) {
+    if (bytes < 1024) return bytes + ' B';
+    if (bytes < 1024*1024) return (bytes/1024).toFixed(1) + ' KB';
+    return (bytes/1024/1024).toFixed(1) + ' MB';
+}
+function escapeHtml(str) {
+    if (!str) return '';
+    return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
+              .replace(/"/g,'&quot;').replace(/'/g,'&#39;');
+}
+function showToast(message, type = 'info') {
+    const container = document.getElementById('toast-container');
+    if (!container) return;
+    const toast = document.createElement('div');
+    toast.className = `toast ${type}`;
+    const icons = { success:'fa-check-circle', error:'fa-times-circle', info:'fa-info-circle' };
+    toast.innerHTML = `<i class="fas ${icons[type]||'fa-info-circle'}"></i> ${message}`;
+    container.appendChild(toast);
+    setTimeout(() => {
+        toast.style.animation = 'toastOut 0.3s ease forwards';
+        setTimeout(() => toast.remove(), 300);
+    }, 3000);
+}
+</script>
+</body>
+</html>
