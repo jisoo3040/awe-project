@@ -36,8 +36,9 @@ export async function onRequest(context) {
         .bind(...values)
         .run();
 
-      // 🔥 반드시 JSON으로 반환 (프론트가 json() 사용 중이므로)
-      return Response.json({ success: true });
+      // 🔥 저장된 실제 데이터 반환
+      return Response.json(body);
+
     } catch (error) {
       return Response.json(
         { success: false, error: error.message },
