@@ -90,29 +90,6 @@ const MENUS = [
     { key: 'room_assignment',  label: '방 배정표',     icon: 'fa-door-open' },
 ];
 
-// ===== 앱 진입점 =====
-async function initGuideApp(type) {
-    AppState.userType = type;
-    AppState.isAdmin  = false;
-    AppState.currentMenu = 'important_notice';
-
-    const app = document.getElementById('main-app');
-    app.style.display = 'block';
-    app.innerHTML = buildAppHTML();
-    bindEvents();
-
-    // 정적 데이터(js/data.js)를 캐시에 로드 – 서버 DB 완전 독립
-    Cache.schedule     = (typeof STATIC_SCHEDULE     !== 'undefined') ? STATIC_SCHEDULE     : [];
-    Cache.notices      = (typeof STATIC_NOTICES      !== 'undefined') ? STATIC_NOTICES      : [];
-    Cache.participants = (typeof STATIC_PARTICIPANTS !== 'undefined') ? STATIC_PARTICIPANTS : [];
-    Cache.contacts     = (typeof STATIC_CONTACTS     !== 'undefined') ? STATIC_CONTACTS     : [];
-    Cache.content      = (typeof STATIC_CONTENT      !== 'undefined') ? STATIC_CONTENT      : [];
-    Cache.files        = (typeof STATIC_FILES        !== 'undefined') ? STATIC_FILES        : [];
-    Cache.loaded       = true;
-
-    renderMenu(AppState.currentMenu);
-}
-
 // ===== prefetchAll – 정적 데이터 사용으로 전환되어 서버 fetch 불필요 =====
 async function prefetchAll() {
     // 서버 DB 의존 완전 제거 – js/data.js의 정적 데이터를 사용
@@ -125,50 +102,70 @@ async function invalidateContent() {
     try {
         const res  = await fetch(`tables/${TABLE_CONTENT}?limit=500`);
         const data = await res.json();
-        const srv = data.data || [];
-        if (srv.length > 0) { Cache.content = srv; }
+        Cache.content = Array.isArray(data) ? data : [];
     } catch {}
 }
 async function invalidateFiles() {
     try {
         const res  = await fetch(`tables/${TABLE_FILES}?limit=500`);
         const data = await res.json();
-        const srv = data.data || [];
-        if (srv.length > 0) {
-            Cache.files = srv;
-            Cache.files.forEach(f => {
-                if (f.file_data) lsSaveFileData(f.id, f.file_data);
-            });
-        }
+        Cache.files = Array.isArray(data) ? data : [];
     } catch {}
 }
 async function invalidateContacts() {
     try {
         const res  = await fetch(`tables/${TABLE_CONTACTS}?limit=200`);
         const data = await res.json();
-        const srv = data.data || [];
-        if (srv.length > 0) { Cache.contacts = srv; }
+        Cache.contacts = Array.isArray(data) ? data : [];
     } catch {}
 }
 async function invalidateNotices() {
     try {
         const res  = await fetch(`tables/${TABLE_NOTICES}?limit=500`);
         const data = await res.json();
-        const srv = data.data || [];
-        if (srv.length > 0) { Cache.notices = srv; }
+        Cache.notices = Array.isArray(data) ? data : [];
     } catch {}
 }
 async function invalidateParticipants() {
     try {
         const res  = await fetch(`tables/${TABLE_PARTICIPANTS}?limit=500`);
         const data = await res.json();
-        const srv = data.data || [];
-        if (srv.length > 0) { Cache.participants = srv; }
+        Cache.participants = Array.isArray(data) ? data : [];
     } catch {}
 }
 async function invalidateSchedule() {
-    // 일정은 항상 정적 데이터(js/data.js) 사용 - 서버 fetch 안 함
-    Cache.schedule = (typeof STATIC_SCHEDULE !== 'undefined') ? STATIC_SCHEDULE : [];
+    try {
+        const res = await fetch(`tables/${TABLE_SCHEDULE}?limit=500`);
+        const data = await res.json();
+
+        // Cloudflare Pages Functions는 배열 그대로 반환
+        Cache.schedule = Array.isArray(data) ? data : [];
+    } catch (e) {
+        console.error('일정 재로드 실패:', e);
+        Cache.schedule = [];
+    }
+}
+async function initGuideApp(type) {
+    AppState.userType = type;
+    AppState.isAdmin  = false;
+    AppState.currentMenu = 'important_notice';
+
+    const app = document.getElementById('main-app');
+    app.style.display = 'block';
+    app.innerHTML = buildAppHTML();
+    bindEvents();
+
+    await invalidateSchedule();
+
+    Cache.notices      = (typeof STATIC_NOTICES !== 'undefined') ? STATIC_NOTICES : [];
+    Cache.participants = (typeof STATIC_PARTICIPANTS !== 'undefined') ? STATIC_PARTICIPANTS : [];
+    Cache.contacts     = (typeof STATIC_CONTACTS !== 'undefined') ? STATIC_CONTACTS : [];
+    Cache.content      = (typeof STATIC_CONTENT !== 'undefined') ? STATIC_CONTENT : [];
+    Cache.files        = (typeof STATIC_FILES !== 'undefined') ? STATIC_FILES : [];
+
+    Cache.loaded = true;
+
+    renderMenu(AppState.currentMenu);
 }
 
 // ===== 캐시 기반 조회 =====
