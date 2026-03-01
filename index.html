@@ -978,39 +978,33 @@ async function initGuideApp(type) {
  * - 실패 시 STATIC_SCHEDULE 폴백 (오프라인/DB 오류 대비)
  */
 async function loadScheduleFromDB() {
-  try {
-    const res = await fetch(`tables/${TABLE_SCHEDULE}?limit=200&sort=sort_order`);
-    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    try {
+        const res = await fetch(`tables/${TABLE_SCHEDULE}?limit=500&sort=sort_order`);
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
 
-    const data = await res.json();
+        const data = await res.json();
 
-    // 🔥 핵심: API는 배열 그대로 반환
-    const rows = Array.isArray(data) ? data : (data.data || []);
+        const rows = Array.isArray(data) ? data : (data.data || []);
 
-    if (rows.length > 0) {
-      Cache.schedule = rows;
-    } else {
-      console.warn('awe_schedule 테이블이 비어있습니다.');
-      Cache.schedule = [];
+        // 🔥 user_type 기준 필터링
+        const filtered = rows.filter(r => r.user_type === AppState.userType);
+
+        Cache.schedule = filtered;
+
+        if (AppState.currentMenu === 'schedule') {
+            const content = document.getElementById('menu-content');
+            if (content) renderSchedule(content);
+        }
+
+    } catch (e) {
+        console.warn('일정 DB 로드 실패:', e);
+        Cache.schedule = [];
+
+        if (AppState.currentMenu === 'schedule') {
+            const content = document.getElementById('menu-content');
+            if (content) renderSchedule(content);
+        }
     }
-
-    // 일정 메뉴가 열려있으면 즉시 다시 렌더
-    if (AppState.currentMenu === 'schedule') {
-      const content = document.getElementById('menu-content');
-      if (content) renderSchedule(content);
-    }
-
-  } catch (e) {
-    console.warn('일정 DB 로드 실패:', e);
-
-    // ❌ STATIC_SCHEDULE 사용하지 않음
-    Cache.schedule = [];
-
-    if (AppState.currentMenu === 'schedule') {
-      const content = document.getElementById('menu-content');
-      if (content) renderSchedule(content);
-    }
-  }
 }
 
 async function prefetchAll() {}
