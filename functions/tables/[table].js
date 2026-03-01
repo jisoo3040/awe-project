@@ -17,7 +17,7 @@ export async function onRequest(context) {
       `INSERT INTO ${table} (${keys.join(',')}) VALUES (${placeholders})`
     ).bind(...values).run();
 
-    return new Response('Inserted', { status: 201 });
+    return new Response('Inserted', { status: 200 });
   }
 
   return new Response('Method Not Allowed', { status: 405 });
