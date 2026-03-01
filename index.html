@@ -978,31 +978,39 @@ async function initGuideApp(type) {
  * - 실패 시 STATIC_SCHEDULE 폴백 (오프라인/DB 오류 대비)
  */
 async function loadScheduleFromDB() {
-    try {
-        const res  = await fetch(`tables/${TABLE_SCHEDULE}?limit=200&sort=sort_order`);
-        if (!res.ok) throw new Error(`HTTP ${res.status}`);
-        const data = await res.json();
-        const rows = data.data || [];
-        if (rows.length > 0) {
-            Cache.schedule = rows;
-        } else {
-            // D1에 데이터 없을 경우 정적 폴백만 사용 (씨딩하지 않음 - 이미 DB에 있어야 함)
-            console.warn('awe_schedule 테이블이 비어있습니다.');
-            Cache.schedule = (typeof STATIC_SCHEDULE !== 'undefined') ? STATIC_SCHEDULE : [];
-        }
-        // 일정 탭이 열려있으면 즉시 갱신
-        if (AppState.currentMenu === 'schedule') {
-            const content = document.getElementById('menu-content');
-            if (content) renderSchedule(content);
-        }
-    } catch(e) {
-        console.warn('일정 DB 로드 실패, 정적 데이터 폴백 사용:', e);
-        Cache.schedule = (typeof STATIC_SCHEDULE !== 'undefined') ? STATIC_SCHEDULE : [];
-        if (AppState.currentMenu === 'schedule') {
-            const content = document.getElementById('menu-content');
-            if (content) renderSchedule(content);
-        }
+  try {
+    const res = await fetch(`tables/${TABLE_SCHEDULE}?limit=200&sort=sort_order`);
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+
+    const data = await res.json();
+
+    // 🔥 핵심: API는 배열 그대로 반환
+    const rows = Array.isArray(data) ? data : (data.data || []);
+
+    if (rows.length > 0) {
+      Cache.schedule = rows;
+    } else {
+      console.warn('awe_schedule 테이블이 비어있습니다.');
+      Cache.schedule = [];
     }
+
+    // 일정 메뉴가 열려있으면 즉시 다시 렌더
+    if (AppState.currentMenu === 'schedule') {
+      const content = document.getElementById('menu-content');
+      if (content) renderSchedule(content);
+    }
+
+  } catch (e) {
+    console.warn('일정 DB 로드 실패:', e);
+
+    // ❌ STATIC_SCHEDULE 사용하지 않음
+    Cache.schedule = [];
+
+    if (AppState.currentMenu === 'schedule') {
+      const content = document.getElementById('menu-content');
+      if (content) renderSchedule(content);
+    }
+  }
 }
 
 async function prefetchAll() {}
