@@ -2570,37 +2570,23 @@ async function executeAddSchedDay() {
         time_slots:   JSON.stringify(_addSlots.filter(s => s.detail.trim() !== '')),
     };
 
-    const saveBtn = document.getElementById('sa-save-btn');
-    if (saveBtn) { saveBtn.disabled = true; saveBtn.textContent = '추가 중...'; }
+    const res = await fetch(`tables/${TABLE_SCHEDULE}`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(newDay)
+    });
 
-    try {
-        const res = await fetch(`tables/${TABLE_SCHEDULE}`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(newDay)
-        });
-        if (!res.ok) throw new Error(`HTTP ${res.status}`);
-        const saved = await res.json();
-
-        Cache.schedule.push(saved || newDay);
-        closeSchedAddModal();
-        showToast('일정이 추가되었습니다! ✅', 'success');
-
-        const content = document.getElementById('menu-content');
-        if (content) renderSchedule(content);
-    } catch(e) {
-        // DB 실패 시 로컬에만 반영
-        const localId = 'tmp_' + Date.now();
-        Cache.schedule.push({ ...newDay, id: localId });
-        closeSchedAddModal();
-        showToast('추가 실패(DB 오류) — 화면에만 반영됨', 'error');
-        console.warn('일정 추가 실패:', e);
-
-        const content = document.getElementById('menu-content');
-        if (content) renderSchedule(content);
-    } finally {
-        if (saveBtn) { saveBtn.disabled = false; saveBtn.innerHTML = '<i class="fas fa-plus" style="margin-right:5px;"></i>추가'; }
+    if (!res.ok) {
+        showToast('DB 저장 실패 ❌', 'error');
+        return;
     }
+
+    await invalidateSchedule();   // ⭐ 반드시 재조회
+    closeSchedAddModal();
+    showToast('일정이 영구 저장되었습니다 ✅', 'success');
+
+    const content = document.getElementById('menu-content');
+    if (content) renderSchedule(content);
 }
 
 // 일정 삭제 관련
