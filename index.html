@@ -1041,8 +1041,10 @@ async function invalidateNotices() {
         const res  = await fetch(`/tables/${TABLE_NOTICES}?limit=500`);
         const data = await res.json();
         const srv = data.data || [];
-        if (srv.length > 0) { Cache.notices = srv; }
-    } catch {}
+        Cache.notices = srv;   // 🔥 조건 제거
+    } catch (e) {
+        console.warn('invalidateNotices 실패:', e);
+    }
 }
 async function invalidateParticipants() {
     try {
