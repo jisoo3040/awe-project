@@ -1544,9 +1544,14 @@ async function executeSaveNotice() {
             showToast('수정되었습니다!', 'success');
         } else {
             const now = Date.now();
-            await fetch(`/tables/${TABLE_NOTICES}/${editId}`, {
-                method: 'POST', headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ user_type: AppState.userType, content: text, created_at_custom: now })
+            await fetch(`/tables/${TABLE_NOTICES}`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    user_type: AppState.userType,
+                    content: text,
+                    created_at_custom: now
+                })
             });
             showToast('중요 안내가 등록되었습니다!', 'success');
         }
