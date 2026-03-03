@@ -9,12 +9,15 @@ export async function onRequest(context) {
     // GET - 전체 조회
     // ============================
     if (method === "GET") {
-      const { results } = await DB.prepare(
-        `SELECT * FROM ${table}`
-      ).all();
+  const { results } = await DB.prepare(
+    `SELECT * FROM ${table}`
+  ).all();
 
-      return Response.json(results);
-    }
+  return Response.json({
+    success: true,
+    data: results
+  });
+}
 
     // ============================
     // POST - 데이터 추가
