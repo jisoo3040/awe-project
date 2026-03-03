@@ -1054,11 +1054,20 @@ async function invalidateParticipants() {
 }
 async function invalidateSchedule() {
     try {
-        const res  = await fetch(`tables/${TABLE_SCHEDULE}?limit=200&sort=sort_order`);
-        const data = await res.json();
-        const rows = data.data || [];
-        if (rows.length > 0) Cache.schedule = rows;
-    } catch(e) { console.warn('invalidateSchedule 실패:', e); }
+        const res = await fetch(`tables/${TABLE_SCHEDULE}`);
+        if (!res.ok) throw new Error('Fetch 실패');
+
+        const rows = await res.json();   // ⭐ 바로 배열 받기
+
+        if (Array.isArray(rows)) {
+            Cache.schedule = rows;
+        } else {
+            console.warn('예상치 못한 응답 구조:', rows);
+        }
+
+    } catch(e) {
+        console.warn('invalidateSchedule 실패:', e);
+    }
 }
 
 function getCachedContent(menu, section) {
@@ -2432,47 +2441,25 @@ function seDelSlot(idx) {
 
 async function saveSchedEdit() {
     if (!_editingScheduleId) return;
-    const idx = Cache.schedule.findIndex(x => x.id === _editingScheduleId);
-    if (idx === -1) return;
 
     const updated = {
-        ...Cache.schedule[idx],
-        day_label:    document.getElementById('se-day-label').value.trim(),
-        date_label:   document.getElementById('se-date-label').value.trim(),
-        region:       document.getElementById('se-region').value.trim(),
-        transport:    document.getElementById('se-transport').value.trim(),
-        notes:        document.getElementById('se-notes').value.trim(),
-        meal_morning: document.getElementById('se-meal-morning').value.trim(),
-        meal_lunch:   document.getElementById('se-meal-lunch').value.trim(),
-        meal_dinner:  document.getElementById('se-meal-dinner').value.trim(),
-        hotel:        document.getElementById('se-hotel').value.trim(),
-        time_slots:   JSON.stringify(_editSlots.filter(s => s.detail.trim() !== '')),
+        ...
     };
 
-    // 저장 버튼 비활성화 (중복 클릭 방지)
-    const saveBtn = document.querySelector('#sched-edit-modal .btn-confirm');
-    if (saveBtn) { saveBtn.disabled = true; saveBtn.innerHTML = '<i class="fas fa-spinner fa-spin" style="margin-right:5px;"></i>저장 중...'; }
+    const res = await fetch(`tables/${TABLE_SCHEDULE}/${_editingScheduleId}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(updated)
+    });
 
-    try {
-        const res = await fetch(`tables/${TABLE_SCHEDULE}/${_editingScheduleId}`, {
-            method: 'PUT',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(updated)
-        });
-        if (!res.ok) throw new Error(`HTTP ${res.status}`);
-        const saved = await res.json();
-
-        // 캐시도 서버 응답값으로 갱신
-        Cache.schedule[idx] = saved || updated;
-        closeSchedEditModal();
-        showToast('일정이 D1에 저장되었습니다! ✅', 'success');
-    } catch(e) {
-        // PUT 실패 시에도 캐시는 업데이트해서 화면에는 반영
-        Cache.schedule[idx] = updated;
-        if (saveBtn) { saveBtn.disabled = false; saveBtn.innerHTML = '<i class="fas fa-save" style="margin-right:5px;"></i>저장'; }
-        showToast('저장 실패(DB 연결 오류) — 화면에만 반영됨', 'error');
-        console.warn('일정 저장 실패:', e);
+    if (!res.ok) {
+        showToast('DB 저장 실패 ❌', 'error');
+        return;
     }
+
+    await invalidateSchedule();
+    closeSchedEditModal();
+    showToast('일정이 영구 수정되었습니다 ✅', 'success');
 
     const content = document.getElementById('menu-content');
     if (content) renderSchedule(content);
@@ -2607,22 +2594,19 @@ function closeSchedDeleteModal() {
 async function executeDeleteSchedDay() {
     const delId = _editingScheduleId;
     if (!delId) return;
-    document.getElementById('sched-delete-modal').classList.add('hidden');
-    _editingScheduleId = null;
 
-    try {
-        const res = await fetch(`tables/${TABLE_SCHEDULE}/${delId}`, { method: 'DELETE' });
-        if (!res.ok && res.status !== 204) throw new Error(`HTTP ${res.status}`);
-        Cache.schedule = Cache.schedule.filter(x => x.id !== delId);
-        showToast('일정이 삭제되었습니다.', 'success');
-    } catch(e) {
-        // DB 실패 시 캐시에서만 제거
-        Cache.schedule = Cache.schedule.filter(x => x.id !== delId);
-        showToast('삭제 실패(DB 오류) — 화면에만 반영됨', 'error');
-        console.warn('일정 삭제 실패:', e);
+    const res = await fetch(`tables/${TABLE_SCHEDULE}/${delId}`, {
+        method: 'DELETE'
+    });
+
+    if (!res.ok && res.status !== 204) {
+        showToast('DB 삭제 실패 ❌', 'error');
+        return;
     }
 
-    _editSlots = [];
+    await invalidateSchedule();   // ⭐ 재조회
+    showToast('일정이 영구 삭제되었습니다.', 'success');
+
     const content = document.getElementById('menu-content');
     if (content) renderSchedule(content);
 }
