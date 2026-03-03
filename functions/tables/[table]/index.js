@@ -1,10 +1,12 @@
 export async function onRequest(context) {
   const table = context.params.table;
+  const id = context.params.id;
   const { DB } = context.env;
   const method = context.request.method;
 
   try {
 
+    // GET
     if (method === "GET") {
       const { results } = await DB.prepare(
         `SELECT * FROM ${table}`
@@ -16,6 +18,7 @@ export async function onRequest(context) {
       });
     }
 
+    // POST
     if (method === "POST") {
       const body = await context.request.json();
       body.id = crypto.randomUUID();
@@ -30,16 +33,41 @@ export async function onRequest(context) {
         .bind(...values)
         .run();
 
-      return Response.json({
-        success: true,
-        data: body
-      });
+      return Response.json({ success: true });
     }
 
-    return Response.json(
-      { success: false, message: "Method Not Allowed" },
-      { status: 405 }
-    );
+    // PUT
+    if (method === "PUT") {
+      if (!id) return Response.json({ success: false }, { status: 400 });
+
+      const body = await context.request.json();
+      const keys = Object.keys(body);
+      const values = Object.values(body);
+      const setClause = keys.map(k => `${k} = ?`).join(",");
+
+      await DB.prepare(
+        `UPDATE ${table} SET ${setClause} WHERE id = ?`
+      )
+        .bind(...values, id)
+        .run();
+
+      return Response.json({ success: true });
+    }
+
+    // DELETE
+    if (method === "DELETE") {
+      if (!id) return Response.json({ success: false }, { status: 400 });
+
+      await DB.prepare(
+        `DELETE FROM ${table} WHERE id = ?`
+      )
+        .bind(id)
+        .run();
+
+      return Response.json({ success: true });
+    }
+
+    return Response.json({ success: false }, { status: 405 });
 
   } catch (error) {
     return Response.json(
