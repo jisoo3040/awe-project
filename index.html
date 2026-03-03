@@ -2442,8 +2442,21 @@ function seDelSlot(idx) {
 async function saveSchedEdit() {
     if (!_editingScheduleId) return;
 
+    const idx = Cache.schedule.findIndex(x => x.id === _editingScheduleId);
+    if (idx === -1) return;
+
     const updated = {
-        ...
+        ...Cache.schedule[idx],
+        day_label:    document.getElementById('se-day-label').value.trim(),
+        date_label:   document.getElementById('se-date-label').value.trim(),
+        region:       document.getElementById('se-region').value.trim(),
+        transport:    document.getElementById('se-transport').value.trim(),
+        notes:        document.getElementById('se-notes').value.trim(),
+        meal_morning: document.getElementById('se-meal-morning').value.trim(),
+        meal_lunch:   document.getElementById('se-meal-lunch').value.trim(),
+        meal_dinner:  document.getElementById('se-meal-dinner').value.trim(),
+        hotel:        document.getElementById('se-hotel').value.trim(),
+        time_slots:   JSON.stringify(_editSlots.filter(s => s.detail.trim() !== '')),
     };
 
     const res = await fetch(`tables/${TABLE_SCHEDULE}/${_editingScheduleId}`, {
