@@ -955,17 +955,15 @@ async function initGuideApp(type) {
     app.innerHTML = buildAppHTML();
     bindEvents();
 
-    // 🔥 STATIC 제거
-    Cache.notices = [];
-    Cache.participants = [];
-    Cache.contacts = [];
-    Cache.content = [];
-    Cache.files = [];
+    // 🔥 캐시 강제 초기화 제거
+    Cache.loaded = true;
 
-    Cache.schedule = [];
-    Cache.loaded   = true;
-
-    await invalidateNotices();   // 🔥 반드시 DB에서 다시 로드
+    // 🔥 모든 데이터 DB에서 다시 로드
+    await invalidateNotices();
+    await invalidateParticipants();
+    await invalidateContacts?.();
+    await invalidateContent?.();
+    await invalidateFiles?.();
 
     renderMenu(AppState.currentMenu);
     loadScheduleFromDB();
