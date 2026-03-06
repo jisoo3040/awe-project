@@ -1738,46 +1738,4 @@ function showToast(message, type = 'info') {
     }, 3000);
 }
 
-function renderHotelInfo(container) {
-
-    container.innerHTML = `
-    <div class="section-card">
-        <div class="section-card-header">
-            <div class="section-card-title">
-                <i class="fas fa-hotel"></i>호텔 정보
-            </div>
-        </div>
-
-        <div style="margin-bottom:30px;">
-            <h3>Beijing Kun Tai Hotel</h3>
-            <p style="color:#666;">3/10 ~ 3/11 숙박</p>
-
-            <img src="https://cf.bstatic.com/xdata/images/hotel/max1024x768/15278488.jpg"
-            style="width:100%;border-radius:10px;margin:10px 0;">
-
-            <iframe
-            src="https://maps.google.com/maps?q=Beijing%20Kun%20Tai%20Hotel&t=&z=15&ie=UTF8&iwloc=&output=embed"
-            style="width:100%;height:250px;border:0;border-radius:10px;">
-            </iframe>
-
-            <p style="margin-top:10px;">주변 : 왕징 상업지구</p>
-        </div>
-
-        <div>
-            <h3>Grand Metropark Hotel</h3>
-            <p style="color:#666;">3/12 ~ 3/14 숙박</p>
-
-            <img src="https://cf.bstatic.com/xdata/images/hotel/max1024x768/31000610.jpg"
-            style="width:100%;border-radius:10px;margin:10px 0;">
-
-            <iframe
-            src="https://maps.google.com/maps?q=Grand%20Metropark%20Hotel%20Beijing&t=&z=15&ie=UTF8&iwloc=&output=embed"
-            style="width:100%;height:250px;border:0;border-radius:10px;">
-            </iframe>
-
-            <p style="margin-top:10px;">주변 : 쇼핑몰, 음식점 밀집</p>
-        </div>
-
-    </div>
-    `;
-}
+renderHotelInfo
