@@ -451,25 +451,49 @@ function closeDeleteModal() { document.getElementById('delete-modal').classList.
 
 // ===== 저장 헬퍼 (저장 후 캐시만 무효화) =====
 async function saveContent(menu, section, title, text) {
+
     try {
+
         const existing = getCachedContent(menu, section);
+
         if (existing) {
+
             await fetch(`/tables/${TABLE_CONTENT}/${existing.id}`, {
                 method: 'PUT',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ ...existing, content: text, title })
+                body: JSON.stringify({
+                    ...existing,
+                    content: text,
+                    title
+                })
             });
+
         } else {
+
             await fetch(`/tables/${TABLE_CONTENT}`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ user_type: AppState.userType, menu, section, title, content: text, sort_order: 0 })
+                body: JSON.stringify({
+                    id: crypto.randomUUID(),
+                    user_type: AppState.userType,
+                    menu,
+                    section,
+                    title,
+                    content: text,
+                    sort_order: 0
+                })
             });
+
         }
-        await invalidateContent(); // 캐시만 갱신
+
+        await invalidateContent();
+
         showToast('저장되었습니다!', 'success');
+
     } catch (e) {
+
         showToast('저장 실패: ' + e.message, 'error');
+
     }
 }
 
@@ -653,45 +677,63 @@ function closeNoticeConfirmModal() {
 }
 async function executeSaveNotice() {
     document.getElementById('notice-confirm-modal').classList.add('hidden');
+
     const text = AppState._pendingNoticeText;
     const editId = AppState._editingNoticeId;
+
     AppState._pendingNoticeText = null;
     AppState._editingNoticeId = null;
+
     if (!text) return;
+
     try {
+
         if (editId) {
-            // 수정
+
             const existing = (Cache.notices || []).find(n => n.id === editId);
+
             await fetch(`/tables/${TABLE_NOTICES}/${editId}`, {
                 method: 'PUT',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ ...existing, content: text })
             });
+
             showToast('수정되었습니다!', 'success');
+
         } else {
-            // 신규 등록
+
             const now = Date.now();
+
             await fetch(`/tables/${TABLE_NOTICES}`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
+                    id: crypto.randomUUID(),
                     user_type: AppState.userType,
                     content: text,
                     created_at_custom: now
                 })
             });
+
             showToast('중요 안내가 등록되었습니다!', 'success');
         }
+
         await invalidateNotices();
-        // 게시판만 업데이트
+
         const board = document.getElementById('notice-board');
+
         if (board) {
+
             const notices = (Cache.notices || [])
                 .filter(n => n.user_type === AppState.userType)
                 .sort((a, b) => (b.created_at_custom || b.created_at || 0) - (a.created_at_custom || a.created_at || 0));
+
             board.innerHTML = renderNoticeList(notices);
         }
-    } catch (e) { showToast('저장 실패: ' + e.message, 'error'); }
+
+    } catch (e) {
+        showToast('저장 실패: ' + e.message, 'error');
+    }
 }
 
 // 공지 삭제
@@ -796,19 +838,39 @@ async function requestSaveContacts() {
 async function saveContactsCallback() {
     try {
         const existing = (Cache.contacts || []).filter(r => r.user_type === AppState.userType);
-        await Promise.all(existing.map(c => fetch(`/tables/${TABLE_CONTACTS}/${c.id}`, { method: 'DELETE' })));
-        await Promise.all(tempContacts.filter(c => c.name || c.phone).map((c, i) =>
-            fetch(`/tables/${TABLE_CONTACTS}`, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ ...c, user_type: AppState.userType, sort_order: i })
-            })
-        ));
+
+        await Promise.all(
+            existing.map(c =>
+                fetch(`/tables/${TABLE_CONTACTS}/${c.id}`, { method: 'DELETE' })
+            )
+        );
+
+        await Promise.all(
+            tempContacts
+                .filter(c => c.name || c.phone)
+                .map((c, i) =>
+                    fetch(`/tables/${TABLE_CONTACTS}`, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                            id: crypto.randomUUID(),
+                            ...c,
+                            user_type: AppState.userType,
+                            sort_order: i
+                        })
+                    })
+                )
+        );
+
         await invalidateContacts();
         showToast('연락처가 저장되었습니다!', 'success');
+
         const el = document.getElementById('contact-display');
         if (el) el.innerHTML = renderContactTable(getCachedContacts());
-    } catch (e) { showToast('저장 실패: ' + e.message, 'error'); }
+
+    } catch (e) {
+        showToast('저장 실패: ' + e.message, 'error');
+    }
 }
 
 // ===== 날씨 (캐시 30분) =====
