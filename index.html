@@ -2869,17 +2869,23 @@ async function saveSchedulePDF() {
   const element = document.querySelector(".schedule-timeline");
 
   const canvas = await html2canvas(element, {
-    scale: 2
+    scale: 2,
+    useCORS: true
   });
 
   const imgData = canvas.toDataURL("image/png");
 
   const { jsPDF } = window.jspdf;
-  const pdf = new jsPDF("p", "mm", "a4");
 
-  const pageWidth = 210;
-  const imgWidth = pageWidth;
+  const imgWidth = 210;
   const imgHeight = canvas.height * imgWidth / canvas.width;
+
+  // 페이지 높이를 일정표 높이에 맞춤
+  const pdf = new jsPDF({
+    orientation: "portrait",
+    unit: "mm",
+    format: [210, imgHeight]
+  });
 
   pdf.addImage(imgData, "PNG", 0, 0, imgWidth, imgHeight);
 
