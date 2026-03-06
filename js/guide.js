@@ -1449,15 +1449,23 @@ async function executeDeleteParticipant() {
 
 // ===== 5. 일정표 =====
 function renderSchedule(container) {
-    // 중복 day_num 제거: 같은 user_type + day_num 중 가장 최근(created_at 큰) 것만 사용
-    const allDays = (Cache.schedule || []).filter(d => d.user_type === AppState.userType);
-    const dayMap = {};
-    allDays.forEach(d => {
-        const key = d.day_num || d.sort_order || d.date_label;
-        if (!dayMap[key] || (d.created_at || 0) > (dayMap[key].created_at || 0)) {
-            dayMap[key] = d;
-        }
-    });
+
+  if (!Cache.schedule || !Cache.schedule.length) {
+    Cache.schedule = STATIC_SCHEDULE.filter(
+      s => s.user_type === AppState.userType
+    );
+  }
+
+  const schedules = Cache.schedule || [];
+
+  if (!schedules.length) {
+    container.innerHTML = `
+      <div class="empty-state">
+        등록된 일정이 없습니다.
+      </div>
+    `;
+    return;
+  }
     const days = Object.values(dayMap)
         .sort((a, b) => (a.sort_order || a.day_num || 0) - (b.sort_order || b.day_num || 0));
 
