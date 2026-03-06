@@ -1367,7 +1367,7 @@ function renderImportantNotice(container) {
     const contacts = getCachedContacts();
     const prepText = prepRec ? prepRec.content : '';
     const notices = (Cache.notices || [])
-        .filter(n => n.user_type === AppState.userType)
+        .filter(n => (n.user_type || '').trim() === (AppState.userType || '').trim())
         .sort((a, b) => (b.created_at_custom || b.created_at || 0) - (a.created_at_custom || a.created_at || 0));
 
     container.innerHTML = `
@@ -1558,7 +1558,7 @@ async function executeSaveNotice() {
         const board = document.getElementById('notice-board');
         if (board) {
             const notices = (Cache.notices || [])
-                .filter(n => n.user_type === AppState.userType)
+                .filter(n => (n.user_type || '').trim() === (AppState.userType || '').trim())
                 .sort((a, b) => (b.created_at_custom || b.created_at || 0) - (a.created_at_custom || a.created_at || 0));
             board.innerHTML = renderNoticeList(notices);
         }
