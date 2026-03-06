@@ -2572,32 +2572,6 @@ async function processFileUpload(file, menu) {
     } catch (e) { showToast('업로드 실패: ' + e.message, 'error'); }
 }
 
-// ===== 유튜브 =====
-async function addYoutubeLink() {
-    const input = document.getElementById('yt-url-input');
-    const url   = input?.value?.trim();
-    if (!url) { showToast('YouTube URL을 입력하세요.', 'error'); return; }
-    const ytId = extractYtId(url);
-    if (!ytId) { showToast('유효한 YouTube URL이 아닙니다.', 'error'); return; }
-    showToast('YouTube 링크 추가 중...', 'info');
-    try {
-        const title = await fetchYtTitle(ytId);
-        await fetch(`/tables/${TABLE_FILES}`, {
-            method: 'POST', headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-                user_type: AppState.userType, menu: 'learning',
-                file_name: title || url, file_type: 'youtube',
-                file_data: url, file_size: '',
-                thumbnail_url: `https://img.youtube.com/vi/${ytId}/maxresdefault.jpg`,
-                sort_order: Date.now()
-            })
-        });
-        if (input) input.value = '';
-        await invalidateFiles();
-        showToast('YouTube 영상이 추가되었습니다!', 'success');
-        renderMenu('learning');
-    } catch (e) { showToast('추가 실패: ' + e.message, 'error'); }
-}
 async function saveSchedulePDF() {
 
   const element = document.querySelector(".schedule-timeline");
