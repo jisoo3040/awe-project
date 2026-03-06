@@ -100,42 +100,42 @@ async function prefetchAll() {
 async function invalidateContent() {
     // 저장 후 캐시 재로드 - 서버에서 fetch 후 콘텐츠 갱신
     try {
-        const res  = await fetch(`tables/${TABLE_CONTENT}?limit=500`);
+        const res  = await fetch(`/tables/${TABLE_CONTENT}?limit=500`);
         const data = await res.json();
         Cache.content = Array.isArray(data) ? data : [];
     } catch {}
 }
 async function invalidateFiles() {
     try {
-        const res  = await fetch(`tables/${TABLE_FILES}?limit=500`);
+        const res  = await fetch(`/tables/${TABLE_FILES}?limit=500`);
         const data = await res.json();
         Cache.files = Array.isArray(data) ? data : [];
     } catch {}
 }
 async function invalidateContacts() {
     try {
-        const res  = await fetch(`tables/${TABLE_CONTACTS}?limit=200`);
+        const res  = await fetch(`/tables/${TABLE_CONTACTS}?limit=200`);
         const data = await res.json();
         Cache.contacts = Array.isArray(data) ? data : [];
     } catch {}
 }
 async function invalidateNotices() {
     try {
-        const res  = await fetch(`tables/${TABLE_NOTICES}?limit=500`);
+        const res  = await fetch(`/tables/${TABLE_NOTICES}?limit=500`);
         const data = await res.json();
         Cache.notices = Array.isArray(data) ? data : [];
     } catch {}
 }
 async function invalidateParticipants() {
     try {
-        const res  = await fetch(`tables/${TABLE_PARTICIPANTS}?limit=500`);
+        const res  = await fetch(`/tables/${TABLE_PARTICIPANTS}?limit=500`);
         const data = await res.json();
         Cache.participants = Array.isArray(data) ? data : [];
     } catch {}
 }
 async function invalidateSchedule() {
     try {
-        const res = await fetch(`tables/${TABLE_SCHEDULE}?limit=500`);
+        const res = await fetch(`/tables/${TABLE_SCHEDULE}?limit=500`);
         const data = await res.json();
 
         // Cloudflare Pages Functions는 배열 그대로 반환
@@ -454,13 +454,13 @@ async function saveContent(menu, section, title, text) {
     try {
         const existing = getCachedContent(menu, section);
         if (existing) {
-            await fetch(`tables/${TABLE_CONTENT}/${existing.id}`, {
+            await fetch(`/tables/${TABLE_CONTENT}/${existing.id}`, {
                 method: 'PUT',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ ...existing, content: text, title })
             });
         } else {
-            await fetch(`tables/${TABLE_CONTENT}`, {
+            await fetch(`/tables/${TABLE_CONTENT}`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ user_type: AppState.userType, menu, section, title, content: text, sort_order: 0 })
@@ -662,7 +662,7 @@ async function executeSaveNotice() {
         if (editId) {
             // 수정
             const existing = (Cache.notices || []).find(n => n.id === editId);
-            await fetch(`tables/${TABLE_NOTICES}/${editId}`, {
+            await fetch(`/tables/${TABLE_NOTICES}/${editId}`, {
                 method: 'PUT',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ ...existing, content: text })
@@ -671,7 +671,7 @@ async function executeSaveNotice() {
         } else {
             // 신규 등록
             const now = Date.now();
-            await fetch(`tables/${TABLE_NOTICES}`, {
+            await fetch(`/tables/${TABLE_NOTICES}`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
@@ -705,7 +705,7 @@ function confirmDeleteNotice(noticeId) {
 async function executeDeleteNotice() {
     document.getElementById('delete-modal').classList.add('hidden');
     try {
-        await fetch(`tables/${TABLE_NOTICES}/${pendingNoticeDeleteId}`, { method: 'DELETE' });
+        await fetch(`/tables/${TABLE_NOTICES}/${pendingNoticeDeleteId}`, { method: 'DELETE' });
         await invalidateNotices();
         showToast('삭제되었습니다.', 'success');
         const board = document.getElementById('notice-board');
@@ -796,9 +796,9 @@ async function requestSaveContacts() {
 async function saveContactsCallback() {
     try {
         const existing = (Cache.contacts || []).filter(r => r.user_type === AppState.userType);
-        await Promise.all(existing.map(c => fetch(`tables/${TABLE_CONTACTS}/${c.id}`, { method: 'DELETE' })));
+        await Promise.all(existing.map(c => fetch(`/tables/${TABLE_CONTACTS}/${c.id}`, { method: 'DELETE' })));
         await Promise.all(tempContacts.filter(c => c.name || c.phone).map((c, i) =>
-            fetch(`tables/${TABLE_CONTACTS}`, {
+            fetch(`/tables/${TABLE_CONTACTS}`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ ...c, user_type: AppState.userType, sort_order: i })
@@ -1171,14 +1171,14 @@ async function executeSaveParticipant() {
     try {
         if (editId) {
             const existing = (Cache.participants || []).find(p => p.id === editId);
-            await fetch(`tables/${TABLE_PARTICIPANTS}/${editId}`, {
+            await fetch(`/tables/${TABLE_PARTICIPANTS}/${editId}`, {
                 method: 'PUT',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ ...existing, ...data })
             });
             showToast('수정되었습니다!', 'success');
         } else {
-            await fetch(`tables/${TABLE_PARTICIPANTS}`, {
+            await fetch(`/tables/${TABLE_PARTICIPANTS}`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
@@ -1516,7 +1516,7 @@ async function processFileUpload(file, menu) {
     showToast('파일 업로드 중...', 'info');
     try {
         const base64 = await fileToBase64(file);
-        await fetch(`tables/${TABLE_FILES}`, {
+        await fetch(`/tables/${TABLE_FILES}`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
@@ -1542,7 +1542,7 @@ async function addYoutubeLink() {
     showToast('YouTube 링크 추가 중...', 'info');
     try {
         const title = await fetchYtTitle(ytId);
-        await fetch(`tables/${TABLE_FILES}`, {
+        await fetch(`/tables/${TABLE_FILES}`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
@@ -1623,7 +1623,7 @@ function confirmDeleteFile(fileId, fileName) {
 async function executeDeleteFile() {
     document.getElementById('delete-modal').classList.add('hidden');
     try {
-        await fetch(`tables/${TABLE_FILES}/${pendingDeleteId}`, { method: 'DELETE' });
+        await fetch(`/tables/${TABLE_FILES}/${pendingDeleteId}`, { method: 'DELETE' });
         lsRemoveFileData(pendingDeleteId); // localStorage file_data도 삭제
         await invalidateFiles();
         showToast('파일이 삭제되었습니다.', 'success');
