@@ -87,7 +87,7 @@ const MENUS = [
     { key: 'learning',         label: '학습자료',      icon: 'fa-book-open' },
     { key: 'participants',     label: '참가자명단',    icon: 'fa-users' },
     { key: 'schedule',         label: '일정표',        icon: 'fa-calendar-alt' },
-    { key: 'room_assignment',  label: '방 배정표',     icon: 'fa-door-open' },
+    { key: 'room_assignment',  label: '호텔 정보',     icon: 'fa-hotel' },
 ];
 
 // ===== prefetchAll – 정적 데이터 사용으로 전환되어 서버 fetch 불필요 =====
@@ -361,7 +361,7 @@ function renderMenu(menuKey) {
         case 'learning':         renderLearning(content);        break;
         case 'participants':     renderParticipants(content);                                                  break;
         case 'schedule':         renderSchedule(content);                                                     break;
-        case 'room_assignment':  renderFileSection(content, 'room_assignment','방 배정표', 'fa-door-open');    break;
+        case 'room_assignment':  renderHotelInfo(content);    break;
     }
 }
 
@@ -1736,4 +1736,49 @@ function showToast(message, type = 'info') {
         toast.style.animation = 'toastOut 0.3s ease forwards';
         setTimeout(() => toast.remove(), 300);
     }, 3000);
+}
+
+function renderHotelInfo(container) {
+
+container.innerHTML = `
+<div class="section-card">
+
+<div class="section-card-header">
+<div class="section-card-title">
+<i class="fas fa-hotel"></i>호텔 정보
+</div>
+</div>
+
+<div style="padding:10px 0; line-height:1.7;">
+
+<h3>호텔</h3>
+<p><b>Hyatt Regency Shanghai Global Harbor</b></p>
+
+<h3>주소</h3>
+<p>No.718 Ningxia Road, Putuo District, Shanghai</p>
+
+<h3>지도</h3>
+
+<div style="width:100%;height:350px;border-radius:12px;overflow:hidden;">
+<iframe
+width="100%"
+height="100%"
+frameborder="0"
+style="border:0"
+src="https://maps.google.com/maps?q=Hyatt%20Regency%20Shanghai%20Global%20Harbor&t=&z=15&ie=UTF8&iwloc=&output=embed">
+</iframe>
+</div>
+
+<h3 style="margin-top:20px;">주변 상점가</h3>
+
+<ul style="line-height:1.8;">
+<li>Global Harbor Mall (도보 3분)</li>
+<li>Starbucks / Luckin Coffee</li>
+<li>다수 레스토랑 및 쇼핑몰</li>
+</ul>
+
+</div>
+</div>
+`;
+
 }
