@@ -1782,3 +1782,92 @@ src="https://maps.google.com/maps?q=Hyatt%20Regency%20Shanghai%20Global%20Harbor
 `;
 
 }
+
+function renderHotelInfo(container) {
+
+container.innerHTML = `
+
+<div class="section-card">
+
+<div class="section-card-header">
+<div class="section-card-title">
+<i class="fas fa-hotel"></i>호텔 정보
+</div>
+</div>
+
+<div style="line-height:1.8;font-size:14px">
+
+<h3 style="margin-top:10px">3/10 ~ 3/11 숙소</h3>
+
+<b>Beijing Kun Tai Hotel</b>
+
+<img
+src="https://images.unsplash.com/photo-1566073771259-6a8506099945"
+style="width:100%;border-radius:10px;margin:10px 0">
+
+<p>
+주소<br>
+No.2 Qiyang Road, Chaoyang District, Beijing
+</p>
+
+<div style="width:100%;height:320px;border-radius:10px;overflow:hidden;margin:10px 0">
+<iframe
+width="100%"
+height="100%"
+style="border:0"
+loading="lazy"
+allowfullscreen
+src="https://maps.google.com/maps?q=Beijing%20Kuntai%20Hotel&t=&z=15&ie=UTF8&iwloc=&output=embed">
+</iframe>
+</div>
+
+<b>주변 상점</b>
+
+<ul>
+<li>Wangjing SOHO</li>
+<li>Wangjing Science Park</li>
+<li>Starbucks / Luckin Coffee</li>
+<li>레스토랑 및 쇼핑몰 다수</li>
+</ul>
+
+<hr style="margin:30px 0">
+
+<h3>3/12 ~ 3/14 숙소</h3>
+
+<b>Grand Metropark Hotel Shanghai</b>
+
+<img
+src="https://images.unsplash.com/photo-1551882547-ff40c63fe5fa"
+style="width:100%;border-radius:10px;margin:10px 0">
+
+<p>
+주소<br>
+No.1 Lane 299 Xumin Road, Qingpu District, Shanghai
+</p>
+
+<div style="width:100%;height:320px;border-radius:10px;overflow:hidden;margin:10px 0">
+<iframe
+width="100%"
+height="100%"
+style="border:0"
+loading="lazy"
+allowfullscreen
+src="https://maps.google.com/maps?q=Grand%20Metropark%20Hotel%20Shanghai%20Hongqiao&t=&z=15&ie=UTF8&iwloc=&output=embed">
+</iframe>
+</div>
+
+<b>주변 상점</b>
+
+<ul>
+<li>National Exhibition & Convention Center</li>
+<li>Hongqiao Railway Station</li>
+<li>Panlong Tiandi Mall</li>
+<li>레스토랑 및 쇼핑몰 다수</li>
+</ul>
+
+</div>
+</div>
+
+`;
+
+}
