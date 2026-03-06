@@ -648,6 +648,8 @@ body.admin-mode .youtube-add-form { display: flex; }
             .landing-btn-title { font-size: 17px; }
         }
     </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 </head>
 <body>
 
@@ -2076,9 +2078,9 @@ function renderSchedule(container) {
             </div>
             <div style="display:flex;gap:8px;align-items:center;">
                 ${isAdmin ? `<button class="sched-add-day-btn" onclick="openSchedAddModal()" title="일정 추가"><i class="fas fa-plus"></i> 일정 추가</button>` : ''}
-                <a href="schedule-print.html" target="_blank" class="pdf-export-btn">
+                <button class="pdf-export-btn" onclick="saveSchedulePDF()">
                     <i class="fas fa-file-pdf"></i> PDF 저장
-                </a>
+                </button>
             </div>
         </div>
         ${totalDays === 0
@@ -2861,6 +2863,27 @@ function showToast(message, type = 'info') {
         toast.style.animation = 'toastOut 0.3s ease forwards';
         setTimeout(() => toast.remove(), 300);
     }, 3000);
+}
+async function saveSchedulePDF() {
+
+  const element = document.querySelector(".schedule-timeline");
+
+  const canvas = await html2canvas(element, {
+    scale: 2
+  });
+
+  const imgData = canvas.toDataURL("image/png");
+
+  const { jsPDF } = window.jspdf;
+  const pdf = new jsPDF("p", "mm", "a4");
+
+  const pageWidth = 210;
+  const imgWidth = pageWidth;
+  const imgHeight = canvas.height * imgWidth / canvas.width;
+
+  pdf.addImage(imgData, "PNG", 0, 0, imgWidth, imgHeight);
+
+  pdf.save("schedule.pdf");
 }
 </script>
 </body>
