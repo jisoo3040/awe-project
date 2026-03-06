@@ -1182,6 +1182,7 @@ async function executeSaveParticipant() {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
+                    id: crypto.randomUUID(),
                     user_type: AppState.userType,
                     ...data,
                     sort_order: Date.now()
