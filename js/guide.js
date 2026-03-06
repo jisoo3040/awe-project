@@ -1206,7 +1206,7 @@ function confirmDeleteParticipant(id, name) {
 async function executeDeleteParticipant() {
     document.getElementById('delete-modal').classList.add('hidden');
     try {
-        await fetch(`tables/${TABLE_PARTICIPANTS}/${_pendingDeleteParticipantId}`, { method: 'DELETE' });
+        await fetch(`/tables/${TABLE_PARTICIPANTS}/${_pendingDeleteParticipantId}`, { method: 'DELETE' });
         await invalidateParticipants();
         showToast('삭제되었습니다.', 'success');
         const content = document.getElementById('menu-content');
