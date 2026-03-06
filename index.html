@@ -875,33 +875,7 @@ const STATIC_SCHEDULE = [
     ]), meal_morning:'호텔', meal_lunch:'현지식', meal_dinner:'', hotel:'' },
 ];
 </script>
-<script>
-/**
- * AWE 2026 참관 안내 앱 - 최적화 버전
- * 핵심: 앱 시작 시 전체 데이터 1회 로드 → 메모리 캐시 → 메뉴 전환 즉시 렌더링
- */
 
-// ===== 전역 상태 =====
-const AppState = {
-    userType: 'staff',
-    isAdmin: false,
-    currentMenu: 'important_notice',
-    editCallback: null,
-    _pendingEditText: null,
-};
-
-// ===== 메모리 캐시 =====
-const Cache = {
-    content: null,
-    files: null,
-    contacts: null,
-    notices: null,
-    participants: null,
-    schedule: null,
-    weather: null,
-    weatherTime: 0,
-    loaded: false,
-};
 const WEATHER_TTL = 30 * 60 * 1000;
 
 // ===== localStorage 키 =====
