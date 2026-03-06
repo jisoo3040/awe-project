@@ -1466,29 +1466,45 @@ function renderSchedule(container) {
     `;
     return;
   }
-    const days = Object.values(dayMap)
-        .sort((a, b) => (a.sort_order || a.day_num || 0) - (b.sort_order || b.day_num || 0));
 
-    const totalDays  = days.length;
-    const typeLabel  = AppState.userType === 'executive' ? '책임자급 (5박6일 북경+상해)' : '실무자급 (4박5일 상해)';
-    const colorClass = AppState.userType === 'executive' ? 'exec' : 'staff';
+  // 🔴 이 부분 추가
+  const dayMap = {};
 
-    container.innerHTML = `
-    <div class="section-card">
-        <div class="section-card-header">
-            <div class="section-card-title">
-                <i class="fas fa-calendar-alt"></i>일정표
-                <span class="schedule-type-badge ${colorClass}">${typeLabel}</span>
-            </div>
-            <a href="schedule-print.html" target="_blank" class="pdf-export-btn">
-                <i class="fas fa-file-pdf"></i> PDF 저장
-            </a>
-        </div>
-        ${totalDays === 0
-            ? `<div class="empty-state"><i class="fas fa-calendar-alt"></i><p>등록된 일정이 없습니다.</p></div>`
-            : `<div class="schedule-timeline">${days.map((d, idx) => renderScheduleDay(d, idx, totalDays)).join('')}</div>`
-        }
-    </div>`;
+  schedules.forEach(row => {
+    if (!dayMap[row.day_num]) {
+      dayMap[row.day_num] = {
+        ...row,
+        slots: JSON.parse(row.time_slots || "[]")
+      };
+    }
+  });
+
+  const days = Object.values(dayMap)
+    .sort((a, b) => (a.sort_order || a.day_num || 0) - (b.sort_order || b.day_num || 0));
+
+  const totalDays  = days.length;
+  const typeLabel  = AppState.userType === 'executive'
+    ? '책임자급 (5박6일 북경+상해)'
+    : '실무자급 (4박5일 상해)';
+
+  const colorClass = AppState.userType === 'executive' ? 'exec' : 'staff';
+
+  container.innerHTML = `
+  <div class="section-card">
+      <div class="section-card-header">
+          <div class="section-card-title">
+              <i class="fas fa-calendar-alt"></i>일정표
+              <span class="schedule-type-badge ${colorClass}">${typeLabel}</span>
+          </div>
+          <a href="schedule-print.html" target="_blank" class="pdf-export-btn">
+              <i class="fas fa-file-pdf"></i> PDF 저장
+          </a>
+      </div>
+      ${totalDays === 0
+          ? `<div class="empty-state"><i class="fas fa-calendar-alt"></i><p>등록된 일정이 없습니다.</p></div>`
+          : `<div class="schedule-timeline">${days.map((d, idx) => renderScheduleDay(d, idx, totalDays)).join('')}</div>`
+      }
+  </div>`;
 }
 
 // 팀 태그 없는 일반 슬롯 렌더링 헬퍼
