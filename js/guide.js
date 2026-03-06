@@ -970,19 +970,188 @@ function weatherCodeToDesc(c) {
 }
 
 // ===== 2. 방문기업 정보 =====
-function renderCompanyInfo(container) {
-    const rec  = getCachedContent('company_info', 'main');
-    const text = rec ? rec.content : '';
-    container.innerHTML = `
-    <div class="section-card">
-        <div class="section-card-header">
-            <div class="section-card-title"><i class="fas fa-building"></i>방문기업 정보</div>
-            <button class="edit-btn" onclick="editCompanyInfo()"><i class="fas fa-pen"></i> 편집</button>
-        </div>
-        <div class="content-display" id="company-info-text">
-            ${text ? escapeHtml(text).replace(/\n/g,'<br>') : '<span class="content-empty">방문기업 정보를 입력하세요. (관리자 모드에서 편집 가능)</span>'}
-        </div>
-    </div>`;
+function renderCompanyInfo(container){
+
+container.innerHTML = `
+
+<div class="section-card">
+
+<div class="section-card-header">
+<div class="section-card-title">
+<i class="fas fa-building"></i> 방문기업 정보
+</div>
+</div>
+
+<div class="company-grid">
+
+<!-- 1 Xiaomi -->
+<div class="company-card">
+
+<h2>Xiaomi EV Factory</h2>
+
+<div class="company-images">
+<img src="https://cdn.motor1.com/images/mgl/Y99R8K/s1/xiaomi-su7-factory.jpg">
+<img src="https://cdn.motor1.com/images/mgl/qkkRZ/s1/xiaomi-su7-production-line.jpg">
+<img src="https://www.electrive.com/wp-content/uploads/2024/03/xiaomi-su7-factory-production.jpg">
+</div>
+
+<p class="company-location">
+📍 중국 베이징 경제기술개발구
+</p>
+
+<p>
+샤오미 전기차 공장은 완전 자동화된 스마트 제조 시설로 AI와 로봇 중심의 Dark Factory 개념을 구현한 차세대 자동차 공장입니다. 사람 없이 24시간 자동 생산이 가능합니다.
+</p>
+
+<ul>
+<li>700대 이상 산업용 로봇 운영</li>
+<li>AMR 자율이동로봇 물류 시스템</li>
+<li>약 76초당 차량 1대 생산</li>
+<li>완전 자동화 Dark Factory</li>
+</ul>
+
+</div>
+
+
+<!-- 2 LEJU -->
+<div class="company-card">
+
+<h2>LEJU Robotics</h2>
+
+<div class="company-images">
+<img src="https://roboticsbiz.com/wp-content/uploads/2024/01/leju-robot.jpg">
+<img src="https://cdn.vox-cdn.com/thumbor/leju-humanoid.jpg">
+<img src="https://www.humanoidrobot.tech/leju-robot-training.jpg">
+</div>
+
+<p class="company-location">
+📍 베이징 시징산구
+</p>
+
+<p>
+휴머노이드 로봇 AI 학습을 위한 데이터 훈련 센터로 실제 인간 생활 및 산업 환경을 재현하여 로봇 행동 데이터를 학습시키는 시설입니다.
+</p>
+
+<ul>
+<li>공장·가정·서비스 환경 재현</li>
+<li>로봇 행동 데이터 생성</li>
+<li>인간 트레이너 기반 학습</li>
+<li>산업·서비스 로봇 AI 훈련</li>
+</ul>
+
+</div>
+
+
+<!-- 3 SenseTime -->
+<div class="company-card">
+
+<h2>SenseTime AIDC</h2>
+
+<div class="company-images">
+<img src="https://cdn.sensetime.com/aidc-campus.jpg">
+<img src="https://cdn.sensetime.com/aidc-data-center.jpg">
+<img src="https://cdn.sensetime.com/sensecore-platform.jpg">
+</div>
+
+<p class="company-location">
+📍 상하이 린강 신구
+</p>
+
+<p>
+아시아 최대 규모 AI 데이터센터 중 하나로 초대형 AI 모델 학습과 산업용 AI 서비스를 지원하는 핵심 인프라입니다.
+</p>
+
+<ul>
+<li>8.1 EFLOPS 연산 성능</li>
+<li>SenseCore AI 플랫폼</li>
+<li>자율주행 AI / 스마트시티</li>
+<li>고효율 친환경 데이터센터</li>
+</ul>
+
+</div>
+
+
+<!-- 4 AISBOT -->
+<div class="company-card">
+
+<h2>AISBOT</h2>
+
+<div class="company-images">
+<img src="https://humanoid-ai.com/aisbot-robot.jpg">
+<img src="https://humanoid-ai.com/aisbot-industrial.jpg">
+<img src="https://humanoid-ai.com/aisbot-production.jpg">
+</div>
+
+<p>
+체화지능 기반 휴머노이드 로봇 기업으로 제조·물류·위험 작업 환경에서 인간을 보조하거나 대체하는 산업용 로봇을 개발합니다.
+</p>
+
+<ul>
+<li>휴머노이드 산업용 로봇</li>
+<li>로봇 렌털 플랫폼</li>
+<li>대량 생산 체계 구축</li>
+<li>산업 현장 데이터 기반 AI 학습</li>
+</ul>
+
+</div>
+
+
+<!-- 5 Zhangjiang -->
+<div class="company-card">
+
+<h2>Zhangjiang Group</h2>
+
+<div class="company-images">
+<img src="https://www.zhangjiangsc.com/science-city.jpg">
+<img src="https://www.zhangjiangsc.com/ai-island.jpg">
+<img src="https://www.zhangjiangsc.com/semiconductor-cluster.jpg">
+</div>
+
+<p class="company-location">
+📍 상하이 장강 하이테크 파크
+</p>
+
+<p>
+중국 실리콘밸리라 불리는 첨단 산업 단지로 AI, 반도체, 바이오 산업 기업 24,000개 이상이 입주한 혁신 클러스터입니다.
+</p>
+
+<ul>
+<li>AI Island</li>
+<li>반도체 산업 허브</li>
+<li>바이오·로봇 산업 클러스터</li>
+<li>첨단 산업 생태계</li>
+</ul>
+
+</div>
+
+
+<!-- 6 Huawei -->
+<div class="company-card">
+
+<h2>Huawei R&D Campus</h2>
+
+<div class="company-images">
+<img src="https://cdn.huawei.com/ox-huawei-campus.jpg">
+<img src="https://cdn.huawei.com/huawei-rd-city.jpg">
+<img src="https://cdn.huawei.com/huawei-tram-campus.jpg">
+</div>
+
+<p>
+화웨이 글로벌 연구개발 중심 기지로 약 3만 명 이상의 연구 인력이 근무하는 세계 최대 규모 R&D 캠퍼스입니다.
+</p>
+
+<ul>
+<li>1.6㎢ 초대형 연구단지</li>
+<li>5.5G / 6G 연구</li>
+<li>AI·반도체·클라우드 연구</li>
+<li>8개 테마 연구 구역</li>
+</ul>
+
+</div>
+
+</div>
+</div>
+`;
 }
 
 function editCompanyInfo() {
