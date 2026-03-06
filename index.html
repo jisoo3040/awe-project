@@ -943,7 +943,7 @@ const MENUS = [
     { key: 'learning',         label: '학습자료',      icon: 'fa-book-open' },
     { key: 'participants',     label: '참가자명단',    icon: 'fa-users' },
     { key: 'schedule',         label: '일정표',        icon: 'fa-calendar-alt' },
-    { key: 'room_assignment',  label: '방 배정표',     icon: 'fa-door-open' },
+    { key: 'room_assignment',  label: '호텔 정보',     icon: 'fa-hotel' },
 ];
 
 // ===== 앱 진입점 =====
@@ -1257,7 +1257,7 @@ function renderMenu(menuKey) {
         case 'learning':         renderLearning(content);        break;
         case 'participants':     renderParticipants(content);    break;
         case 'schedule':         renderSchedule(content);        break;
-        case 'room_assignment':  renderFileSection(content, 'room_assignment','방 배정표', 'fa-door-open'); break;
+        case 'room_assignment':  renderFileSection(content, 'room_assignment','호텔 정보', 'fa-hotel'); break;
     }
 }
 
