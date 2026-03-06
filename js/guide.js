@@ -1738,4 +1738,51 @@ function showToast(message, type = 'info') {
     }, 3000);
 }
 
-renderHotelInfo
+function renderHotelInfo(container) {
+
+container.innerHTML = `
+<div class="section-card">
+
+<div class="section-card-header">
+<div class="section-card-title">
+<i class="fas fa-hotel"></i>호텔 정보
+</div>
+</div>
+
+<div style="margin-bottom:40px">
+
+<h3>3/10 ~ 3/11</h3>
+<h2>Beijing Kun Tai Hotel</h2>
+
+<img src="https://cf.bstatic.com/xdata/images/hotel/max1024x768/15278488.jpg"
+style="width:100%;border-radius:10px;margin:15px 0;">
+
+<p>📍 Chaoyang District, Beijing</p>
+
+<iframe
+src="https://maps.google.com/maps?q=Beijing%20Kun%20Tai%20Hotel&t=&z=15&ie=UTF8&iwloc=&output=embed"
+style="width:100%;height:250px;border:0;border-radius:10px;">
+</iframe>
+
+</div>
+
+<div>
+
+<h3>3/12 ~ 3/14</h3>
+<h2>Grand Metropark Hotel</h2>
+
+<img src="https://cf.bstatic.com/xdata/images/hotel/max1024x768/31000610.jpg"
+style="width:100%;border-radius:10px;margin:15px 0;">
+
+<p>📍 Beijing 중심지</p>
+
+<iframe
+src="https://maps.google.com/maps?q=Grand%20Metropark%20Hotel%20Beijing&t=&z=15&ie=UTF8&iwloc=&output=embed"
+style="width:100%;height:250px;border:0;border-radius:10px;">
+</iframe>
+
+</div>
+
+</div>
+`;
+}
