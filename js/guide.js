@@ -1755,8 +1755,8 @@ container.innerHTML = `
 <h3>3/10 ~ 3/11</h3>
 <h2>Beijing Kun Tai Hotel</h2>
 
-<img src="https://cf.bstatic.com/xdata/images/hotel/max1024x768/15278488.jpg"
-style="width:100%;border-radius:10px;margin:15px 0;">
+<img src="https://images.unsplash.com/photo-1566073771259-6a8506099945"
+style="width:100%;border-radius:12px;margin:15px 0;box-shadow:0 4px 12px rgba(0,0,0,0.1);">
 
 <p>📍 Chaoyang District, Beijing</p>
 
@@ -1772,8 +1772,8 @@ style="width:100%;height:250px;border:0;border-radius:10px;">
 <h3>3/12 ~ 3/14</h3>
 <h2>Grand Metropark Hotel</h2>
 
-<img src="https://cf.bstatic.com/xdata/images/hotel/max1024x768/31000610.jpg"
-style="width:100%;border-radius:10px;margin:15px 0;">
+<img src="https://images.unsplash.com/photo-1551882547-ff40c63fe5fa"
+style="width:100%;border-radius:12px;margin:15px 0;box-shadow:0 4px 12px rgba(0,0,0,0.1);">
 
 <p>📍 Beijing 중심지</p>
 
