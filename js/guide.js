@@ -1754,11 +1754,12 @@ container.innerHTML = `
 
 <h3>3/10 ~ 3/11</h3>
 <h2>Beijing Kun Tai Hotel</h2>
+<p style="color:#666;margin-top:-5px;">
+📍 No.2 Chao Wai Da Jie, Chaoyang District, Beijing, China
+</p>
 
 <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945"
 style="width:100%;border-radius:12px;margin:15px 0;box-shadow:0 4px 12px rgba(0,0,0,0.1);">
-
-<p>📍 Chaoyang District, Beijing</p>
 
 <iframe
 src="https://maps.google.com/maps?q=Beijing%20Kun%20Tai%20Hotel&t=&z=15&ie=UTF8&iwloc=&output=embed"
@@ -1771,11 +1772,12 @@ style="width:100%;height:250px;border:0;border-radius:10px;">
 
 <h3>3/12 ~ 3/14</h3>
 <h2>Grand Metropark Hotel</h2>
+<p style="color:#666;margin-top:-5px;">
+📍 2 Wangfujing Ave, Dongcheng District, Beijing, China
+</p>
 
 <img src="https://images.unsplash.com/photo-1551882547-ff40c63fe5fa"
 style="width:100%;border-radius:12px;margin:15px 0;box-shadow:0 4px 12px rgba(0,0,0,0.1);">
-
-<p>📍 Beijing 중심지</p>
 
 <iframe
 src="https://maps.google.com/maps?q=Grand%20Metropark%20Hotel%20Beijing&t=&z=15&ie=UTF8&iwloc=&output=embed"
